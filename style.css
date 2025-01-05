@@ -12,7 +12,7 @@ html, body {
     display: flex;
     flex-direction: column;
     background: linear-gradient(135deg, #003049 30%, #003049);
-    color: #333;
+    color: black;
     align-items: center;
     animation: fadeInBackground 2s ease-in; /* Adiciona a animação de entrada no fundo */
 }
@@ -90,7 +90,7 @@ main {
 section {
     padding-top: 20px;
     margin: 20px;
-    background-color: white;
+    background-color: rgb(238, 238, 238);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
@@ -143,7 +143,7 @@ ul li a {
 }
 
 ul li a:hover {
-    color: #3d4e91;
+    color: #1a274f;
     text-decoration: underline;
 }
 
