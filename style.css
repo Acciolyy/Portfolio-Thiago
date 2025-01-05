@@ -11,7 +11,7 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #9474b7 30%, #826ca1);
+    background: linear-gradient(135deg, #003049 30%, #003049);
     color: #333;
     align-items: center;
     animation: fadeInBackground 2s ease-in; /* Adiciona a animação de entrada no fundo */
@@ -22,16 +22,23 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    animation: fadeIn 1.5s ease-out; /* Animação de fade-in para o conteúdo */
+    animation: fadeIn 1s ease-out; /* Animação de fade-in para o conteúdo */
+    padding-top: 80px;
 }
 
 header {
+    position: fixed; /* Fixa o header no topo da tela */
+    top: 0; /* Alinha ao topo */
+    left: 0;
     width: 100%;
-    background-color: #533579;
-    padding: 10px 0;
+    z-index: 100;
+    background-color: #001011;
+    padding: 10px 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1.5s ease-out;
+   
+    
 }
 .header-logo{
     float: left;
@@ -57,7 +64,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: rgb(193, 176, 204);
+    color: #FFFFFC;
     text-decoration: none;
     font-size: 1.2em;
     transition: color 0.3s;
@@ -77,12 +84,13 @@ main {
     padding: 20px;
     box-sizing: border-box;
     animation: fadeIn 1.5s ease-out;
+    
 }
 
 section {
-    padding: 20px;
+    padding-top: 20px;
     margin: 20px;
-    background-color: #dcb9f9;
+    background-color: #e0e2ed;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
@@ -102,7 +110,7 @@ section:hover {
     object-fit: cover;
     display: block;
     margin: 0 auto 20px;
-    border: 5px solid #4b3a5c;
+    border: 5px solid #001011;
     animation: bounce 2s infinite;
 }
 
@@ -115,7 +123,7 @@ h1, h2 {
 footer {
     text-align: center;
     padding: 15px;
-    background-color: #533579;
+    background-color: #001011;
     color: white;
     width: 100%;
     margin-top: auto;
@@ -128,7 +136,7 @@ ul {
 }
 
 ul li a {
-    color: #574caf;
+    color: black;
     text-decoration: none;
     font-size: 1.1em;
     transition: color 0.3s;
@@ -140,12 +148,16 @@ ul li a:hover {
 }
 
 .fa-linkedin, .fa-envelope {
-    color: #614caf;
+    color: black;
     margin-right: 8px;
 }
 
 .fa-linkedin:hover, .fa-envelope:hover {
-    color: #3d9140;
+    color: #1a274f;
+}
+
+.fa-gamepad:hover, .fa-film:hover, .fa-github:hover{
+    color: #1a274f;
 }
 
 
@@ -174,6 +186,6 @@ ul li a:hover {
 }
 
 @keyframes fadeInBackground {
-    0% { background: linear-gradient(135deg, #e1e8ff, #f4f4f9); }
-    100% { background: linear-gradient(135deg, #f4f4f9 30%, #e1e8ff); }
+    0% { background: linear-gradient(135deg, #003049, #003049); }
+    100% { background: linear-gradient(135deg, #003049 30%, #003049); }
 }
