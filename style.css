@@ -90,7 +90,7 @@ main {
 section {
     padding-top: 20px;
     margin: 20px;
-    background-color: #e0e2ed;
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
@@ -115,7 +115,7 @@ section:hover {
 }
 
 h1, h2 {
-    color: #291933;
+    color: black;
     text-align: center;
     animation: fadeIn 1.5s ease-out;
 }
@@ -152,7 +152,7 @@ ul li a:hover {
     margin-right: 8px;
 }
 
-.fa-linkedin:hover, .fa-envelope:hover {
+.fa-linkedin:hover {
     color: #1a274f;
 }
 
