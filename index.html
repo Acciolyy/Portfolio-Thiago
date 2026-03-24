@@ -1,110 +1,280 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dracula">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TVA Portfólio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="TVlogo.ico">
+    <title>Thiago Viriato Accioly | Portfólio Fullstack</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Ajuste para o menu fixo não cobrir o título das seções */
+        section {
+            scroll-margin-top: 5rem;
+        }
+    </style>
 </head>
-<body>
-    <header>
-    
-        <nav>
-        
-            <ul>
-                <li class="header-logo">
-                <img src="TV1.png" alt="Logo">    
-                </li>
-                <li><a href="#habilidades">Skills</a></li>
-                <li><a href="#sobre">Sobre Mim</a></li>
+<body class="bg-base-300 text-base-content antialiased">
+
+    <nav class="navbar bg-base-100 fixed top-0 w-full z-50 shadow-lg" x-data="{ mobileMenuOpen: false }">
+        <div class="flex-1">
+            <a href="#" class="btn btn-ghost text-xl font-bold tracking-wider">
+                <span class="text-primary">TVA</span> <span class="hidden sm:inline">| Portfólio</span>
+            </a>
+        </div>
+        <div class="flex-none hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 font-semibold">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#capacitacao">Capacitação</a></li>
                 <li><a href="#contato">Contato</a></li>
-                <li><a href="#education">Formação</a></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+        
+        <div class="flex-none lg:hidden">
+            <button class="btn btn-square btn-ghost" @click="mobileMenuOpen = !mobileMenuOpen">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-transition 
+             class="absolute top-16 right-0 w-full bg-base-200 shadow-xl lg:hidden">
+            <ul class="menu menu-vertical px-4 py-6 text-lg font-semibold space-y-2 text-center">
+                <li><a href="#sobre" @click="mobileMenuOpen = false">Sobre</a></li>
+                <li><a href="#skills" @click="mobileMenuOpen = false">Skills</a></li>
+                <li><a href="#projetos" @click="mobileMenuOpen = false">Projetos</a></li>
+                <li><a href="#capacitacao" @click="mobileMenuOpen = false">Capacitação</a></li>
+                <li><a href="#contato" @click="mobileMenuOpen = false">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <section id="sobre">
-        <img src="eu imagem.jpg" alt="Foto de Perfil" class="profile-pic">
-        <h1>Bem-vindo ao meu Portfólio</h1>
-        <p>Sou Thiago Viriato Accioly, tenho 19 anos e sou estudante do curso de Engenharia de Software pela Universidade de Brasília.
-            Tenho muito interesse em todos os ramos em geral dessa área, por isso tenho como objetivo me aventurar nesse meio.
-        </p>
-    </section>
-    <section id="habilidades">
-        <h1>Skills</h1>
-        <p>
-            <ul class="skill">
-            <li>Inglês em nível Básico/Intermediário</li>
-            <li><img src="eng.png" alt=""></li>
-            <li>Pacote Office em nível Intermediário</li>
-            <li><i class="fa-brands fa-microsoft"></i></li>
-            <li>Um bom nível de contato com Metodologias (como SCRUM e SixSigma)</li>
-            <li><img src="agile.png" alt="">  <img src="developer.png" alt=""></li>
-            <li>Ótimo entrosamento em grupo, Alto nível de Comunicação, Proeficiência em Resiliência</li>
-            <li><i class="fa fa-users"></i>  <i class="fa fa-microphone"></i>  <img src="challenge.png" alt=""></li>
-            <li>Linguagens: Python, C, HTMLL/CSS, Java e JavaScript/TypeScript </li>
-            <li><i class="fa-brands fa-python fa-2x"></i>  <i class="fa-solid fa-c fa-2x"></i>  <i class="fa-brands fa-html5 fa-2x"> </i>  <i class="fa-brands fa-css3 fa-2x"></i>  <i class="fa-brands fa-java fa-2x"></i></li>
-            </li>
-        </p>
+    <section id="sobre" class="hero min-h-screen bg-base-200 pt-20">
+        <div class="hero-content flex-col lg:flex-row-reverse gap-10 lg:gap-20 max-w-6xl">
+            <img src="eu imagem.jpg" alt="Foto de Thiago Viriato Accioly" class="max-w-xs md:max-w-sm rounded-full shadow-2xl border-4 border-primary" />
+            <div class="text-center lg:text-left">
+                <p class="text-xl text-primary font-semibold mb-2">Olá, eu sou o</p>
+                <h1 class="text-5xl font-bold mb-4">Thiago Viriato Accioly</h1>
+                <p class="py-2 text-lg text-gray-300 leading-relaxed">
+                    Estudante do 6º semestre de Engenharia de Software na UnB e Estagiário Fullstack no Senado Federal. 
+                    Tenho forte experiência com desenvolvimento de sistemas web utilizando <span class="text-primary font-semibold">Python (Django)</span>, 
+                    <span class="text-primary font-semibold">Node.js</span> e interfaces modernas.
+                </p>
+                <p class="py-2 text-lg text-gray-300 leading-relaxed">
+                    Meu objetivo é consolidar minha carreira como Desenvolvedor Fullstack/Backend. Além do código, tenho forte interesse e atuação paralela em 
+                    <strong>Inteligência de Dados, Machine Learning, Engenharia de Requisitos e Testes de Software</strong>, garantindo não apenas a entrega, 
+                    mas a qualidade e alinhamento com as regras de negócio.
+                </p>
+                <div class="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
+                    <a href="#projetos" class="btn btn-primary shadow-lg"><i class="fa-solid fa-code"></i> Ver Projetos</a>
+                    <a href="#contato" class="btn btn-outline btn-accent shadow-lg"><i class="fa-solid fa-paper-plane"></i> Contato</a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="projetos">
-        <h2>Projetos</h2>
-        <p>Ao longo do meu curso de Engenharia de Software eu fiz alguns projetos dentro da faculdade e por fora (cursos a parte), aqui estão alguns:
-        </p>
-        <ul>
+    <section id="skills" class="py-20 bg-base-300">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12"><i class="fa-solid fa-screwdriver-wrench text-primary"></i> Skills & Ferramentas</h2>
             
-            <li><a href="https://acciolyy.github.io/Portfolio-Thiago/"><img src="TVlogo.ico" alt=""> Este Portfólio</a></li>
-          
-            <li><a href="https://jogo-da-velha-orc.vercel.app/"><i class="fa-solid fa-gamepad"></i> Jogo da Velha de Navegador</a></li>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-primary">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-laptop-code text-4xl text-primary mb-2"></i>
+                        <h3 class="card-title mb-2">Linguagens & Web</h3>
+                        <p class="text-sm text-gray-400">Python, JavaScript, TypeScript, Node.js, C, Java, HTML/CSS.</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-accent">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-cubes text-4xl text-accent mb-2"></i>
+                        <h3 class="card-title mb-2">Frameworks & DevOps</h3>
+                        <p class="text-sm text-gray-400">Django, React, Express, Plone, Docker, Docker Compose, Git, Linux.</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-secondary">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-brain text-4xl text-secondary mb-2"></i>
+                        <h3 class="card-title mb-2">Dados & IA</h3>
+                        <p class="text-sm text-gray-400">PostgreSQL, MongoDB, Pandas, Plotly, Streamlit, Machine Learning, Visão Computacional.</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-info">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-chart-line text-4xl text-info mb-2"></i>
+                        <h3 class="card-title mb-2">Engenharia & Negócios</h3>
+                        <p class="text-sm text-gray-400">Engenharia de Requisitos, Testes de Software, Metodologias Ágeis (Scrum, Kanban), Power BI.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos" class="py-20 bg-base-200" x-data="{ filter: 'all' }">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-10"><i class="fa-solid fa-folder-open text-primary"></i> Projetos em Destaque</h2>
             
-            <li><a href="https://projeto-api-brown.vercel.app/"><i class="fa fa-film"></i> Um Site de Review de Filmes Básico com API</a></li>
+            <div class="flex justify-center flex-wrap gap-4 mb-12">
+                <button class="btn" :class="filter === 'all' ? 'btn-primary' : 'btn-outline'" @click="filter = 'all'">Todos</button>
+                <button class="btn" :class="filter === 'web' ? 'btn-primary' : 'btn-outline'" @click="filter = 'web'">Web & Fullstack</button>
+                <button class="btn" :class="filter === 'data' ? 'btn-primary' : 'btn-outline'" @click="filter = 'data'">Dados & IA</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition>
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">Portal Orc'estra <span class="text-sm font-normal text-gray-400">(Empresa Júnior)</span></h2>
+                        <p class="text-gray-300 mb-4">Desenvolvimento de portal interno para gestão de usuários focado em soluções de software e gamificação. Implementação de autenticação JWT e controle de acesso (RBAC).</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-primary badge-outline">Node.js</span>
+                            <span class="badge badge-primary badge-outline">React</span>
+                            <span class="badge badge-primary badge-outline">MongoDB</span>
+                            <span class="badge badge-accent badge-outline">Gamificação</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="https://github.com/portal-orcestra" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition>
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">Cerradex</h2>
+                        <p class="text-gray-300 mb-4">Plataforma web Fullstack desenvolvida para proteção de informações do bioma Cerrado. Arquitetura containerizada com integração robusta de banco de dados.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-primary badge-outline">Next.js</span>
+                            <span class="badge badge-primary badge-outline">Bun + TS</span>
+                            <span class="badge badge-primary badge-outline">Supabase</span>
+                            <span class="badge badge-secondary badge-outline">Docker</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="https://github.com/FGA0138-MDS-Ajax/2025.1-Berkanan" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition>
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">Dashboard Análise de Salários</h2>
+                        <p class="text-gray-300 mb-4">Desenvolvimento de dashboard interativo para análise de um dataset contendo mais de 130 mil registros, com filtros dinâmicos e visualização gráfica avançada.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-secondary badge-outline">Python</span>
+                            <span class="badge badge-secondary badge-outline">Streamlit</span>
+                            <span class="badge badge-secondary badge-outline">Pandas</span>
+                            <span class="badge badge-secondary badge-outline">Plotly</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="https://github.com/Acciolyy/Dashboard-Salarios?tab=readme-ov-file" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition>
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">Detector de Celular</h2>
+                        <p class="text-gray-300 mb-4">Sistema de Visão Computacional desenvolvido para detecção de objetos em tempo real. O modelo foi treinado com dataset próprio criado especificamente para a aplicação.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-secondary badge-outline">Python</span>
+                            <span class="badge badge-secondary badge-outline">Machine Learning</span>
+                            <span class="badge badge-info badge-outline">Edge Impulse</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="#" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="capacitacao" class="py-20 bg-base-300">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12"><i class="fa-solid fa-graduation-cap text-primary"></i> Capacitação & Eventos</h2>
             
-            <li><a href="https://github.com/kalebmacedo/Projeto-OO---KLT"><i class="fa-brands fa-github"></i> Um Pequeno Projeto de Alocação de Turmas em Java (Básico no Git)</a></li>
-           
-            <!-- Adicione mais projetos conforme necessário -->
-        </ul>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-base-200 p-6 rounded-box shadow-md">
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-primary"><i class="fa-solid fa-code"></i> Desenvolvimento</h3>
+                    <ul class="space-y-3">
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> JavaScript & TypeScript Fullstack <span class="text-xs text-gray-500">(Udemy)</span></li>
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Python 3 + Projetos Reais <span class="text-xs text-gray-500">(Udemy)</span></li>
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Java Orientado a Objetos <span class="text-xs text-gray-500">(Udemy)</span></li>
+                    </ul>
+                </div>
+
+                <div class="bg-base-200 p-6 rounded-box shadow-md">
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-secondary"><i class="fa-solid fa-shield-halved"></i> Dados & Segurança</h3>
+                    <ul class="space-y-3">
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Imersão Dados com Python <span class="text-xs text-gray-500">(Alura)</span></li>
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> IA Aplicada à Visão Computacional</li>
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Hackers do Bem - Cibersegurança</li>
+                    </ul>
+                </div>
+
+                <div class="bg-base-200 p-6 rounded-box shadow-md">
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-info"><i class="fa-solid fa-users-gear"></i> Processos & Negócios</h3>
+                    <ul class="space-y-3">
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Scrum Fundamentals Certified (SFC)</li>
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Six Sigma Yellow Belt</li>
+                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Funifier Associate - Gamificação</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-base-100 p-8 rounded-box shadow-xl text-center max-w-4xl mx-auto border-l-4 border-primary">
+                <i class="fa-solid fa-people-group text-5xl text-primary mb-4"></i>
+                <h3 class="text-2xl font-bold mb-3">Eventos Tech & Hackathons</h3>
+                <p class="text-gray-300">
+                    Sempre em busca de imersão na comunidade tech. 
+                    Acredito que a troca de experiências em eventos e competições é fundamental para a inovação e o crescimento fora do ambiente acadêmico tradicional.
+                </p>
+                <div class="mt-4 text-sm text-gray-500 italic">Espaço reservado para futuras participações...</div>
+            </div>
+        </div>
     </section>
 
-    <section id="education">
-        <h1>Formação</h1>
-        <p>
-            Estou no quarto semestre do curso de Engenharia de Software e faço parte da Empresa Junior Orc'estra Gamificações.
-            Por fora da faculdade, faço cursos para aprendizado e conhecimento, alguns como ensino de linguagem de programação em Python, Java, Metodologias do tipo SCRUM e SixSigma, Proteção de Dados, Pacote Office.
-        </p>
-        <p>
-            Fora do meio acadêmico, eu tenho experiência na área de negócios. Pois trabalho em uma empresa do ramo imobiliário.
-        </p>
-    </section>
-
-    <section id="contato">
-        <h2>Contato</h2>
-        <p>Entre em contato comigo através das redes sociais ou e-mail:</p>
-        <ul>
-            <li><a href="https://www.linkedin.com/in/thiago-viriato-accioly"><i class="fa-brands fa-linkedin"></i>LinkedIn</a></li>
-            <li> <i class="fa fa-envelope"></i> thiagoacciolyest@gmail.com</li>
-            <li><a href="https://github.com/Acciolyy"><i class="fa-brands fa-github"></i> GitHub</a></li>
-        </ul>
-    </section>
-    
-
-
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-
-
-
-
-
-
-
-
-
-
-    <footer>
-        <p>&copy; 2024 - Portfólio de Thiago Viriato Accioly</p>
+    <footer id="contato" class="footer footer-center p-10 bg-base-100 text-base-content rounded mt-auto border-t border-base-300 shadow-inner">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-2">Vamos conversar?</h2>
+            <p class="mb-6 text-gray-400">Estou aberto a novas conexões e oportunidades na área de desenvolvimento.</p>
+            
+            <div class="grid grid-flow-col gap-6 mb-6">
+                <a href="https://www.linkedin.com/in/thiago-viriato-accioly" target="_blank" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/Acciolyy" target="_blank" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="mailto:thiagoacciolyest@gmail.com" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+            
+            <p class="text-lg mb-2"><i class="fa-solid fa-paper-plane text-primary mr-2"></i> thiagoacciolyest@gmail.com</p>
+        </div>
+        
+        <aside>
+            <p>Copyright © 2026 - Thiago Viriato Accioly. Construído com HTML, Tailwind CSS e Alpine.js.</p>
+        </aside>
     </footer>
+
 </body>
 </html>
