@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiago Viriato Accioly | Portfólio Fullstack</title>
-    
+
+    <meta name="description" content="Portfólio de Thiago Viriato Accioly — Desenvolvedor Fullstack (Python/Django, Node.js, React) com foco em Dados & IA. Projetos, skills e capacitação.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Thiago Viriato Accioly | Portfólio Fullstack">
+    <meta property="og:description" content="Estudante de Engenharia de Software na UnB e Estagiário Fullstack no Senado Federal. Projetos em Python, Django, Node.js, React e Inteligência Artificial.">
+    <meta property="og:image" content="https://acciolyy.github.io/Portfolio-Thiago/eu%20imagem.jpg">
+    <meta property="og:url" content="https://acciolyy.github.io/Portfolio-Thiago/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -24,6 +33,9 @@
         /* Ajuste para o menu fixo não cobrir o título das seções */
         section {
             scroll-margin-top: 5rem;
+        }
+        [x-cloak] {
+            display: none !important;
         }
     </style>
 </head>
@@ -68,14 +80,12 @@
             <img src="eu imagem.jpg" alt="Foto de Thiago Viriato Accioly" class="max-w-xs md:max-w-sm rounded-full shadow-2xl border-4 border-primary" />
             <div class="text-center lg:text-left">
                 <p class="text-xl text-primary font-semibold mb-2">Olá, eu sou o</p>
-                <h1 class="text-5xl font-bold mb-4">Thiago Viriato Accioly</h1>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">Thiago Viriato Accioly</h1>
                 <p class="py-2 text-lg text-gray-300 leading-relaxed">
-                    Estudante do 7º semestre de Engenharia de Software na UnB e Estagiário Fullstack no Senado Federal. 
-                    Tenho forte experiência com desenvolvimento de sistemas web utilizando <span class="text-primary font-semibold">Python (Django)</span>, 
-                    <span class="text-primary font-semibold">Node.js</span> e interfaces modernas.
+                    Estudante do 8º semestre de Engenharia de Software na UnB e Estagiário Fullstack no Senado Federal, onde construo sistemas web em <span class="text-primary font-semibold">Python (Django)</span> e automatizo sua validação com testes E2E em <span class="text-primary font-semibold">Playwright</span> e <span class="text-primary font-semibold">pytest</span> em produção.
                 </p>
                 <p class="py-2 text-lg text-gray-300 leading-relaxed">
-                    Meu objetivo é consolidar minha carreira como Desenvolvedor Fullstack. Paralelamente, tenho forte interesse em <strong>Inteligência de Dados, Machine Learning e Visão Computacional</strong>, com foco na aplicação prática dessas áreas na resolução de problemas reais.
+                    Minhas duas áreas de interesse são <strong>Automação de Testes (QA)</strong> e <strong>Inteligência Artificial / Machine Learning</strong> — da automação que garante a qualidade de um sistema à construção de agentes e modelos que resolvem problemas reais. O desenvolvimento fullstack é a base técnica que sustenta as duas.
                 </p>
                 <div class="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
                     <a href="#projetos" class="btn btn-primary shadow-lg"><i class="fa-solid fa-code"></i> Ver Projetos</a>
@@ -85,11 +95,11 @@
         </div>
     </section>
 
-    <section id="skills" class="py-20 bg-base-300">
+    <section id="skills" class="py-24 md:py-32 bg-base-300">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12"><i class="fa-solid fa-screwdriver-wrench text-primary"></i> Skills & Ferramentas</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 tracking-tight"><i class="fa-solid fa-screwdriver-wrench text-primary"></i> Skills & Ferramentas</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-primary">
                     <div class="card-body items-center text-center">
                         <i class="fa-solid fa-laptop-code text-4xl text-primary mb-2"></i>
@@ -110,7 +120,7 @@
                     <div class="card-body items-center text-center">
                         <i class="fa-solid fa-brain text-4xl text-secondary mb-2"></i>
                         <h3 class="card-title mb-2">Dados & IA</h3>
-                        <p class="text-sm text-gray-400">PostgreSQL, MongoDB, Pandas, Plotly, Streamlit, Machine Learning, Visão Computacional.</p>
+                        <p class="text-sm text-gray-400">PostgreSQL, MongoDB, Pandas, Plotly, Streamlit, PyTorch, scikit-learn, OpenCV, Function Calling / Agentes de IA, Visão Computacional.</p>
                     </div>
                 </div>
 
@@ -125,22 +135,44 @@
         </div>
     </section>
 
-    <section id="projetos" class="py-20 bg-base-200" x-data="{ filter: 'all' }">
+    <section id="projetos" class="py-24 md:py-32 bg-base-200" x-data="{ filter: 'all' }">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-10"><i class="fa-solid fa-folder-open text-primary"></i> Projetos em Destaque</h2>
-            
-            <div class="flex justify-center flex-wrap gap-4 mb-12">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4 tracking-tight"><i class="fa-solid fa-folder-open text-primary"></i> Projetos em Destaque</h2>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">Clique em "Ver detalhes" em cada card para entender o problema, a solução e o resultado de cada projeto.</p>
+
+            <div class="flex justify-center flex-wrap gap-4 mb-16">
                 <button class="btn" :class="filter === 'all' ? 'btn-primary' : 'btn-outline'" @click="filter = 'all'">Todos</button>
                 <button class="btn" :class="filter === 'web' ? 'btn-primary' : 'btn-outline'" @click="filter = 'web'">Web & Fullstack</button>
                 <button class="btn" :class="filter === 'data' ? 'btn-primary' : 'btn-outline'" @click="filter = 'data'">Dados & IA</button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition x-data="{ open: false }">
                     <div class="card-body">
                         <h2 class="card-title text-2xl">Portal Orc'estra <span class="text-sm font-normal text-gray-400">(Empresa Júnior)</span></h2>
-                        <p class="text-gray-300 mb-4">Desenvolvimento de portal interno para gestão de usuários focado em soluções de software e gamificação. Implementação de autenticação JWT e controle de acesso (RBAC).</p>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Em uso pela diretoria para gerenciar contas e gamificação dos membros.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">A empresa júnior precisava de um portal único para centralizar cadastro de membros e gestão de permissões, até então dispersos em planilhas e processos manuais.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Portal web com autenticação JWT e controle de acesso baseado em papéis (RBAC), integrado a um sistema de gamificação para engajamento dos membros.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">Portal em uso pela diretoria da empresa júnior para gerenciar contas e o progresso de gamificação dos membros, substituindo o controle manual anterior.</p>
+                            </div>
+                        </div>
+
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="badge badge-primary badge-outline">Node.js</span>
                             <span class="badge badge-primary badge-outline">React</span>
@@ -153,10 +185,31 @@
                     </div>
                 </div>
 
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition>
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition x-data="{ open: false }">
                     <div class="card-body">
                         <h2 class="card-title text-2xl">Cerradex</h2>
-                        <p class="text-gray-300 mb-4">Plataforma web Fullstack desenvolvida para proteção de informações do bioma Cerrado. Arquitetura containerizada com integração robusta de banco de dados.</p>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Entregue como projeto final de disciplina, com ambiente reproduzível via Docker Compose.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">Falta de uma fonte confiável, visual e acessível sobre espécies do Cerrado ameaçadas de extinção, dificultando o engajamento de quem não é especialista com a preservação do bioma.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Como parte do time Berkanan (disciplina de Métodos de Desenvolvimento de Software, UnB), construí a camada fullstack: frontend em Next.js/TypeScript, backend em Bun + TypeScript e persistência em Supabase, tudo containerizado com Docker Compose.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">Plataforma entregue e apresentada como projeto final da disciplina, com ambiente reproduzível via <code>docker-compose up</code> e integração completa entre frontend, backend e banco de dados.</p>
+                            </div>
+                        </div>
+
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="badge badge-primary badge-outline">Next.js</span>
                             <span class="badge badge-primary badge-outline">Bun + TS</span>
@@ -169,26 +222,69 @@
                     </div>
                 </div>
 
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition>
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
                     <div class="card-body">
                         <h2 class="card-title text-2xl">Dashboard Análise de Salários</h2>
-                        <p class="text-gray-300 mb-4">Desenvolvimento de dashboard interativo para análise de um dataset contendo mais de 130 mil registros, com filtros dinâmicos e visualização gráfica avançada.</p>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Mais de 133 mil registros analisados, publicado ao vivo no Streamlit Cloud.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">Encontrar dados salariais confiáveis e comparáveis na área de dados costuma exigir garimpar múltiplas pesquisas dispersas, sem filtros por senioridade, país ou modalidade de trabalho.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Dashboard interativo em Streamlit que processa um dataset com mais de 133 mil registros de salários em Data Science, Data Engineering e Analytics, com filtros dinâmicos (ano, senioridade, contrato, cargo) e visualizações em Plotly, incluindo um mapa coroplético global.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">Dashboard publicado e acessível ao vivo, permitindo consultar tendências salariais globais em tempo real sem necessidade de instalação.</p>
+                            </div>
+                        </div>
+
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="badge badge-secondary badge-outline">Python</span>
                             <span class="badge badge-secondary badge-outline">Streamlit</span>
                             <span class="badge badge-secondary badge-outline">Pandas</span>
                             <span class="badge badge-secondary badge-outline">Plotly</span>
                         </div>
-                        <div class="card-actions justify-end mt-auto">
+                        <div class="card-actions justify-end mt-auto flex-wrap gap-2">
+                            <a href="https://tech-salary-insights.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i> Demo ao Vivo</a>
                             <a href="https://github.com/Acciolyy/Dashboard-Salarios?tab=readme-ov-file" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition>
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
                     <div class="card-body">
                         <h2 class="card-title text-2xl">Detector de Celular</h2>
-                        <p class="text-gray-300 mb-4">Pipeline de visão computacional em tempo real com Python, OpenCV e Edge Impulse, incluindo inferência local e detecção de objetos via webcam.</p>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Protótipo funcional de detecção em tempo real via webcam, com inferência 100% local.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">Uso do celular ao volante é um fator recorrente em acidentes de trânsito, reduzindo o tempo de reação do condutor — mas validar essa detecção em tempo real exige uma pipeline própria de visão computacional.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Pipeline de visão computacional em tempo real com Python, OpenCV e um modelo treinado no Edge Impulse (formato <code>.eim</code>), capturando e processando o vídeo da webcam para inferência local, sem depender de nuvem.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">Protótipo funcional de detecção em tempo real via webcam, servindo de base técnica para estudos de monitoramento em cabine e assistência ao motorista.</p>
+                            </div>
+                        </div>
+
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="badge badge-secondary badge-outline">Python</span>
                             <span class="badge badge-secondary badge-outline">OpenCV</span>
@@ -201,14 +297,124 @@
                     </div>
                 </div>
 
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">Agente de Triagem de Vagas com IA</h2>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Triagem automática de vagas reais a partir de critérios em linguagem natural.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">Buscar vagas remotas alinhadas ao perfil do candidato manualmente é lento e repetitivo, exigindo reler dezenas de anúncios para aplicar critérios simples de nível, stack e modelo de trabalho.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Agente conversacional em Python com a API do Gemini (function calling): coleta critérios em linguagem natural, chama uma função para buscar vagas reais no feed RSS do We Work Remotely e outra para registrar a decisão de aplicar ou não em cada vaga, com interface tanto por terminal quanto via Streamlit.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">Agente que triagem vagas reais automaticamente a partir de critérios em linguagem natural, retornando um resumo com vagas recomendadas e descartadas — sem intervenção manual vaga a vaga.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-secondary badge-outline">Python</span>
+                            <span class="badge badge-secondary badge-outline">API Gemini</span>
+                            <span class="badge badge-info badge-outline">Function Calling</span>
+                            <span class="badge badge-secondary badge-outline">Streamlit</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="https://github.com/Acciolyy/agente-triagem-vagas" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">Portfólio de IA e Machine Learning</h2>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> 98,9% de acurácia em CNN (PyTorch) e convergência ótima comprovada em Q-Learning.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">Entender IA e Machine Learning na prática exige ir além da teoria: implementar os diferentes paradigmas e métodos clássicos para comparar comportamento, limitações e resultados reais.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Implementações práticas dos quatro paradigmas de Machine Learning (supervisionado, não supervisionado, por reforço e deep learning) e de métodos clássicos de IA (busca, otimização, CSP, modelos probabilísticos), desenvolvidos na disciplina de Inteligência Artificial (FGA0221) na UnB.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">98,9% de acurácia em uma CNN treinada com PyTorch e convergência ótima comprovada em Q-Learning, entre os principais resultados do portfólio.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-secondary badge-outline">Python</span>
+                            <span class="badge badge-secondary badge-outline">PyTorch</span>
+                            <span class="badge badge-secondary badge-outline">scikit-learn</span>
+                            <span class="badge badge-secondary badge-outline">NumPy</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="https://github.com/Acciolyy/portfolio-ia" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition x-data="{ open: false }">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">QA Automation Portfolio</h2>
+                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Base prática de CRUD (contas e produtos) para automação de testes ponta a ponta.</p>
+
+                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
+                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
+                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
+                        </button>
+
+                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
+                            <div>
+                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
+                                <p class="text-sm text-gray-400">Praticar automação de testes exige uma aplicação real com fluxos de CRUD, autenticação e regras de negócio — não apenas exemplos isolados.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
+                                <p class="text-sm text-gray-400">Aplicação Django com CRUD completo de contas e produtos, construída como base prática para estudos e automação de testes (funcionais e de API).</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
+                                <p class="text-sm text-gray-400">Projeto usado como terreno de prática para automação de testes, cobrindo os fluxos de CRUD de contas e produtos ponta a ponta.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge badge-primary badge-outline">Django</span>
+                            <span class="badge badge-primary badge-outline">Python</span>
+                            <span class="badge badge-accent badge-outline">Testes</span>
+                        </div>
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="https://github.com/Acciolyy/qa-automation-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="capacitacao" class="py-20 bg-base-300">
+    <section id="capacitacao" class="py-24 md:py-32 bg-base-300">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12"><i class="fa-solid fa-graduation-cap text-primary"></i> Capacitação & Eventos</h2>
-            
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 tracking-tight"><i class="fa-solid fa-graduation-cap text-primary"></i> Capacitação & Eventos</h2>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 <div class="bg-base-200 p-6 rounded-box shadow-md">
                     <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-primary"><i class="fa-solid fa-code"></i> Desenvolvimento</h3>
@@ -250,12 +456,12 @@
         </div>
     </section>
 
-    <footer id="contato" class="footer footer-center p-10 bg-base-100 text-base-content rounded mt-auto border-t border-base-300 shadow-inner">
+    <footer id="contato" class="footer footer-center p-10 md:p-16 bg-base-100 text-base-content rounded mt-auto border-t border-base-300 shadow-inner">
         <div class="max-w-2xl mx-auto">
-            <h2 class="text-3xl font-bold mb-2">Vamos conversar?</h2>
-            <p class="mb-6 text-gray-400">Estou aberto a novas conexões e oportunidades na área de desenvolvimento.</p>
-            
-            <div class="grid grid-flow-col gap-6 mb-6">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight">Vamos conversar?</h2>
+            <p class="mb-8 text-gray-400">Estou aberto a novas conexões e oportunidades em QA Automation e Inteligência Artificial.</p>
+
+            <div class="grid grid-flow-col gap-6 mb-8">
                 <a href="https://www.linkedin.com/in/thiago-viriato-accioly" target="_blank" rel="noopener noreferrer" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="LinkedIn">
                     <i class="fa-brands fa-linkedin"></i>
                 </a>
@@ -266,7 +472,7 @@
                     <i class="fa-solid fa-envelope"></i>
                 </a>
             </div>
-            
+
             <p class="text-lg mb-2"><i class="fa-solid fa-paper-plane text-primary mr-2"></i> thiagoacciolyest@gmail.com</p>
         </div>
         
