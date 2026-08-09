@@ -1,485 +1,446 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dracula">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thiago Viriato Accioly | Portfólio Fullstack</title>
+    <title>Thiago Viriato Accioly, Desenvolvedor Python</title>
 
-    <meta name="description" content="Portfólio de Thiago Viriato Accioly — Desenvolvedor Fullstack (Python/Django, Node.js, React) com foco em Dados & IA. Projetos, skills e capacitação.">
+    <meta name="description" content="Desenvolvedor Python. Construo aplicações com Django, HTMX e PostgreSQL, e escrevo os testes que provam que elas continuam funcionando depois.">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Thiago Viriato Accioly | Portfólio Fullstack">
-    <meta property="og:description" content="Estudante de Engenharia de Software na UnB e Estagiário Fullstack no Senado Federal. Projetos em Python, Django, Node.js, React e Inteligência Artificial.">
+    <meta property="og:title" content="Thiago Viriato Accioly, Desenvolvedor Python">
+    <meta property="og:description" content="Django, HTMX, PostgreSQL e pytest. Projetos com o problema que apareceu no caminho e o que eu fiz para resolver.">
     <meta property="og:image" content="https://acciolyy.github.io/Portfolio-Thiago/eu%20imagem.jpg">
     <meta property="og:url" content="https://acciolyy.github.io/Portfolio-Thiago/">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#131619">
+
+    <link rel="icon" href="TVlogo.ico" sizes="any">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        html {
-            scroll-behavior: smooth;
-            font-family: 'Inter', sans-serif;
-        }
-        /* Ajuste para o menu fixo não cobrir o título das seções */
-        section {
-            scroll-margin-top: 5rem;
-        }
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
+    <!-- Tailwind compilado estaticamente: só as utilidades usadas neste arquivo,
+         mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
+    <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
+    <link rel="stylesheet" href="assets/tailwind.css?v=2">
+    <link rel="stylesheet" href="style.css?v=2">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
+            integrity="sha384-9Ax3MmS9AClxJyd5/zafcXXjxmwFhZCdsT6HJoJjarvCaAkJlk5QDzjLJm+Wdx5F"
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-base-300 text-base-content antialiased">
+<body>
 
-    <nav class="navbar bg-base-100 fixed top-0 w-full z-50 shadow-lg" x-data="{ mobileMenuOpen: false }">
-        <div class="flex-1">
-            <a href="#" class="btn btn-ghost text-xl font-bold tracking-wider">
-                <span class="text-primary">TVA</span> <span class="hidden sm:inline">| Portfólio</span>
-            </a>
-        </div>
-        <div class="flex-none hidden lg:flex">
-            <ul class="menu menu-horizontal px-1 font-semibold">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <!-- 1) Linha de traçado: progresso de scroll -->
+    <div class="progress" aria-hidden="true">
+        <div class="progress__fill" id="progress-fill"></div>
+        <svg class="progress__car" id="progress-car" viewBox="0 0 34 12" width="34" height="12" fill="none">
+            <path d="M1.2 9V6.4c0-.6.4-1.1 1-1.2l6.9-1L13.7 1.7c.5-.4 1.1-.6 1.8-.6h5.3c.8 0 1.6.3 2.1.9l2.7 3 5.4 1c.8.2 1.4.9 1.4 1.7V9H1.2Z" fill="currentColor"/>
+            <circle cx="9.2" cy="9.1" r="2.1" fill="#131619" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="25.4" cy="9.1" r="2.1" fill="#131619" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+    </div>
+
+    <header class="site-header" x-data="{ aberto: false }">
+        <div class="wrap">
+            <a class="brand" href="#inicio">TVA <span>/ python</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
                 <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#capacitacao">Capacitação</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
-        </div>
-        
-        <div class="flex-none lg:hidden">
-            <button class="btn btn-square btn-ghost" @click="mobileMenuOpen = !mobileMenuOpen">
-                <i class="fa-solid fa-bars text-xl"></i>
+
+            <button class="nav-toggle" type="button" @click="aberto = !aberto"
+                    :aria-expanded="aberto" aria-controls="menu-mobile">
+                <span x-text="aberto ? 'fechar' : 'menu'">menu</span>
             </button>
         </div>
-        
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-transition 
-             class="absolute top-16 right-0 w-full bg-base-200 shadow-xl lg:hidden">
-            <ul class="menu menu-vertical px-4 py-6 text-lg font-semibold space-y-2 text-center">
-                <li><a href="#sobre" @click="mobileMenuOpen = false">Sobre</a></li>
-                <li><a href="#skills" @click="mobileMenuOpen = false">Skills</a></li>
-                <li><a href="#projetos" @click="mobileMenuOpen = false">Projetos</a></li>
-                <li><a href="#capacitacao" @click="mobileMenuOpen = false">Capacitação</a></li>
-                <li><a href="#contato" @click="mobileMenuOpen = false">Contato</a></li>
+
+        <nav class="nav-drawer" id="menu-mobile" x-show="aberto" x-cloak
+             @click.outside="aberto = false" aria-label="Navegação principal">
+            <ul>
+                <li><a href="#inicio" @click="aberto = false">Início</a></li>
+                <li><a href="#sobre" @click="aberto = false">Sobre</a></li>
+                <li><a href="#projetos" @click="aberto = false">Projetos</a></li>
+                <li><a href="#contato" @click="aberto = false">Contato</a></li>
             </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo">
+
+        <!-- ============================== 01 / INICIO ============================== -->
+        <section id="inicio" class="section section--hero">
+            <div class="wrap">
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>01 / INICIO</p>
+
+                <div class="hero__top">
+                    <div class="hero__lead">
+                        <p class="hero__name">Thiago Viriato Accioly</p>
+
+                        <h1 class="hero__title">
+                            Desenvolvedor
+                            <span class="py">Python</span>
+                        </h1>
+
+                        <p class="hero__pitch indent">
+                            Construo aplicações com Django e PostgreSQL, e escrevo os testes que
+                            provam que elas continuam funcionando depois.
+                        </p>
+                    </div>
+
+                    <!-- Ficha técnica: os dados que não cabem no título. -->
+                    <dl class="spec">
+                        <div class="spec__row">
+                            <dt>Local</dt>
+                            <dd>Brasília, DF</dd>
+                        </div>
+                        <div class="spec__row">
+                            <dt>Formação</dt>
+                            <dd>Eng. de Software, UnB <span class="sep">·</span> 2027</dd>
+                        </div>
+                        <div class="spec__row">
+                            <dt>Atual</dt>
+                            <dd>Estagiário fullstack, Senado Federal</dd>
+                        </div>
+                        <div class="spec__row">
+                            <dt>Foco</dt>
+                            <dd>Django <span class="sep">·</span> PostgreSQL <span class="sep">·</span> automação de testes</dd>
+                        </div>
+                        <div class="spec__row">
+                            <dt>Disponível</dt>
+                            <dd>presencial <span class="sep">·</span> híbrido <span class="sep">·</span> remoto</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="telemetry" id="telemetry">
+                    <div class="telemetry__cell">
+                        <span class="telemetry__label">Ult. commit</span>
+                        <span class="telemetry__value" data-tel="ultimoCommit">2h</span>
+                    </div>
+                    <div class="telemetry__cell">
+                        <span class="telemetry__label">Testes</span>
+                        <span class="telemetry__value" data-tel="testes">92</span>
+                    </div>
+                    <div class="telemetry__cell">
+                        <span class="telemetry__label">Suíte</span>
+                        <span class="telemetry__value" data-tel="suite">5.24s</span>
+                    </div>
+                    <div class="telemetry__cell">
+                        <span class="telemetry__label">CI</span>
+                        <span class="telemetry__value telemetry__value--ok" data-tel="ci">passing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== 02 / SOBRE =============================== -->
+        <section id="sobre" class="section section--sobre">
+            <div class="wrap">
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>02 / SOBRE</p>
+
+                <div class="about">
+                    <figure class="about__photo m-0">
+                        <img src="eu%20imagem.jpg" alt="Thiago Viriato Accioly" width="152" height="152" loading="lazy" decoding="async">
+                        <figcaption>Brasília, DF</figcaption>
+                    </figure>
+
+                    <div class="about__text indent">
+                        <p>
+                            Python foi minha primeira linguagem. Eu já me interessava por IA antes de
+                            saber programar, e foi por aí que entrei.
+                        </p>
+                        <p>
+                            Gosto de entender o sistema inteiro antes de mexer numa parte dele. Foi
+                            assim que acabei caindo em testes: para automatizar um fluxo eu precisava
+                            entender a arquitetura, o banco e as regras de negócio. O hábito virou a
+                            forma como eu programo.
+                        </p>
+                        <p>
+                            Sobre otimização: se existe um jeito mais simples que serve ao mesmo
+                            propósito, eu troco. Não gosto de sistema lento, nem de suíte de teste lenta.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 03 / NEM TUDO É O QUE PARECE ======================= -->
+        <section id="nem-tudo" class="section section--nota">
+            <div class="wrap">
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>03 / NEM TUDO É O QUE PARECE</p>
+
+                <div class="note indent">
+                    <p>
+                        No Senado, eu estava testando uma feature nova de geração de documentos em
+                        Typst. O documento saía com N/A em vários campos e eu tinha certeza de que era
+                        bug de campo obrigatório não preenchido. Não era. A feature estava em teste e
+                        aqueles dados ainda não existiam no ambiente.
+                    </p>
+                    <p>
+                        Desde então eu investigo a razão antes de concluir a causa. Foi isso que me fez
+                        achar, semanas depois, um bug de mapeamento de coordenada escondido atrás de uma
+                        métrica que media a coisa errada.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================= 04 / PROJETOS ============================= -->
+        <section id="projetos" class="section section--projetos">
+            <div class="wrap">
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>04 / PROJETOS</p>
+
+                <!-- Projeto principal -->
+                <article class="card card--main">
+                    <div class="card__body">
+                        <p class="rank">Projeto principal</p>
+                        <h2 class="card__title">ImóvelDF, Portal de Imóveis</h2>
+                        <p class="origin">origem: demanda real</p>
+
+                        <p class="stack mt-6">
+                            Python 3.12 <span class="sep">·</span> Django 5.2 <span class="sep">·</span>
+                            PostgreSQL 16 <span class="sep">·</span> HTMX <span class="sep">·</span>
+                            Alpine.js <span class="sep">·</span> Tailwind <span class="sep">·</span>
+                            Docker <span class="sep">·</span> pytest
+                        </p>
+
+                        <p class="card__text">
+                            Portal de imóveis construído do zero, com anúncio e busca de propriedades,
+                            sistema de assinaturas com controle de limites e acesso diferenciado por
+                            perfil de usuário. A arquitetura segue princípios de Domain-Driven Design:
+                            apps isolados por domínio, modelos magros, regras de negócio em
+                            <code>services.py</code> e consultas em <code>selectors.py</code>.
+                        </p>
+
+                        <ul class="points">
+                            <li>UUID como chave primária, para evitar enumeration attacks em endpoints</li>
+                            <li>Soft delete com managers dedicados e auditoria por timestamps</li>
+                            <li>on_delete=PROTECT como padrão e CheckConstraint garantindo invariantes no banco</li>
+                            <li>Hardening contra supply-chain com hashes SRI e tokens CSRF</li>
+                            <li>PostgreSQL 16 em container Docker espelhando produção</li>
+                        </ul>
+
+                        <!-- Capturas do ImóvelDF entram aqui. Substituir o bloco .shots por:
+                             <img src="assets/imoveldf-01.png" alt="Tela de busca do ImóvelDF" loading="lazy"> -->
+                        <div class="shots">
+                            <span>Espaço reservado para capturas</span>
+                        </div>
+
+                        <p class="private-note">
+                            Repositório privado enquanto o projeto não vai para produção.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Segundo destaque, com vídeo -->
+                <article class="feature mt-4">
+                    <div class="feature__media">
+                        <video id="video-destaque"
+                               src="assets/destaque.webm"
+                               preload="none"
+                               muted loop playsinline
+                               aria-label="Detecção de uso de celular rodando em tempo real sobre vídeo de webcam"></video>
+                    </div>
+
+                    <div class="feature__body">
+                        <p class="rank">Em destaque</p>
+                        <h2 class="card__title">Detector de uso de celular</h2>
+                        <p class="origin">origem: prática</p>
+
+                        <p class="stack mt-6">
+                            Python <span class="sep">·</span> OpenCV <span class="sep">·</span>
+                            Edge Impulse <span class="sep">·</span> NumPy
+                        </p>
+
+                        <p class="card__text">
+                            A latência que o modelo reportava era de 1 ms, mas o sistema entregava de 3 a
+                            8 quadros por segundo. Investigando, achei três causas escondidas atrás de uma
+                            métrica que só media a rede neural: a câmera limitando a entrega, um laço de
+                            extração de features não vetorizado, e a exibição de vídeo consumindo boa
+                            parte do tempo.
+                        </p>
+                        <p class="card__text">
+                            No caminho apareceu um segundo problema. As caixas de detecção estavam mal
+                            mapeadas sempre que o objeto saía do centro da imagem. Depois de corrigir, deu
+                            para isolar a limitação real do modelo: ele detecta bem com o celular perto da
+                            orelha e falha em outras posições, sinal de que o dataset super-representa uma
+                            única pose.
+                        </p>
+
+                        <div class="out-row">
+                            <a class="out" href="https://github.com/Acciolyy/Cell-Detector" target="_blank" rel="noopener noreferrer">
+                                github.com/Acciolyy/Cell-Detector <span class="arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Demais projetos -->
+                <div class="grid-projects mt-4">
+
+                    <article class="card">
+                        <div class="card__media">
+                            <video src="assets/agente.webm"
+                                   preload="none"
+                                   muted loop playsinline
+                                   aria-label="Agente de triagem em uso: critérios de vaga escritos em linguagem natural na barra lateral e busca de vagas remotas"></video>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">Agente de Triagem de Vagas com IA</h3>
+                            <p class="origin">origem: necessidade própria</p>
+                            <p class="card__text">
+                                Eu estava me candidatando a dezenas de vagas remotas e cansei de rolar site
+                                atrás de site. Construí um agente em Python com a API do Gemini e function
+                                calling para filtrar vagas por critérios em linguagem natural. Comecei
+                                consumindo a API do RemoteOK e percebi que os resultados eram bons demais.
+                                Era um dataset chamariz, servido para quem não tem contrato. Migrei para o
+                                RSS do We Work Remotely.
+                            </p>
+                            <p class="stack mt-6">
+                                Python <span class="sep">·</span> Streamlit <span class="sep">·</span>
+                                Gemini API <span class="sep">·</span> Function Calling
+                            </p>
+                            <div class="out-row">
+                                <a class="out" href="https://github.com/Acciolyy/agente-triagem-vagas" target="_blank" rel="noopener noreferrer">
+                                    github.com/Acciolyy/agente-triagem-vagas <span class="arrow" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__media">
+                            <video src="assets/dashboard.webm"
+                                   preload="none"
+                                   muted loop playsinline
+                                   aria-label="Dashboard de salários em uso: filtros por ano e senioridade à esquerda, métricas gerais e gráficos à direita"></video>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">Dashboard de Análise Salarial</h3>
+                            <p class="origin">origem: prática</p>
+                            <p class="card__text">
+                                Ferramenta de BI sobre mais de 130 mil registros do mercado de tecnologia,
+                                com Pandas e Plotly. Integra dados em tempo real da API da Adzuna com cache
+                                de 24h para respeitar o limite de requisições, e continua funcionando se a
+                                API externa cair.
+                            </p>
+                            <p class="stack mt-6">
+                                Python <span class="sep">·</span> Pandas <span class="sep">·</span>
+                                Plotly <span class="sep">·</span> Streamlit <span class="sep">·</span>
+                                Adzuna API
+                            </p>
+                            <div class="out-row">
+                                <a class="out" href="https://tech-salary-insights.streamlit.app/" target="_blank" rel="noopener noreferrer">
+                                    demo ao vivo <span class="arrow" aria-hidden="true">↗</span>
+                                </a>
+                                <a class="out" href="https://github.com/Acciolyy/Dashboard-Salarios" target="_blank" rel="noopener noreferrer">
+                                    github.com/Acciolyy/Dashboard-Salarios <span class="arrow" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__body">
+                            <h3 class="card__title">Portfólio de IA e Machine Learning</h3>
+                            <p class="origin">origem: acadêmico</p>
+                            <p class="card__text">
+                                Implementações dos quatro paradigmas de ML: supervisionado, não
+                                supervisionado, reforço e deep learning. Inclui uma CNN com 98,9% de
+                                acurácia em PyTorch, redes bayesianas, HMM, filtro de Kalman e métodos
+                                clássicos de busca e otimização.
+                            </p>
+                            <p class="stack mt-6">
+                                Python <span class="sep">·</span> PyTorch <span class="sep">·</span>
+                                scikit-learn <span class="sep">·</span> NumPy
+                            </p>
+                            <div class="out-row">
+                                <a class="out" href="https://github.com/Acciolyy/portfolio-ia" target="_blank" rel="noopener noreferrer">
+                                    github.com/Acciolyy/portfolio-ia <span class="arrow" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__body">
+                            <h3 class="card__title">QA Automation Portfolio</h3>
+                            <p class="origin">origem: prática</p>
+                            <p class="card__text">
+                                Aplicação Django que construí para praticar automação de testes, com bugs
+                                documentados e reproduzidos: validação de preço negativo, TextField sem
+                                limite, off-by-one na paginação, ausência de controle de acesso por papel, e
+                                página protegida ainda acessível pelo botão voltar após logout, por falta de
+                                Cache-Control.
+                            </p>
+                            <p class="stack mt-6">
+                                Django <span class="sep">·</span> pytest <span class="sep">·</span> Playwright
+                            </p>
+                            <div class="out-row">
+                                <a class="out" href="https://github.com/Acciolyy/qa-automation-portfolio" target="_blank" rel="noopener noreferrer">
+                                    github.com/Acciolyy/qa-automation-portfolio <span class="arrow" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== 05 / CONTATO ============================= -->
+        <section id="contato" class="section section--contato">
+            <div class="wrap">
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>05 / CONTATO</p>
+
+                <div class="contact indent">
+                    <h2>Vamos conversar</h2>
+                    <p>
+                        Procuro vagas de Desenvolvedor Python, Back-End ou Full-Stack. Moro em Brasília
+                        e atendo presencial ou híbrido aqui, e remoto para fora.
+                    </p>
+
+                    <div class="contact__links">
+                        <a href="https://github.com/Acciolyy" target="_blank" rel="noopener noreferrer">
+                            <span class="k">GitHub</span>
+                            <span class="v">Acciolyy</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/thiago-viriato-accioly" target="_blank" rel="noopener noreferrer">
+                            <span class="k">LinkedIn</span>
+                            <span class="v">thiago-viriato-accioly</span>
+                        </a>
+                        <a href="mailto:thiagoacciolyest@gmail.com">
+                            <span class="k">E-mail</span>
+                            <span class="v">thiagoacciolyest@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>© 2026 Thiago Viriato Accioly. HTML, Tailwind, Alpine.js e GSAP.</p>
         </div>
-    </nav>
-
-    <section id="sobre" class="hero min-h-screen bg-base-200 pt-20">
-        <div class="hero-content flex-col lg:flex-row-reverse gap-10 lg:gap-20 max-w-6xl">
-            <img src="eu imagem.jpg" alt="Foto de Thiago Viriato Accioly" class="max-w-xs md:max-w-sm rounded-full shadow-2xl border-4 border-primary" />
-            <div class="text-center lg:text-left">
-                <p class="text-xl text-primary font-semibold mb-2">Olá, eu sou o</p>
-                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">Thiago Viriato Accioly</h1>
-                <p class="py-2 text-lg text-gray-300 leading-relaxed">
-                    Estudante do 8º semestre de Engenharia de Software na UnB e Estagiário Fullstack no Senado Federal, onde construo sistemas web em <span class="text-primary font-semibold">Python (Django)</span> e automatizo sua validação com testes E2E em <span class="text-primary font-semibold">Playwright</span> e <span class="text-primary font-semibold">pytest</span> em produção.
-                </p>
-                <p class="py-2 text-lg text-gray-300 leading-relaxed">
-                    Minhas duas áreas de interesse são <strong>Automação de Testes (QA)</strong> e <strong>Inteligência Artificial / Machine Learning</strong> — da automação que garante a qualidade de um sistema à construção de agentes e modelos que resolvem problemas reais. O desenvolvimento fullstack é a base técnica que sustenta as duas.
-                </p>
-                <div class="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
-                    <a href="#projetos" class="btn btn-primary shadow-lg"><i class="fa-solid fa-code"></i> Ver Projetos</a>
-                    <a href="#contato" class="btn btn-outline btn-accent shadow-lg"><i class="fa-solid fa-paper-plane"></i> Contato</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-24 md:py-32 bg-base-300">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 tracking-tight"><i class="fa-solid fa-screwdriver-wrench text-primary"></i> Skills & Ferramentas</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-primary">
-                    <div class="card-body items-center text-center">
-                        <i class="fa-solid fa-laptop-code text-4xl text-primary mb-2"></i>
-                        <h3 class="card-title mb-2">Linguagens & Web</h3>
-                        <p class="text-sm text-gray-400">Python, JavaScript, TypeScript, Node.js, C, HTML/CSS.</p>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-accent">
-                    <div class="card-body items-center text-center">
-                        <i class="fa-solid fa-cubes text-4xl text-accent mb-2"></i>
-                        <h3 class="card-title mb-2">Frameworks & DevOps</h3>
-                        <p class="text-sm text-gray-400">Django, React, Express, Plone, Docker, Docker Compose, Git, Linux.</p>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-secondary">
-                    <div class="card-body items-center text-center">
-                        <i class="fa-solid fa-brain text-4xl text-secondary mb-2"></i>
-                        <h3 class="card-title mb-2">Dados & IA</h3>
-                        <p class="text-sm text-gray-400">PostgreSQL, MongoDB, Pandas, Plotly, Streamlit, PyTorch, scikit-learn, OpenCV, Function Calling / Agentes de IA, Visão Computacional.</p>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-info">
-                    <div class="card-body items-center text-center">
-                        <i class="fa-solid fa-chart-line text-4xl text-info mb-2"></i>
-                        <h3 class="card-title mb-2">Engenharia & Negócios</h3>
-                        <p class="text-sm text-gray-400">Engenharia de Requisitos, Testes de Software, Metodologias Ágeis (Scrum, Kanban), Power BI.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projetos" class="py-24 md:py-32 bg-base-200" x-data="{ filter: 'all' }">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4 tracking-tight"><i class="fa-solid fa-folder-open text-primary"></i> Projetos em Destaque</h2>
-            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">Clique em "Ver detalhes" em cada card para entender o problema, a solução e o resultado de cada projeto.</p>
-
-            <div class="flex justify-center flex-wrap gap-4 mb-16">
-                <button class="btn" :class="filter === 'all' ? 'btn-primary' : 'btn-outline'" @click="filter = 'all'">Todos</button>
-                <button class="btn" :class="filter === 'web' ? 'btn-primary' : 'btn-outline'" @click="filter = 'web'">Web & Fullstack</button>
-                <button class="btn" :class="filter === 'data' ? 'btn-primary' : 'btn-outline'" @click="filter = 'data'">Dados & IA</button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">Portal Orc'estra <span class="text-sm font-normal text-gray-400">(Empresa Júnior)</span></h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Em uso pela diretoria para gerenciar contas e gamificação dos membros.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">A empresa júnior precisava de um portal único para centralizar cadastro de membros e gestão de permissões, até então dispersos em planilhas e processos manuais.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Portal web com autenticação JWT e controle de acesso baseado em papéis (RBAC), integrado a um sistema de gamificação para engajamento dos membros.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">Portal em uso pela diretoria da empresa júnior para gerenciar contas e o progresso de gamificação dos membros, substituindo o controle manual anterior.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-primary badge-outline">Node.js</span>
-                            <span class="badge badge-primary badge-outline">React</span>
-                            <span class="badge badge-primary badge-outline">MongoDB</span>
-                            <span class="badge badge-accent badge-outline">Gamificação</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto">
-                            <a href="https://github.com/portal-orcestra" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">Cerradex</h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Entregue como projeto final de disciplina, com ambiente reproduzível via Docker Compose.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">Falta de uma fonte confiável, visual e acessível sobre espécies do Cerrado ameaçadas de extinção, dificultando o engajamento de quem não é especialista com a preservação do bioma.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Como parte do time Berkanan (disciplina de Métodos de Desenvolvimento de Software, UnB), construí a camada fullstack: frontend em Next.js/TypeScript, backend em Bun + TypeScript e persistência em Supabase, tudo containerizado com Docker Compose.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">Plataforma entregue e apresentada como projeto final da disciplina, com ambiente reproduzível via <code>docker-compose up</code> e integração completa entre frontend, backend e banco de dados.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-primary badge-outline">Next.js</span>
-                            <span class="badge badge-primary badge-outline">Bun + TS</span>
-                            <span class="badge badge-primary badge-outline">Supabase</span>
-                            <span class="badge badge-secondary badge-outline">Docker</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto">
-                            <a href="https://github.com/FGA0138-MDS-Ajax/2025.1-Berkanan" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">Dashboard Análise de Salários</h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Mais de 133 mil registros analisados, publicado ao vivo no Streamlit Cloud.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">Encontrar dados salariais confiáveis e comparáveis na área de dados costuma exigir garimpar múltiplas pesquisas dispersas, sem filtros por senioridade, país ou modalidade de trabalho.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Dashboard interativo em Streamlit que processa um dataset com mais de 133 mil registros de salários em Data Science, Data Engineering e Analytics, com filtros dinâmicos (ano, senioridade, contrato, cargo) e visualizações em Plotly, incluindo um mapa coroplético global.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">Dashboard publicado e acessível ao vivo, permitindo consultar tendências salariais globais em tempo real sem necessidade de instalação.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-secondary badge-outline">Python</span>
-                            <span class="badge badge-secondary badge-outline">Streamlit</span>
-                            <span class="badge badge-secondary badge-outline">Pandas</span>
-                            <span class="badge badge-secondary badge-outline">Plotly</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto flex-wrap gap-2">
-                            <a href="https://tech-salary-insights.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i> Demo ao Vivo</a>
-                            <a href="https://github.com/Acciolyy/Dashboard-Salarios?tab=readme-ov-file" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">Detector de Celular</h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Protótipo funcional de detecção em tempo real via webcam, com inferência 100% local.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">Uso do celular ao volante é um fator recorrente em acidentes de trânsito, reduzindo o tempo de reação do condutor — mas validar essa detecção em tempo real exige uma pipeline própria de visão computacional.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Pipeline de visão computacional em tempo real com Python, OpenCV e um modelo treinado no Edge Impulse (formato <code>.eim</code>), capturando e processando o vídeo da webcam para inferência local, sem depender de nuvem.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">Protótipo funcional de detecção em tempo real via webcam, servindo de base técnica para estudos de monitoramento em cabine e assistência ao motorista.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-secondary badge-outline">Python</span>
-                            <span class="badge badge-secondary badge-outline">OpenCV</span>
-                            <span class="badge badge-info badge-outline">Edge Impulse</span>
-                            <span class="badge badge-info badge-outline">Computer Vision</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto">
-                            <a href="https://github.com/Acciolyy/Cell-Detector" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">Agente de Triagem de Vagas com IA</h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Triagem automática de vagas reais a partir de critérios em linguagem natural.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">Buscar vagas remotas alinhadas ao perfil do candidato manualmente é lento e repetitivo, exigindo reler dezenas de anúncios para aplicar critérios simples de nível, stack e modelo de trabalho.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Agente conversacional em Python com a API do Gemini (function calling): coleta critérios em linguagem natural, chama uma função para buscar vagas reais no feed RSS do We Work Remotely e outra para registrar a decisão de aplicar ou não em cada vaga, com interface tanto por terminal quanto via Streamlit.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">Agente que triagem vagas reais automaticamente a partir de critérios em linguagem natural, retornando um resumo com vagas recomendadas e descartadas — sem intervenção manual vaga a vaga.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-secondary badge-outline">Python</span>
-                            <span class="badge badge-secondary badge-outline">API Gemini</span>
-                            <span class="badge badge-info badge-outline">Function Calling</span>
-                            <span class="badge badge-secondary badge-outline">Streamlit</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto">
-                            <a href="https://github.com/Acciolyy/agente-triagem-vagas" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'data'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">Portfólio de IA e Machine Learning</h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> 98,9% de acurácia em CNN (PyTorch) e convergência ótima comprovada em Q-Learning.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">Entender IA e Machine Learning na prática exige ir além da teoria: implementar os diferentes paradigmas e métodos clássicos para comparar comportamento, limitações e resultados reais.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Implementações práticas dos quatro paradigmas de Machine Learning (supervisionado, não supervisionado, por reforço e deep learning) e de métodos clássicos de IA (busca, otimização, CSP, modelos probabilísticos), desenvolvidos na disciplina de Inteligência Artificial (FGA0221) na UnB.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">98,9% de acurácia em uma CNN treinada com PyTorch e convergência ótima comprovada em Q-Learning, entre os principais resultados do portfólio.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-secondary badge-outline">Python</span>
-                            <span class="badge badge-secondary badge-outline">PyTorch</span>
-                            <span class="badge badge-secondary badge-outline">scikit-learn</span>
-                            <span class="badge badge-secondary badge-outline">NumPy</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto">
-                            <a href="https://github.com/Acciolyy/portfolio-ia" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl" x-show="filter === 'all' || filter === 'web'" x-transition x-data="{ open: false }">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl">QA Automation Portfolio</h2>
-                        <p class="text-gray-300 font-medium mb-3"><i class="fa-solid fa-chart-line text-primary mr-1"></i> Base prática de CRUD (contas e produtos) para automação de testes ponta a ponta.</p>
-
-                        <button class="btn btn-sm btn-outline btn-primary self-start mb-3" @click="open = !open">
-                            <span x-show="!open">Ver detalhes <i class="fa-solid fa-chevron-down ml-1"></i></span>
-                            <span x-show="open" x-cloak>Ocultar detalhes <i class="fa-solid fa-chevron-up ml-1"></i></span>
-                        </button>
-
-                        <div x-show="open" x-transition x-cloak class="space-y-3 mb-4 border-l-2 border-primary/40 pl-4">
-                            <div>
-                                <h4 class="font-semibold text-primary text-xs uppercase tracking-wide mb-1">Problema</h4>
-                                <p class="text-sm text-gray-400">Praticar automação de testes exige uma aplicação real com fluxos de CRUD, autenticação e regras de negócio — não apenas exemplos isolados.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-accent text-xs uppercase tracking-wide mb-1">O que construí</h4>
-                                <p class="text-sm text-gray-400">Aplicação Django com CRUD completo de contas e produtos, construída como base prática para estudos e automação de testes (funcionais e de API).</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-secondary text-xs uppercase tracking-wide mb-1">Resultado</h4>
-                                <p class="text-sm text-gray-400">Projeto usado como terreno de prática para automação de testes, cobrindo os fluxos de CRUD de contas e produtos ponta a ponta.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="badge badge-primary badge-outline">Django</span>
-                            <span class="badge badge-primary badge-outline">Python</span>
-                            <span class="badge badge-accent badge-outline">Testes</span>
-                        </div>
-                        <div class="card-actions justify-end mt-auto">
-                            <a href="https://github.com/Acciolyy/qa-automation-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github text-lg"></i> Ver Código</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="capacitacao" class="py-24 md:py-32 bg-base-300">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 tracking-tight"><i class="fa-solid fa-graduation-cap text-primary"></i> Capacitação & Eventos</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-base-200 p-6 rounded-box shadow-md">
-                    <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-primary"><i class="fa-solid fa-code"></i> Desenvolvimento</h3>
-                    <ul class="space-y-3">
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> JavaScript & TypeScript Fullstack <span class="text-xs text-gray-500">(Udemy)</span></li>
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Python 3 + Projetos Reais <span class="text-xs text-gray-500">(Udemy)</span></li>
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Java Orientado a Objetos <span class="text-xs text-gray-500">(Udemy)</span></li>
-                    </ul>
-                </div>
-
-                <div class="bg-base-200 p-6 rounded-box shadow-md">
-                    <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-secondary"><i class="fa-solid fa-shield-halved"></i> Dados & Segurança</h3>
-                    <ul class="space-y-3">
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Imersão Dados com Python <span class="text-xs text-gray-500">(Alura)</span></li>
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> IA Aplicada à Visão Computacional</li>
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Hackers do Bem - Cibersegurança</li>
-                    </ul>
-                </div>
-
-                <div class="bg-base-200 p-6 rounded-box shadow-md">
-                    <h3 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2 text-info"><i class="fa-solid fa-users-gear"></i> Processos & Negócios</h3>
-                    <ul class="space-y-3">
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Scrum Fundamentals Certified (SFC)</li>
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Six Sigma Yellow Belt</li>
-                        <li><i class="fa-solid fa-certificate text-accent mr-2"></i> Funifier Associate - Gamificação</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="bg-base-100 p-8 rounded-box shadow-xl text-center max-w-4xl mx-auto border-l-4 border-primary">
-                <i class="fa-solid fa-people-group text-5xl text-primary mb-4"></i>
-                <h3 class="text-2xl font-bold mb-3">Eventos Tech & Hackathons</h3>
-                <p class="text-gray-300">
-                    Sempre em busca de imersão na comunidade tech. 
-                    Acredito que a troca de experiências em eventos e competições é fundamental para a inovação e o crescimento fora do ambiente acadêmico tradicional.
-                </p>
-                <div class="mt-4 text-sm text-gray-500 italic">Espaço reservado para futuras participações...</div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contato" class="footer footer-center p-10 md:p-16 bg-base-100 text-base-content rounded mt-auto border-t border-base-300 shadow-inner">
-        <div class="max-w-2xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight">Vamos conversar?</h2>
-            <p class="mb-8 text-gray-400">Estou aberto a novas conexões e oportunidades em QA Automation e Inteligência Artificial.</p>
-
-            <div class="grid grid-flow-col gap-6 mb-8">
-                <a href="https://www.linkedin.com/in/thiago-viriato-accioly" target="_blank" rel="noopener noreferrer" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/Acciolyy" target="_blank" rel="noopener noreferrer" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="mailto:thiagoacciolyest@gmail.com" class="text-3xl hover:text-primary transition-colors duration-300" aria-label="Email">
-                    <i class="fa-solid fa-envelope"></i>
-                </a>
-            </div>
-
-            <p class="text-lg mb-2"><i class="fa-solid fa-paper-plane text-primary mr-2"></i> thiagoacciolyest@gmail.com</p>
-        </div>
-        
-        <aside>
-            <p>Copyright © 2026 - Thiago Viriato Accioly. Construído com HTML, Tailwind CSS e Alpine.js.</p>
-        </aside>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer
+            integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer
+            integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/site.js?v=2" defer></script>
 
 </body>
 </html>

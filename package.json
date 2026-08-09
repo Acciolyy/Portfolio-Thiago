@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-thiago",
+  "private": true,
+  "description": "Portfolio de Thiago Viriato Accioly. O site e estatico; o npm existe so para compilar o Tailwind.",
+  "scripts": {
+    "css": "tailwindcss -i assets/tailwind.src.css -o assets/tailwind.css --minify",
+    "css:watch": "tailwindcss -i assets/tailwind.src.css -o assets/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

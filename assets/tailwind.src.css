@@ -1,0 +1,15 @@
+/* Entrada do build do Tailwind.
+   O arquivo final (assets/tailwind.css) leva só as utilidades usadas no
+   index.html, mais a lista abaixo, que fica sempre disponível para edições
+   rápidas sem precisar rodar o build de novo.
+
+   Build:  npm install  (uma vez)  →  npm run css
+*/
+@import "tailwindcss";
+@source "../index.html";
+
+@source inline("{m,mt,mb,ml,mr,p,pt,pb,px,py}-{0,1,2,3,4,6,8,10,12,16,20,24}");
+@source inline("{flex,grid,block,inline-block,hidden,relative,absolute}");
+@source inline("{items-start,items-center,justify-between,flex-wrap,flex-col}");
+@source inline("gap-{1,2,3,4,6,8,10,12}");
+@source inline("max-w-{xs,sm,md,lg,xl,2xl,3xl,4xl,5xl}");
