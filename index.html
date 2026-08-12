@@ -24,8 +24,8 @@
     <!-- Tailwind compilado estaticamente: só as utilidades usadas neste arquivo,
          mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
     <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
-    <link rel="stylesheet" href="assets/tailwind.css?v=3">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="assets/tailwind.css?v=6">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
             integrity="sha384-9Ax3MmS9AClxJyd5/zafcXXjxmwFhZCdsT6HJoJjarvCaAkJlk5QDzjLJm+Wdx5F"
@@ -120,22 +120,25 @@
                     </dl>
                 </div>
 
+                <!-- Valores estáticos: é o que aparece sem JS, enquanto a API do
+                     GitHub não responde, e se o IP estourar as 60 requisições por
+                     hora. O site.js troca por dado real. Confiram de vez em quando. -->
                 <div class="telemetry" id="telemetry">
                     <div class="telemetry__cell">
                         <span class="telemetry__label">Ult. commit</span>
-                        <span class="telemetry__value" data-tel="ultimoCommit">2h</span>
+                        <span class="telemetry__value" data-tel="ultimoCommit">1d</span>
                     </div>
                     <div class="telemetry__cell">
-                        <span class="telemetry__label">Testes</span>
-                        <span class="telemetry__value" data-tel="testes">92</span>
+                        <span class="telemetry__label">Repos</span>
+                        <span class="telemetry__value" data-tel="repos">20</span>
                     </div>
                     <div class="telemetry__cell">
-                        <span class="telemetry__label">Suíte</span>
-                        <span class="telemetry__value" data-tel="suite">5.24s</span>
+                        <span class="telemetry__label">Commits (30d)</span>
+                        <span class="telemetry__value" data-tel="commits30d">89</span>
                     </div>
                     <div class="telemetry__cell">
-                        <span class="telemetry__label">CI</span>
-                        <span class="telemetry__value telemetry__value--ok" data-tel="ci">passing</span>
+                        <span class="telemetry__label">Stack</span>
+                        <span class="telemetry__value telemetry__value--txt" data-tel="stack">Python</span>
                     </div>
                 </div>
             </div>
@@ -178,17 +181,30 @@
                 <p class="sec-label"><span class="tire" aria-hidden="true"></span>03 / NEM TUDO É O QUE PARECE</p>
 
                 <div class="note indent">
-                    <p>
-                        No Senado, eu estava testando uma feature nova de geração de documentos em
-                        Typst. O documento saía com N/A em vários campos e eu tinha certeza de que era
-                        bug de campo obrigatório não preenchido. Não era. A feature estava em teste e
-                        aqueles dados ainda não existiam no ambiente.
-                    </p>
-                    <p>
-                        Desde então eu investigo a razão antes de concluir a causa. Foi isso que me fez
-                        achar, semanas depois, um bug de mapeamento de coordenada escondido atrás de uma
-                        métrica que media a coisa errada.
-                    </p>
+                    <div class="note__grid">
+                        <div>
+                            <p>
+                                No Senado, eu estava testando uma feature nova de geração de documentos em
+                                Typst, e o resultado saía visualmente quebrado. Fui atrás da causa: parte
+                                eram campos obrigatórios que ainda não tinham sido populados naquele
+                                ambiente de teste, parte eram campos opcionais que, na prática, deveriam ser
+                                obrigatórios. Nos dois casos, o motivo de fundo era o mesmo: nada ali tinha
+                                fallback para a ausência de dado.
+                            </p>
+                            <p>
+                                Desde então eu investigo a razão antes de concluir a causa. Foi isso que me fez
+                                achar, semanas depois, um bug de mapeamento de coordenada escondido atrás de uma
+                                métrica que media a coisa errada.
+                            </p>
+                        </div>
+
+                        <!-- O raciocínio em três linhas, do jeito que eu anotaria no código. -->
+                        <aside class="anota">
+                            <span># sintoma: renderização quebrada</span>
+                            <span># causa: obrigatório vazio + opcional que devia ser obrigatório</span>
+                            <span># raiz comum: sem fallback pra ausência de dado</span>
+                        </aside>
+                    </div>
                 </div>
             </div>
         </section>
@@ -198,9 +214,16 @@
             <div class="wrap">
                 <p class="sec-label"><span class="tire" aria-hidden="true"></span>04 / PROJETOS</p>
 
-                <!-- Projeto principal -->
-                <article class="card card--main">
-                    <div class="card__body">
+                <!-- Projeto principal: mídia à esquerda, texto à direita. -->
+                <article class="feature feature--main">
+                    <div class="feature__media">
+                        <video src="assets/imoveldf.webm"
+                               preload="none"
+                               muted loop playsinline
+                               aria-label="Plataforma ImóvelDF em uso: busca de imóveis com filtros, parceria entre corretores e painel de analytics"></video>
+                    </div>
+
+                    <div class="feature__body">
                         <p class="rank">Projeto principal</p>
                         <h2 class="card__title">ImóvelDF, Portal de Imóveis</h2>
                         <p class="origin">origem: demanda real</p>
@@ -231,21 +254,14 @@
                             <li>Suíte de testes cobrindo modelo, serviços, busca e CRM, toda passando</li>
                         </ul>
 
-                        <div class="card__shot">
-                            <video src="assets/imoveldf.webm"
-                                   preload="none"
-                                   muted loop playsinline
-                                   aria-label="Plataforma ImóvelDF em uso: busca de imóveis com filtros, parceria entre corretores e painel de analytics"></video>
-                        </div>
-
                         <p class="private-note">
                             Repositório privado enquanto o projeto não vai para produção.
                         </p>
                     </div>
                 </article>
 
-                <!-- Segundo destaque, com vídeo -->
-                <article class="feature mt-4">
+                <!-- Texto à esquerda, mídia à direita. -->
+                <article class="feature feature--inverso mt-4">
                     <div class="feature__media">
                         <video id="video-destaque"
                                src="assets/destaque.webm"
@@ -282,6 +298,83 @@
                         <div class="out-row">
                             <a class="out" href="https://github.com/Acciolyy/Cell-Detector" target="_blank" rel="noopener noreferrer">
                                 github.com/Acciolyy/Cell-Detector <span class="arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Carrossel à esquerda, texto à direita. As imagens moram no repo
+                     do portfolio-ia, servidas pelo raw.githubusercontent. -->
+                <article class="feature mt-4">
+                    <div class="feature__media">
+                        <div class="carro" id="carro-ia">
+                            <div class="carro__janela">
+                                <div class="carro__slide" data-ativo>
+                                    <img src="https://raw.githubusercontent.com/Acciolyy/portfolio-ia/master/portfolio-4-machine-learning/imagens/p3_policy_path.png"
+                                         alt="Grid do labirinto com a política aprendida e o caminho de 14 passos marcado"
+                                         data-legenda="Q-Learning encontra o caminho ótimo de 14 passos no grid">
+                                </div>
+                                <div class="carro__slide">
+                                    <img src="https://raw.githubusercontent.com/Acciolyy/portfolio-ia/master/portfolio-4-machine-learning/imagens/p4_training_curves.png" loading="lazy"
+                                         alt="Curvas de perda e acurácia de treino e validação da CNN, lado a lado"
+                                         data-legenda="CNN converge sem overfitting: treino e validação lado a lado">
+                                </div>
+                                <div class="carro__slide">
+                                    <img src="https://raw.githubusercontent.com/Acciolyy/portfolio-ia/master/portfolio-4-machine-learning/imagens/p2_clusters_pca.png" loading="lazy"
+                                         alt="Dispersão dos vinhos em duas componentes principais, colorida por cluster"
+                                         data-legenda="Clusters de vinho descobertos sem rótulo, via PCA">
+                                </div>
+                                <div class="carro__slide">
+                                    <img src="https://raw.githubusercontent.com/Acciolyy/portfolio-ia/master/portfolio-4-machine-learning/imagens/p4_confusion_matrix.png" loading="lazy"
+                                         alt="Matriz de confusão 10 por 10 da CNN sobre os dígitos do MNIST"
+                                         data-legenda="Matriz de confusão da CNN no MNIST">
+                                </div>
+
+                                <button class="carro__nav carro__nav--ant" type="button" data-passo="-1" aria-label="Imagem anterior">
+                                    <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
+                                        <path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                                    </svg>
+                                </button>
+                                <button class="carro__nav carro__nav--prox" type="button" data-passo="1" aria-label="Próxima imagem">
+                                    <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
+                                        <path d="M4 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="carro__pontos" role="group" aria-label="Escolher imagem">
+                                <button class="carro__ponto" type="button" data-ponto="0" aria-current="true" aria-label="Imagem 1 de 4"></button>
+                                <button class="carro__ponto" type="button" data-ponto="1" aria-current="false" aria-label="Imagem 2 de 4"></button>
+                                <button class="carro__ponto" type="button" data-ponto="2" aria-current="false" aria-label="Imagem 3 de 4"></button>
+                                <button class="carro__ponto" type="button" data-ponto="3" aria-current="false" aria-label="Imagem 4 de 4"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature__body">
+                        <p class="rank">Em destaque</p>
+                        <h2 class="card__title">Portfólio de IA e Machine Learning</h2>
+                        <p class="origin">origem: acadêmico</p>
+
+                        <p class="stack mt-6">
+                            Python <span class="sep">·</span> PyTorch <span class="sep">·</span>
+                            scikit-learn <span class="sep">·</span> NumPy
+                        </p>
+
+                        <p class="card__text">
+                            Implementações dos quatro paradigmas de ML: supervisionado, não
+                            supervisionado, reforço e deep learning. Inclui uma CNN com 98,9% de
+                            acurácia em PyTorch, redes bayesianas, HMM, filtro de Kalman e métodos
+                            clássicos de busca e otimização.
+                        </p>
+
+                        <p class="carro__legenda" id="carro-legenda" aria-live="polite">
+                            Q-Learning encontra o caminho ótimo de 14 passos no grid
+                        </p>
+
+                        <div class="out-row">
+                            <a class="out" href="https://github.com/Acciolyy/portfolio-ia" target="_blank" rel="noopener noreferrer">
+                                github.com/Acciolyy/portfolio-ia <span class="arrow" aria-hidden="true">↗</span>
                             </a>
                         </div>
                     </div>
@@ -347,28 +440,6 @@
                                 </a>
                                 <a class="out" href="https://github.com/Acciolyy/Dashboard-Salarios" target="_blank" rel="noopener noreferrer">
                                     github.com/Acciolyy/Dashboard-Salarios <span class="arrow" aria-hidden="true">↗</span>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card__body">
-                            <h3 class="card__title">Portfólio de IA e Machine Learning</h3>
-                            <p class="origin">origem: acadêmico</p>
-                            <p class="card__text">
-                                Implementações dos quatro paradigmas de ML: supervisionado, não
-                                supervisionado, reforço e deep learning. Inclui uma CNN com 98,9% de
-                                acurácia em PyTorch, redes bayesianas, HMM, filtro de Kalman e métodos
-                                clássicos de busca e otimização.
-                            </p>
-                            <p class="stack mt-6">
-                                Python <span class="sep">·</span> PyTorch <span class="sep">·</span>
-                                scikit-learn <span class="sep">·</span> NumPy
-                            </p>
-                            <div class="out-row">
-                                <a class="out" href="https://github.com/Acciolyy/portfolio-ia" target="_blank" rel="noopener noreferrer">
-                                    github.com/Acciolyy/portfolio-ia <span class="arrow" aria-hidden="true">↗</span>
                                 </a>
                             </div>
                         </div>
@@ -444,7 +515,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer
             integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="assets/site.js?v=3" defer></script>
+    <script src="assets/site.js?v=6" defer></script>
 
 </body>
 </html>

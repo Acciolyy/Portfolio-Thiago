@@ -20,7 +20,9 @@
   --font-body:  'Inter', system-ui, -apple-system, sans-serif;
 
   --header-h: 54px;
-  --wrap: 1120px;
+  --wrap: 1440px;
+  /* O container cresceu; a prosa não. Nenhum parágrafo passa daqui. */
+  --prose: 42rem;
 
   color-scheme: dark;
 }
@@ -79,6 +81,11 @@ img, video { max-width: 100%; display: block; }
   .wrap { padding-inline: 2.5rem; }
 }
 
+/* Container mais largo pede mais respiro na lateral. */
+@media (min-width: 1280px) {
+  .wrap { padding-inline: 3.5rem; }
+}
+
 /* Toque de Python: indentação com significado. */
 .indent {
   border-left: 1px solid var(--line-2);
@@ -109,7 +116,7 @@ img, video { max-width: 100%; display: block; }
 
 .lede {
   color: var(--text-dim);
-  max-width: 62ch;
+  max-width: min(62ch, var(--prose));
 }
 
 /* --------------------------------------------------------------------------
@@ -419,12 +426,14 @@ img, video { max-width: 100%; display: block; }
   font-variant-numeric: tabular-nums;
 }
 
-.telemetry__value--ok {
+/* Sem dado nenhum, nem em cache: a faixa some em vez de mostrar buraco. */
+.telemetry[hidden] { display: none; }
+
+.telemetry__value--txt {
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 1.125rem;
-  color: var(--data);
-  text-transform: lowercase;
+  font-size: 1.25rem;
+  color: var(--text);
 }
 
 /* --------------------------------------------------------------------------
@@ -459,7 +468,7 @@ img, video { max-width: 100%; display: block; }
 }
 
 .about__text p {
-  max-width: 60ch;
+  max-width: min(60ch, var(--prose));
   color: var(--text-dim);
   margin: 0 0 1.25rem;
 }
@@ -475,12 +484,36 @@ img, video { max-width: 100%; display: block; }
 .note p {
   font-size: 1.125rem;
   line-height: 1.6;
-  max-width: 56ch;
+  max-width: min(56ch, var(--prose));
   color: var(--text);
   margin: 0 0 1.25rem;
 }
 
 .note p:last-child { color: var(--text-dim); margin-bottom: 0; }
+
+/* Em tela larga a anotação vai para a margem, ao lado da prosa. */
+.note__grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+@media (min-width: 1100px) {
+  .note__grid {
+    grid-template-columns: minmax(0, var(--prose)) minmax(0, 30rem);
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* Comentário de código solto: sem fundo, sem borda, sem caixa. */
+.anota {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.75;
+  color: var(--text-mute);
+}
+
+.anota span { display: block; }
 
 /* --------------------------------------------------------------------------
    Projetos
@@ -525,20 +558,8 @@ img, video { max-width: 100%; display: block; }
 .card__text {
   color: var(--text-dim);
   margin: 1rem 0 0;
-  max-width: 62ch;
+  max-width: min(62ch, var(--prose));
 }
-
-/* Projeto principal: único lugar da tela onde o laranja estrutura o bloco. */
-.card--main {
-  border-left: 2px solid var(--accent);
-  background: var(--ink-2);
-}
-
-.card--main .card__title {
-  font-size: clamp(2rem, 6vw, 2.75rem);
-}
-
-.card--main .card__text { max-width: 68ch; }
 
 .rank {
   font-family: var(--font-mono);
@@ -573,34 +594,36 @@ img, video { max-width: 100%; display: block; }
   color: var(--accent);
 }
 
-/* Vídeo do ImóvelDF. Fica dentro do corpo do card, então leva borda inteira,
-   e não só a de baixo como os vídeos que encostam na aresta. */
-.card__shot {
-  margin-top: 1.75rem;
-  border: 1px solid var(--line);
-  background: var(--ink-2);
-}
+/* --------------------------------------------------------------------------
+   Destaques: mídia e texto lado a lado dentro do card
+   -------------------------------------------------------------------------- */
 
-.card__shot video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: var(--ink-2);
-}
-
-/* Segundo destaque, com vídeo */
 .feature {
   display: grid;
   gap: 0;
   border: 1px solid var(--line);
+  background: var(--ink);
 }
 
+/* 55% mídia / 45% texto. O lado alterna a cada destaque para dar ritmo. */
 @media (min-width: 900px) {
-  .feature { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+  .feature { grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); }
+
+  /* Texto à esquerda, mídia à direita: inverte as colunas e o lado da linha. */
+  .feature--inverso { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); }
+
+  .feature--inverso .feature__media {
+    order: 2;
+    border-right: 0;
+    border-left: 1px solid var(--line);
+  }
 }
 
+/* Zero padding na coluna de mídia: ela encosta na borda interna do card. */
 .feature__media {
+  min-width: 0;
+  display: grid;
+  align-content: start;
   background: var(--ink-2);
   border-bottom: 1px solid var(--line);
 }
@@ -610,23 +633,133 @@ img, video { max-width: 100%; display: block; }
     border-bottom: 0;
     border-right: 1px solid var(--line);
   }
+
+  /* A coluna de texto é mais alta que o vídeo. Em vez de esticar a imagem
+     ou deixar um vazio, o vídeo acompanha a leitura. */
+  .feature__media > * {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
 }
 
 .feature__media video {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  aspect-ratio: 16 / 10;
   background: var(--ink-2);
 }
 
-.feature__body { padding: 1.5rem; }
+.feature__body {
+  min-width: 0;
+  padding: 1.5rem;
+}
 
 @media (min-width: 900px) {
   .feature__body { padding: 2rem; }
 }
 
-/* Grid dos demais projetos */
+/* Projeto principal: único lugar da tela onde o laranja estrutura o bloco. */
+.feature--main {
+  border-left: 2px solid var(--accent);
+  background: var(--ink-2);
+}
+
+/* Corpo em --ink-2, então a mídia inverte o tom para as colunas se separarem. */
+.feature--main .feature__media,
+.feature--main .feature__media video { background: var(--ink); }
+
+.feature--main .card__title { font-size: clamp(2rem, 3.4vw, 2.75rem); }
+
+.feature--main .card__text { max-width: min(68ch, var(--prose)); }
+
+/* --------------------------------------------------------------------------
+   Carrossel do portfólio de IA
+   -------------------------------------------------------------------------- */
+
+/* Os gráficos têm fundo branco. A moldura escura evita que o branco
+   encoste na borda do card. */
+.carro { position: relative; }
+
+.carro__janela {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  padding: 1.5rem;
+}
+
+.carro__slide {
+  position: absolute;
+  inset: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s linear;
+}
+
+.carro__slide[data-ativo] { opacity: 1; }
+
+.carro__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carro__nav {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  background: var(--ink);
+  border: 1px solid var(--line-2);
+  color: var(--text-dim);
+  transition: color 0.15s linear, border-color 0.15s linear;
+}
+
+.carro__nav:hover { color: var(--text); border-color: var(--accent); }
+
+.carro__nav--ant  { left: 0.5rem; }
+.carro__nav--prox { right: 0.5rem; }
+
+.carro__pontos {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.carro__ponto {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--line-2);
+  transition: background 0.15s linear;
+}
+
+.carro__ponto[aria-current="true"] { background: var(--accent); }
+
+/* Legenda vive na coluna de texto e troca junto com o slide. */
+.carro__legenda {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  margin: 1.75rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+  min-height: 3.2em;
+}
+
+/* --------------------------------------------------------------------------
+   Grid dos demais projetos
+   -------------------------------------------------------------------------- */
+
 .grid-projects {
   display: grid;
   gap: 1px;
@@ -636,6 +769,10 @@ img, video { max-width: 100%; display: block; }
 
 @media (min-width: 780px) {
   .grid-projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1100px) {
+  .grid-projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 .grid-projects .card {
@@ -704,7 +841,7 @@ img, video { max-width: 100%; display: block; }
 
 .contact p {
   color: var(--text-dim);
-  max-width: 52ch;
+  max-width: min(52ch, var(--prose));
   margin: 0 0 2.5rem;
 }
 
