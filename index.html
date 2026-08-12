@@ -24,8 +24,8 @@
     <!-- Tailwind compilado estaticamente: só as utilidades usadas neste arquivo,
          mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
     <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
-    <link rel="stylesheet" href="assets/tailwind.css?v=2">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="assets/tailwind.css?v=3">
+    <link rel="stylesheet" href="style.css?v=3">
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
             integrity="sha384-9Ax3MmS9AClxJyd5/zafcXXjxmwFhZCdsT6HJoJjarvCaAkJlk5QDzjLJm+Wdx5F"
@@ -213,11 +213,13 @@
                         </p>
 
                         <p class="card__text">
-                            Portal de imóveis construído do zero, com anúncio e busca de propriedades,
-                            sistema de assinaturas com controle de limites e acesso diferenciado por
-                            perfil de usuário. A arquitetura segue princípios de Domain-Driven Design:
-                            apps isolados por domínio, modelos magros, regras de negócio em
-                            <code>services.py</code> e consultas em <code>selectors.py</code>.
+                            Plataforma para anunciantes e imobiliárias: cadastro e busca de imóveis com
+                            filtros via HTMX, parceria B2B entre corretores com comissão configurável, e
+                            um painel de analytics com histórico de visualizações e leads por imóvel.
+                        </p>
+                        <p class="card__text">
+                            Os endpoints devolvem fragmentos de HTML consumidos por HTMX, no modelo de
+                            hipermídia, em vez de JSON para uma SPA.
                         </p>
 
                         <ul class="points">
@@ -226,12 +228,14 @@
                             <li>on_delete=PROTECT como padrão e CheckConstraint garantindo invariantes no banco</li>
                             <li>Hardening contra supply-chain com hashes SRI e tokens CSRF</li>
                             <li>PostgreSQL 16 em container Docker espelhando produção</li>
+                            <li>Suíte de testes cobrindo modelo, serviços, busca e CRM, toda passando</li>
                         </ul>
 
-                        <!-- Capturas do ImóvelDF entram aqui. Substituir o bloco .shots por:
-                             <img src="assets/imoveldf-01.png" alt="Tela de busca do ImóvelDF" loading="lazy"> -->
-                        <div class="shots">
-                            <span>Espaço reservado para capturas</span>
+                        <div class="card__shot">
+                            <video src="assets/imoveldf.webm"
+                                   preload="none"
+                                   muted loop playsinline
+                                   aria-label="Plataforma ImóvelDF em uso: busca de imóveis com filtros, parceria entre corretores e painel de analytics"></video>
                         </div>
 
                         <p class="private-note">
@@ -440,7 +444,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer
             integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="assets/site.js?v=2" defer></script>
+    <script src="assets/site.js?v=3" defer></script>
 
 </body>
 </html>

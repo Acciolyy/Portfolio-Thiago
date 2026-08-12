@@ -573,23 +573,20 @@ img, video { max-width: 100%; display: block; }
   color: var(--accent);
 }
 
-/* Espaço reservado para capturas do ImóvelDF */
-.shots {
+/* Vídeo do ImóvelDF. Fica dentro do corpo do card, então leva borda inteira,
+   e não só a de baixo como os vídeos que encostam na aresta. */
+.card__shot {
   margin-top: 1.75rem;
   border: 1px solid var(--line);
-  background: var(--ink);
-  aspect-ratio: 16 / 7;
-  display: flex;
-  align-items: flex-end;
-  padding: 1rem;
+  background: var(--ink-2);
 }
 
-.shots span {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-mute);
+.card__shot video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--ink-2);
 }
 
 /* Segundo destaque, com vídeo */
