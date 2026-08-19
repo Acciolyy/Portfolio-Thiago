@@ -251,7 +251,13 @@
                             <li>on_delete=PROTECT como padrão e CheckConstraint garantindo invariantes no banco</li>
                             <li>Hardening contra supply-chain com hashes SRI e tokens CSRF</li>
                             <li>PostgreSQL 16 em container Docker espelhando produção</li>
-                            <li>Suíte de testes cobrindo modelo, serviços, busca e CRM, toda passando</li>
+                            <li>
+                                Suíte com 364 testes automatizados (pytest), rodando contra PostgreSQL com
+                                paralelização via xdist em ~32s, com CI/CD (GitHub Actions) como gate de
+                                qualidade na branch. Validei o locking pessimista (select_for_update)
+                                isoladamente, 10 execuções seguidas sem falha, contra concorrência real
+                                simulada com threads.
+                            </li>
                         </ul>
 
                         <p class="private-note">
@@ -447,7 +453,7 @@
 
                     <article class="card">
                         <div class="card__body">
-                            <h3 class="card__title">QA Automation Portfolio</h3>
+                            <h3 class="card__title">Catálogo com Bugs Propositais</h3>
                             <p class="origin">origem: prática</p>
                             <p class="card__text">
                                 Aplicação Django que construí para praticar automação de testes, com bugs
@@ -460,8 +466,8 @@
                                 Django <span class="sep">·</span> pytest <span class="sep">·</span> Playwright
                             </p>
                             <div class="out-row">
-                                <a class="out" href="https://github.com/Acciolyy/qa-automation-portfolio" target="_blank" rel="noopener noreferrer">
-                                    github.com/Acciolyy/qa-automation-portfolio <span class="arrow" aria-hidden="true">↗</span>
+                                <a class="out" href="https://github.com/Acciolyy/catalog-under-test" target="_blank" rel="noopener noreferrer">
+                                    github.com/Acciolyy/catalog-under-test <span class="arrow" aria-hidden="true">↗</span>
                                 </a>
                             </div>
                         </div>
