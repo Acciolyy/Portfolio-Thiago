@@ -13,11 +13,16 @@
   --text-dim:  #9BA3AB;
   --text-mute: #6E7681;
   --accent:    #FF6B1A;
-  --data:      #5DCAA5;
 
-  --font-title: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  /* 'Reserva condensada' é o @font-face abaixo: métrica ajustada para o
+     Barlow, para a troca acontecer sem refluir o documento. */
+  --font-title: 'Barlow Condensed', 'Roboto Condensed', 'Liberation Sans Narrow', 'Reserva condensada', sans-serif;
   --font-mono:  'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
-  --font-body:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-body:  'Inter', 'Reserva de corpo', system-ui, -apple-system, sans-serif;
+
+  /* Rótulo mono em caixa alta: um tamanho, um tracking, em todo o site. */
+  --label-size: 0.6875rem;
+  --label-track: 0.16em;
 
   --header-h: 54px;
   --wrap: 1440px;
@@ -25,6 +30,45 @@
   --prose: 42rem;
 
   color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   Reservas com métrica ajustada
+
+   Enquanto as webfonts não chegam, o navegador desenha com a fonte do sistema.
+   Sem ajuste, "DESENVOLVEDOR" a 600/60px mede 354px em Barlow Condensed e
+   586px na sans genérica: 65% mais larga. 'Arial Narrow' não salva, o
+   fontconfig do Linux e do Android aliasa para a sans de largura cheia.
+   Resultado medido antes do ajuste: o documento refluía 146px no swap.
+   Os size-adjust abaixo saíram de medição, não de chute:
+     condensada  354 / 535 ≈ 66%
+     corpo       561 / 592 ≈ 95%
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Reserva condensada';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica'),
+       local('Liberation Sans'), local('DejaVu Sans'), local('Roboto');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 66%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Reserva de corpo';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans'),
+       local('DejaVu Sans'), local('Roboto');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
 }
 
 /* --------------------------------------------------------------------------
@@ -44,6 +88,8 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.65;
+  /* Texto claro em fundo escuro fecha um pouco. Um fio de tracking devolve. */
+  letter-spacing: 0.008em;
   -webkit-font-smoothing: antialiased;
   text-align: left;
 }
@@ -90,33 +136,6 @@ img, video { max-width: 100%; display: block; }
 .indent {
   border-left: 1px solid var(--line-2);
   padding-left: 1.25rem;
-}
-
-.indent-deep {
-  border-left: 1px solid var(--line);
-  padding-left: 1.25rem;
-  margin-left: 1.25rem;
-}
-
-.mono {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  color: var(--text-dim);
-}
-
-.meta {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-mute);
-}
-
-.lede {
-  color: var(--text-dim);
-  max-width: min(62ch, var(--prose));
 }
 
 /* --------------------------------------------------------------------------
@@ -196,10 +215,10 @@ img, video { max-width: 100%; display: block; }
 
 .nav-links a {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.16em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
-  color: var(--text-mute);
+  color: var(--text-dim);
   text-decoration: none;
   padding-bottom: 2px;
   border-bottom: 1px solid transparent;
@@ -217,8 +236,8 @@ img, video { max-width: 100%; display: block; }
   border: 1px solid var(--line-2);
   color: var(--text-dim);
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   padding: 0.35rem 0.7rem;
   cursor: pointer;
@@ -282,8 +301,8 @@ img, video { max-width: 100%; display: block; }
   display: inline-block;
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 0.6875rem;
-  letter-spacing: 0.16em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 1.75rem;
@@ -313,7 +332,8 @@ img, video { max-width: 100%; display: block; }
 .hero__name {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  /* 0.22em dispersava um nome próprio de 22 caracteres. */
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   color: var(--text-dim);
   margin: 0 0 0.75rem;
@@ -329,7 +349,7 @@ img, video { max-width: 100%; display: block; }
 .hero__title .py { color: var(--accent); display: block; }
 
 .hero__pitch {
-  max-width: 430px;
+  max-width: min(52ch, var(--prose));
   color: var(--text-dim);
   margin: 0;
 }
@@ -369,8 +389,8 @@ img, video { max-width: 100%; display: block; }
 
 .spec dt {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.16em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   color: var(--text-dim);
 }
@@ -409,18 +429,21 @@ img, video { max-width: 100%; display: block; }
 .telemetry__label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.16em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   color: var(--text-dim);
   margin-bottom: 0.4rem;
 }
 
+/* O Barlow Condensed não expõe tnum: "0" mede 14px e "1" mede 9px, e o
+   contador do site.js mudava de largura a cada quadro da animação. Em mono
+   os dígitos já nascem da mesma largura. */
 .telemetry__value {
-  font-family: var(--font-title);
-  font-weight: 600;
-  font-size: 2rem;
-  line-height: 1;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.1;
   letter-spacing: 0.01em;
   color: var(--text);
   font-variant-numeric: tabular-nums;
@@ -429,10 +452,9 @@ img, video { max-width: 100%; display: block; }
 /* Sem dado nenhum, nem em cache: a faixa some em vez de mostrar buraco. */
 .telemetry[hidden] { display: none; }
 
+/* Herda a família do valor; só cai um degrau porque é texto, não número. */
 .telemetry__value--txt {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--text);
 }
 
@@ -461,10 +483,10 @@ img, video { max-width: 100%; display: block; }
 .about__photo figcaption {
   margin-top: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.12em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
-  color: var(--text-mute);
+  color: var(--text-dim);
 }
 
 .about__text p {
@@ -476,13 +498,10 @@ img, video { max-width: 100%; display: block; }
 .about__text p:last-child { margin-bottom: 0; }
 
 /* Bloco editorial: "Nem tudo é o que parece" */
-.note h2 {
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  margin-bottom: 1.5rem;
-}
-
 .note p {
   font-size: 1.125rem;
+  /* Peso 450 no eixo variável do Inter, que já vem baixado e não era usado. */
+  font-weight: 450;
   line-height: 1.6;
   max-width: min(56ch, var(--prose));
   color: var(--text);
@@ -510,7 +529,8 @@ img, video { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1.75;
-  color: var(--text-mute);
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
 }
 
 .anota span { display: block; }
@@ -519,10 +539,11 @@ img, video { max-width: 100%; display: block; }
    Projetos
    -------------------------------------------------------------------------- */
 
+/* Não é rótulo em caixa alta: sai do token e fica com tracking de leitura. */
 .origin {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
   color: var(--text-dim);
 }
 
@@ -530,6 +551,7 @@ img, video { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1.8;
+  max-width: min(64ch, var(--prose));
   color: var(--text-dim);
   word-spacing: 0.1em;
 }
@@ -552,6 +574,8 @@ img, video { max-width: 100%; display: block; }
 
 .card__title {
   font-size: 1.75rem;
+  /* Sem isto, três títulos deixavam uma palavra sozinha na última linha a 390px. */
+  text-wrap: balance;
   margin-bottom: 0.35rem;
 }
 
@@ -563,8 +587,8 @@ img, video { max-width: 100%; display: block; }
 
 .rank {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.16em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   color: var(--text-dim);
   margin: 0 0 0.75rem;
@@ -579,8 +603,10 @@ img, video { max-width: 100%; display: block; }
 
 .points li {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.55;
+  /* É o bloco de prosa mais longo do site; sobe um degrau e some o 13px. */
+  font-size: 0.875rem;
+  line-height: 1.65;
+  max-width: min(64ch, var(--prose));
   color: var(--text-dim);
   padding: 0.7rem 0 0.7rem 1.5rem;
   border-bottom: 1px solid var(--line);
@@ -749,6 +775,7 @@ img, video { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1.6;
+  max-width: min(64ch, var(--prose));
   color: var(--text-dim);
   margin: 1.75rem 0 0;
   padding-top: 0.9rem;
@@ -795,7 +822,8 @@ img, video { max-width: 100%; display: block; }
 
 .grid-projects .card__title { font-size: 1.25rem; }
 
-.grid-projects .card__text { font-size: 0.9375rem; }
+/* 15px era um degrau só para este card. Volta para o corpo padrão. */
+.grid-projects .card__text { font-size: 1rem; }
 
 /* Links de saída */
 .out {
@@ -826,7 +854,9 @@ img, video { max-width: 100%; display: block; }
 .private-note {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-mute);
+  line-height: 1.7;
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
   margin-top: 1.5rem;
 }
 
@@ -836,6 +866,7 @@ img, video { max-width: 100%; display: block; }
 
 .contact h2 {
   font-size: clamp(2.25rem, 7vw, 3rem);
+  text-wrap: balance;
   margin-bottom: 1.25rem;
 }
 
@@ -870,8 +901,8 @@ img, video { max-width: 100%; display: block; }
 .contact__links .k {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.16em;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
   text-transform: uppercase;
   color: var(--text-dim);
   margin-bottom: 0.3rem;
@@ -891,9 +922,9 @@ img, video { max-width: 100%; display: block; }
 
 .site-footer p {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.06em;
-  color: var(--text-mute);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
   margin: 0;
 }
 
