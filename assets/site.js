@@ -436,6 +436,29 @@
     return;
   }
 
+  /* --- Scroll suave (Lenis) --------------------------------------------- */
+
+  // Só chega aqui com movimento liberado: acima existe o return de
+  // prefers-reduced-motion. Com ele ativo o Lenis nem é instanciado e o
+  // navegador continua rolando nativamente, sem nenhuma interceptação.
+  if (typeof window.Lenis === 'function') {
+    // anchors: true entrega os cliques de âncora ao Lenis. Sem isso, o
+    // scroll-behavior: smooth do CSS e o Lenis animariam o mesmo scroll
+    // ao mesmo tempo, um brigando com o outro.
+    var lenis = new Lenis({ anchors: true });
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (tempo) { lenis.raf(tempo * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // A aba escondida já pausa a globalTimeline; o ticker do GSAP para junto.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) lenis.stop();
+      else lenis.start();
+    });
+  }
+
   progressoDeScroll();
   marcaDePneu();
   contadores();
