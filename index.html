@@ -260,8 +260,16 @@
                             </li>
                         </ul>
 
+                        <div class="out-row">
+                            <a class="out" href="https://imoveldf-homolog.onrender.com" target="_blank" rel="noopener noreferrer">
+                                Demonstração (homologação) <span class="arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+
                         <p class="private-note">
-                            Repositório privado enquanto o projeto não vai para produção.
+                            Primeiro acesso pode levar ~30s (hospedagem adormece por inatividade).
+                            Acesso de corretor requer login; navegação e busca de imóveis são livres
+                            para qualquer visitante.
                         </p>
                     </div>
                 </article>
@@ -374,7 +382,8 @@
                             clássicos de busca e otimização.
                         </p>
 
-                        <p class="carro__legenda" id="carro-legenda" aria-live="polite">
+                        <!-- aria-live é ligado por JS só na navegação manual, nunca no avanço automático. -->
+                        <p class="carro__legenda" id="carro-legenda">
                             Q-Learning encontra o caminho ótimo de 14 passos no grid
                         </p>
 

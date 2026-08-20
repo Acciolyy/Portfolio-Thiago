@@ -261,13 +261,38 @@
   var videos = Array.prototype.slice.call(document.querySelectorAll('video[preload="none"]'));
 
   function tocarVideo(video) {
-    if (!video.visivel || document.hidden) return;
+    // Sem movimento: nada toca sozinho, quem decide é o controle nativo.
+    if (semMovimento || !video.visivel || document.hidden) return;
     var p = video.play();
     if (p && p.catch) p.catch(function () { /* autoplay bloqueado, tudo bem */ });
   }
 
+  function carregarVideo(video) {
+    if (video.preload === 'none') {
+      video.preload = 'metadata';
+      video.load();
+    }
+  }
+
   function observarVideos() {
     if (!videos.length || !('IntersectionObserver' in window)) return;
+
+    if (semMovimento) {
+      // Carrega o primeiro quadro e entrega os controles: o play é do usuário.
+      videos.forEach(function (video) {
+        video.controls = true;
+        video.removeAttribute('loop');
+      });
+
+      var observadorParado = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (e.isIntersecting) carregarVideo(e.target);
+        });
+      }, { rootMargin: '200px 0px' });
+
+      videos.forEach(function (video) { observadorParado.observe(video); });
+      return;
+    }
 
     var observador = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
@@ -275,10 +300,7 @@
         video.visivel = e.isIntersecting;
 
         if (e.isIntersecting) {
-          if (video.preload === 'none') {
-            video.preload = 'metadata';
-            video.load();
-          }
+          carregarVideo(video);
           tocarVideo(video);
         } else {
           video.pause();
@@ -315,7 +337,21 @@
     var legenda = document.getElementById('carro-legenda');
     var atual = 0;
 
-    carroIr = function (n, relativo) {
+    // Só a navegação manual anuncia. No avanço automático a legenda muda calada.
+    function escreverLegenda(texto, manual) {
+      if (!legenda) return;
+
+      if (!manual) {
+        legenda.removeAttribute('aria-live');
+        legenda.textContent = texto;
+        return;
+      }
+
+      legenda.setAttribute('aria-live', 'polite');
+      requestAnimationFrame(function () { legenda.textContent = texto; });
+    }
+
+    carroIr = function (n, relativo, manual) {
       atual = ((relativo ? atual + n : n) + slides.length) % slides.length;
 
       slides.forEach(function (slide, i) {
@@ -326,20 +362,39 @@
 
       var img = slides[atual].querySelector('img');
       img.loading = 'eager';
-      if (legenda) legenda.textContent = img.getAttribute('data-legenda');
+      escreverLegenda(img.getAttribute('data-legenda'), manual);
     };
 
     carro.addEventListener('click', function (e) {
       var botao = e.target.closest('button');
       if (!botao) return;
 
-      if (botao.dataset.passo) carroIr(Number(botao.dataset.passo), true);
-      else carroIr(Number(botao.dataset.ponto), false);
+      if (botao.dataset.passo) carroIr(Number(botao.dataset.passo), true, true);
+      else carroIr(Number(botao.dataset.ponto), false, true);
+      tocarCarro();
+    });
+
+    carro.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      carroIr(e.key === 'ArrowLeft' ? -1 : 1, true, true);
       tocarCarro();
     });
 
     carro.addEventListener('mouseenter', function () { carroParado = true; pararCarro(); });
-    carro.addEventListener('mouseleave', function () { carroParado = false; tocarCarro(); });
+    carro.addEventListener('mouseleave', function () {
+      if (carro.contains(document.activeElement)) return;
+      carroParado = false;
+      tocarCarro();
+    });
+
+    // Teclado navegando dentro do carrossel: o avanço automático sai da frente.
+    carro.addEventListener('focusin', function () { carroParado = true; pararCarro(); });
+    carro.addEventListener('focusout', function (e) {
+      if (carro.contains(e.relatedTarget)) return;
+      carroParado = false;
+      tocarCarro();
+    });
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entradas) {
@@ -368,6 +423,8 @@
 
   /* --- Início ----------------------------------------------------------- */
 
+  // observarVideos() decide internamente: com prefers-reduced-motion ele só carrega
+  // o primeiro quadro e liga os controles nativos, sem nunca dar play.
   observarVideos();
   montarCarrossel();
 
