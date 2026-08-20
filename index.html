@@ -25,7 +25,7 @@
          mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
     <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
     <link rel="stylesheet" href="assets/tailwind.css?v=6">
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
 
     <!-- Lenis: scroll suave. O site.js só liga se prefers-reduced-motion estiver
          desligado; com ele ligado o navegador rola nativamente, sem interceptação. -->
@@ -37,11 +37,23 @@
             integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- Three.js para a camada de fundo. Este <script> só busca e valida o
+         módulo; quem o usa é assets/fundo3d.js, que importa a mesma URL e
+         reaproveita o download. Módulo já é defer por padrão. -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+            integrity="sha384-8/hf5tabFfIo0BPku31TKUvGIKpWGYaMwNtlSNqNyZzXgZCMd4lnOGWbJElML9dv"
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="module" src="assets/fundo3d.js?v=1"></script>
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
             integrity="sha384-9Ax3MmS9AClxJyd5/zafcXXjxmwFhZCdsT6HJoJjarvCaAkJlk5QDzjLJm+Wdx5F"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+
+    <!-- Fundo ambiente. Decoração pura, fora da árvore de acessibilidade. -->
+    <canvas class="fundo3d" id="fundo3d" aria-hidden="true"></canvas>
 
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 

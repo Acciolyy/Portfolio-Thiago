@@ -84,7 +84,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
+  /* Transparente de propósito: a mesma cor está no html acima e pinta o fundo
+     da viewport inteira. Se o body pintasse aqui, cobriria o canvas de fundo,
+     que fica em z-index negativo. Cor renderizada é idêntica. */
+  background: transparent;
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 400;
@@ -308,6 +311,38 @@ img, video { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 1.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Fundo 3D
+
+   Canvas do tamanho da tela, fixo, atrás de tudo. Nunca cresce com o
+   documento. A máscara deixa passar só as duas faixas de borda, com
+   degradê, então a coluna de conteúdo nunca tem nada por trás dela.
+   A opacidade fica nos materiais do Three (0.10 e 0.12).
+   -------------------------------------------------------------------------- */
+
+.fundo3d {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Sem filter: blur. Medido, ele sozinho respondia por metade do tempo de
+     quadro (61 -> 26 fps com ele, 58 sem), porque desfocar uma camada fixa do
+     tamanho da tela custa em área, não em resolução. A suavidade vem de graça
+     do buffer em 0.55x sendo esticado pelo CSS até o tamanho da tela. */
+  -webkit-mask-image: linear-gradient(90deg,
+              #000 0, transparent 13% 87%, #000 100%);
+  mask-image: linear-gradient(90deg,
+              #000 0, transparent 13% 87%, #000 100%);
+}
+
+@media (max-width: 639px) {
+  /* Na tela estreita o texto ocupa quase tudo. Recua mais um passo. */
+  .fundo3d { opacity: 0.6; }
 }
 
 /* Marca de pneu: vestígio, não desenho. Animada pelo GSAP. */
