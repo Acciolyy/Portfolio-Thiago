@@ -407,6 +407,114 @@
     }
   }
 
+  /* --- Terminal simulado da seção Sobre ---------------------------------
+     Não é Python rodando: o transcrito inteiro já está no HTML, e aqui só
+     escondemos e revelamos o que está lá. O trecho por vir fica com
+     visibility: hidden, que preserva a caixa, então a quebra de linha não
+     muda enquanto "digita" e o bloco não empurra a página.
+     --------------------------------------------------------------------- */
+
+  var termTimer = null;
+  var termPendente = null;
+
+  function retomarTerminal() {
+    if (!termPendente || termTimer) return;
+    var seguir = termPendente;
+    termPendente = null;
+    seguir();
+  }
+
+  function montarTerminal() {
+    var caixa = document.getElementById('term-python');
+    // Sem movimento: o transcrito completo do HTML fica como está.
+    if (!caixa || semMovimento) return;
+
+    var codigo = caixa.querySelector('.term__corpo code');
+    if (!codigo || !('IntersectionObserver' in window)) return;
+
+    var cursor = document.createElement('span');
+    cursor.className = 'term__cursor term__cursor--piscando';
+
+    var nos = [];
+    (function coletar(no) {
+      for (var i = 0; i < no.childNodes.length; i++) {
+        var filho = no.childNodes[i];
+        if (filho.nodeType === 3) { if (filho.nodeValue) nos.push(filho); }
+        else coletar(filho);
+      }
+    }(codigo));
+
+    var passos = nos.map(function (no) {
+      var pai = no.parentNode;
+      var classe = pai.className || '';
+      var feito = document.createElement('span');
+      var espera = document.createElement('span');
+
+      espera.className = 'term__espera';
+      espera.textContent = no.nodeValue;
+      pai.replaceChild(espera, no);
+      pai.insertBefore(feito, espera);
+
+      return {
+        feito: feito,
+        espera: espera,
+        // Num REPL de verdade quem digita é a pessoa; a saída aparece inteira.
+        digitar: classe.indexOf('term__cmd') !== -1,
+        espera_ms: classe.indexOf('term__ps') !== -1 ? 90
+                 : /^\s*$/.test(no.nodeValue) ? 130
+                 : 240
+      };
+    });
+
+    var atual = 0;
+
+    function agendar(passo, ms) {
+      termPendente = passo;
+      termTimer = setTimeout(function () {
+        termTimer = null;
+        // Aba escondida: o passo fica guardado e o visibilitychange retoma.
+        if (document.hidden) return;
+        termPendente = null;
+        passo();
+      }, ms);
+    }
+
+    function digitar(p) {
+      if (!p.espera.textContent) { atual++; seguinte(); return; }
+
+      agendar(function () {
+        p.feito.textContent += p.espera.textContent.charAt(0);
+        p.espera.textContent = p.espera.textContent.slice(1);
+        digitar(p);
+      }, 26 + Math.random() * 34);
+    }
+
+    function seguinte() {
+      if (atual >= passos.length) {
+        cursor.classList.remove('term__cursor--piscando');
+        return;
+      }
+
+      var p = passos[atual];
+      p.espera.parentNode.insertBefore(cursor, p.espera);
+
+      if (p.digitar) { digitar(p); return; }
+
+      agendar(function () {
+        p.feito.textContent += p.espera.textContent;
+        p.espera.textContent = '';
+        atual++;
+        seguinte();
+      }, p.espera_ms);
+    }
+
+    new IntersectionObserver(function (entradas, observador) {
+      if (!entradas[0].isIntersecting) return;
+      observador.disconnect();
+      seguinte();
+    }, { rootMargin: '0px 0px -15% 0px' }).observe(caixa);
+  }
+
   /* --- Pausa tudo quando a aba perde o foco ----------------------------- */
 
   document.addEventListener('visibilitychange', function () {
@@ -418,6 +526,7 @@
       if (temGsap) gsap.globalTimeline.resume();
       videos.forEach(tocarVideo);
       tocarCarro();
+      retomarTerminal();
     }
   });
 
@@ -427,6 +536,8 @@
   // o primeiro quadro e liga os controles nativos, sem nunca dar play.
   observarVideos();
   montarCarrossel();
+  // Fica antes do return: o terminal não depende do GSAP, só de movimento.
+  montarTerminal();
 
   if (semMovimento || !temGsap) {
     // Sem movimento: valores finais direto, nenhuma das três animações roda.

@@ -25,7 +25,7 @@
          mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
     <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
     <link rel="stylesheet" href="assets/tailwind.css?v=6">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=9">
 
     <!-- Lenis: scroll suave. O site.js só liga se prefers-reduced-motion estiver
          desligado; com ele ligado o navegador rola nativamente, sem interceptação. -->
@@ -180,6 +180,29 @@
                             Sobre otimização: se existe um jeito mais simples que serve ao mesmo
                             propósito, eu troco. Não gosto de sistema lento, nem de suíte de teste lenta.
                         </p>
+
+                        <!-- REPL de mentira: o transcrito inteiro já vem no HTML, então
+                             funciona sem JS e o leitor de tela lê tudo de uma vez. O
+                             site.js só esconde e revela o que já está aqui. -->
+                        <div class="term" id="term-python">
+                            <div class="term__barra">
+                                <span class="term__nome">python3</span>
+                                <span class="term__tag">simulado</span>
+                            </div>
+<pre class="term__corpo"><code><span class="term__ps">&gt;&gt;&gt; </span><span class="term__cmd">import thiago</span>
+<span class="term__ps">&gt;&gt;&gt; </span><span class="term__cmd">thiago.stack()</span>
+['Django', 'PostgreSQL', 'Playwright', 'pytest', 'Gemini API']
+
+<span class="term__ps">&gt;&gt;&gt; </span><span class="term__cmd">thiago.testes_no_senado()</span>
+297 testes automatizados, ~15s, gate de qualidade no GitLab CI
+
+<span class="term__ps">&gt;&gt;&gt; </span><span class="term__cmd">help(thiago)</span>
+Desenvolvedor Backend Python. Testa o que constrói.
+Veja thiago.projetos() ou digite 'sobre'.
+
+<span class="term__ps">&gt;&gt;&gt; </span><span class="term__cmd">thiago.projetos()</span>
+['ImóvelDF', 'Agente de Triagem', 'Dashboard Salarial', 'Cell-Detector']</code></pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -540,7 +563,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer
             integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="assets/site.js?v=7" defer></script>
+    <script src="assets/site.js?v=8" defer></script>
 
 </body>
 </html>

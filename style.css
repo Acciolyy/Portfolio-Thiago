@@ -497,6 +497,84 @@ img, video { max-width: 100%; display: block; }
 
 .about__text p:last-child { margin-bottom: 0; }
 
+/* --------------------------------------------------------------------------
+   Terminal simulado
+
+   Mesma moldura de 1px do resto do site. O texto inteiro já está no HTML;
+   o JS esconde os trechos por vir com visibility: hidden, que preserva a
+   caixa. Assim a quebra de linha nunca muda enquanto "digita" e o bloco
+   não empurra nada da página.
+   -------------------------------------------------------------------------- */
+
+.term {
+  margin-top: 2rem;
+  /* A família fica aqui para o 68ch medir em mono, não na fonte do corpo. */
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  max-width: min(68ch, var(--prose));
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+}
+
+.term__barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+}
+
+.term__nome { color: var(--text-dim); }
+.term__tag  { color: var(--text-mute); }
+
+.term__corpo {
+  margin: 0;
+  padding: 0.9rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.term__ps  { color: var(--text-mute); }
+.term__cmd { color: var(--text); }
+
+/* Trecho que ainda não foi "digitado": ocupa o lugar, não aparece. */
+.term__espera { visibility: hidden; }
+
+/* Largura zero, para o cursor andar sem empurrar o texto. */
+.term__cursor {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  vertical-align: baseline;
+}
+
+.term__cursor::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.05em;
+  width: 0.55em;
+  height: 1.05em;
+  background: var(--accent);
+}
+
+.term__cursor--piscando::after { animation: term-pisca 1.06s steps(1) infinite; }
+
+@keyframes term-pisca {
+  0%, 50%   { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
 /* Bloco editorial: "Nem tudo é o que parece" */
 .note p {
   font-size: 1.125rem;
