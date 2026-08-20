@@ -13,6 +13,8 @@
   --text-dim:  #9BA3AB;
   --text-mute: #6E7681;
   --accent:    #FF6B1A;
+  /* Mesmo laranja em componentes, para o brilho da borda variar a opacidade. */
+  --accent-rgb: 255 107 26;
 
   /* 'Reserva condensada' é o @font-face abaixo: métrica ajustada para o
      Barlow, para a troca acontecer sem refluir o documento. */
@@ -637,12 +639,50 @@ img, video { max-width: 100%; display: block; }
 .stack .sep { color: var(--line-2); }
 
 .card {
+  position: relative;
   border: 1px solid var(--line);
   background: var(--ink);
   transition: border-color 0.18s linear;
 }
 
 .card:hover { border-color: var(--line-2); }
+
+/* Foco de luz no contorno, seguindo o cursor.
+
+   O gradiente pinta a caixa inteira e a máscara descarta tudo menos o anel
+   de 1px da borda: subtrai a área de conteúdo (content-box) da área total.
+   O card não inclina nem gira, só a borda acende. As coordenadas vêm de
+   --mx/--my, que o site.js atualiza no mousemove. */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s linear;
+  background: radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%),
+              rgb(var(--accent-rgb) / 0.5),
+              rgb(var(--accent-rgb) / 0.14) 45%,
+              transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.card:hover::before,
+.card:focus-within::before { opacity: 1; }
+
+/* Sem movimento: nada de rastrear o cursor. A borda inteira acende, parada. */
+@media (prefers-reduced-motion: reduce) {
+  /* A regra global de transição usa *, que não pega pseudo-elemento. */
+  .card::before {
+    background: rgb(var(--accent-rgb) / 0.28);
+    transition: none;
+  }
+}
 
 .card__body { padding: 1.5rem; }
 
@@ -859,6 +899,91 @@ img, video { max-width: 100%; display: block; }
   padding-top: 0.9rem;
   border-top: 1px solid var(--line);
   min-height: 3.2em;
+}
+
+/* --------------------------------------------------------------------------
+   Mostrador radial
+
+   Arco de 270 graus, escala 0 a 400. O valor final já vem no HTML, tanto no
+   número quanto no stroke-dashoffset do arco, então sem JS o mostrador
+   aparece certo. O site.js só anima de vazio até lá.
+   -------------------------------------------------------------------------- */
+
+.gauge {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.gauge__disco {
+  position: relative;
+  flex: 0 0 auto;
+  width: 120px;
+}
+
+.gauge__svg { display: block; }
+
+.gauge__trilha {
+  fill: none;
+  stroke: var(--line-2);
+  stroke-width: 1.5;
+}
+
+.gauge__arco {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: butt;
+  stroke-dasharray: 207.345;
+}
+
+.gauge__tick {
+  stroke: var(--line-2);
+  stroke-width: 1;
+}
+
+.gauge__num {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 52px;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.gauge__leg {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.gauge__leg b {
+  display: block;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.gauge__escala {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+@media (max-width: 520px) {
+  .gauge { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
 }
 
 /* --------------------------------------------------------------------------

@@ -515,6 +515,86 @@
     }, { rootMargin: '0px 0px -15% 0px' }).observe(caixa);
   }
 
+  /* --- Brilho de borda seguindo o cursor --------------------------------
+     O desenho é todo do CSS; aqui só entram as coordenadas do mouse. Um
+     listener na grade inteira, com o trabalho jogado para o próximo quadro.
+     --------------------------------------------------------------------- */
+
+  function brilhoNaBorda() {
+    var grade = document.querySelector('.grid-projects');
+    // Sem movimento: o CSS acende a borda inteira, parada, sem rastrear nada.
+    if (!grade || semMovimento) return;
+
+    var agendado = false;
+    var ultimo = null;
+
+    grade.addEventListener('mousemove', function (e) {
+      ultimo = e;
+      if (agendado) return;
+      agendado = true;
+
+      requestAnimationFrame(function () {
+        agendado = false;
+        var card = ultimo.target.closest && ultimo.target.closest('.card');
+        if (!card) return;
+
+        var caixa = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (ultimo.clientX - caixa.left).toFixed(1) + 'px');
+        card.style.setProperty('--my', (ultimo.clientY - caixa.top).toFixed(1) + 'px');
+      });
+    });
+  }
+
+  /* --- Mostradores radiais ----------------------------------------------
+     O HTML já traz o valor final, no número e no dashoffset do arco. Aqui
+     só voltamos para o zero e animamos até lá quando entra na viewport.
+     --------------------------------------------------------------------- */
+
+  var ARCO = 207.345;
+
+  function montarGauges() {
+    var gauges = Array.prototype.slice.call(document.querySelectorAll('.gauge'));
+    if (!gauges.length) return;
+
+    // Sem movimento ou sem GSAP: fica o estado final que já veio no HTML.
+    if (semMovimento || !temGsap || !('IntersectionObserver' in window)) return;
+
+    gauges.forEach(function (gauge) {
+      var arco = gauge.querySelector('.gauge__arco');
+      var numero = gauge.querySelector('.gauge__num');
+      var valor = Number(gauge.getAttribute('data-valor'));
+      var maximo = Number(gauge.getAttribute('data-max')) || 400;
+      if (!arco || !numero || !valor) return;
+
+      var alvo = ARCO * (1 - valor / maximo);
+      arco.style.strokeDashoffset = ARCO;
+      numero.textContent = '0';
+
+      ScrollTrigger.create({
+        trigger: gauge,
+        start: 'top 85%',
+        once: true,
+        onEnter: function () {
+          var conta = { n: 0 };
+
+          gsap.to(arco, {
+            strokeDashoffset: alvo,
+            duration: 1.4,
+            ease: 'power2.out'
+          });
+
+          gsap.to(conta, {
+            n: valor,
+            duration: 1.4,
+            ease: 'power2.out',
+            onUpdate: function () { numero.textContent = Math.round(conta.n); },
+            onComplete: function () { numero.textContent = valor; }
+          });
+        }
+      });
+    });
+  }
+
   /* --- Pausa tudo quando a aba perde o foco ----------------------------- */
 
   document.addEventListener('visibilitychange', function () {
@@ -573,4 +653,6 @@
   progressoDeScroll();
   marcaDePneu();
   contadores();
+  brilhoNaBorda();
+  montarGauges();
 }());

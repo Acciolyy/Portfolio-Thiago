@@ -25,7 +25,7 @@
          mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
     <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
     <link rel="stylesheet" href="assets/tailwind.css?v=6">
-    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="style.css?v=10">
 
     <!-- Lenis: scroll suave. O site.js só liga se prefers-reduced-motion estiver
          desligado; com ele ligado o navegador rola nativamente, sem interceptação. -->
@@ -203,6 +203,28 @@ Veja thiago.projetos() ou digite 'sobre'.
 <span class="term__ps">&gt;&gt;&gt; </span><span class="term__cmd">thiago.projetos()</span>
 ['ImóvelDF', 'Agente de Triagem', 'Dashboard Salarial', 'Cell-Detector']</code></pre>
                         </div>
+
+                        <figure class="gauge" data-valor="297" data-max="400">
+                            <div class="gauge__disco">
+                                <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
+                                    <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
+                                    <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 53.39"/>
+                                    <g class="gauge__ticks">
+                                        <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
+                                        <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
+                                        <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
+                                        <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
+                                        <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
+                                    </g>
+                                </svg>
+                                <p class="gauge__num">297</p>
+                            </div>
+                            <figcaption class="gauge__leg">
+                                <b>testes automatizados no Senado</b>
+                                ~15s, gate de qualidade no GitLab CI
+                                <span class="gauge__escala">escala 0 a 400</span>
+                            </figcaption>
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -292,6 +314,29 @@ Veja thiago.projetos() ou digite 'sobre'.
                                 simulada com threads.
                             </li>
                         </ul>
+
+                        <!-- Mostrador: valor final já no HTML, no número e no dashoffset. -->
+                        <figure class="gauge" data-valor="364" data-max="400">
+                            <div class="gauge__disco">
+                                <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
+                                    <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
+                                    <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 18.66"/>
+                                    <g class="gauge__ticks">
+                                        <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
+                                        <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
+                                        <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
+                                        <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
+                                        <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
+                                    </g>
+                                </svg>
+                                <p class="gauge__num">364</p>
+                            </div>
+                            <figcaption class="gauge__leg">
+                                <b>testes automatizados</b>
+                                pytest contra PostgreSQL, ~32s com xdist
+                                <span class="gauge__escala">escala 0 a 400</span>
+                            </figcaption>
+                        </figure>
 
                         <div class="out-row">
                             <a class="out" href="https://imoveldf-homolog.onrender.com" target="_blank" rel="noopener noreferrer">
@@ -563,7 +608,7 @@ Veja thiago.projetos() ou digite 'sobre'.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer
             integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="assets/site.js?v=8" defer></script>
+    <script src="assets/site.js?v=9" defer></script>
 
 </body>
 </html>
