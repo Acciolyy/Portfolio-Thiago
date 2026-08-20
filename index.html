@@ -204,27 +204,50 @@ Veja thiago.projetos() ou digite 'sobre'.
 ['ImóvelDF', 'Agente de Triagem', 'Dashboard Salarial', 'Cell-Detector']</code></pre>
                         </div>
 
-                        <figure class="gauge" data-valor="297" data-max="400">
-                            <div class="gauge__disco">
-                                <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
-                                    <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
-                                    <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 53.39"/>
-                                    <g class="gauge__ticks">
-                                        <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
-                                        <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
-                                        <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
-                                        <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
-                                        <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
-                                    </g>
-                                </svg>
-                                <p class="gauge__num">297</p>
-                            </div>
-                            <figcaption class="gauge__leg">
-                                <b>testes automatizados no Senado</b>
-                                ~15s, gate de qualidade no GitLab CI
-                                <span class="gauge__escala">escala 0 a 400</span>
-                            </figcaption>
-                        </figure>
+                        <div class="gauge-group">
+                            <figure class="gauge" data-valor="297" data-max="400">
+                                <div class="gauge__disco">
+                                    <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
+                                        <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
+                                        <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 53.39"/>
+                                        <g class="gauge__ticks">
+                                            <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
+                                            <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
+                                            <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
+                                            <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
+                                            <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
+                                        </g>
+                                    </svg>
+                                    <p class="gauge__num">297</p>
+                                </div>
+                                <figcaption class="gauge__leg">
+                                    <b>testes automatizados no Senado</b>
+                                    <span class="gauge__escala">escala 0 a 400</span>
+                                </figcaption>
+                            </figure>
+
+                            <figure class="gauge" data-valor="15" data-max="40" data-sufixo="s">
+                                <div class="gauge__disco">
+                                    <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
+                                        <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
+                                        <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 129.59"/>
+                                        <g class="gauge__ticks">
+                                            <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
+                                            <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
+                                            <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
+                                            <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
+                                            <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
+                                        </g>
+                                    </svg>
+                                    <p class="gauge__num">15s</p>
+                                </div>
+                                <figcaption class="gauge__leg">
+                                    <b>tempo de execução</b>
+                                    gate de qualidade no GitLab CI
+                                    <span class="gauge__escala">escala 0 a 40 segundos</span>
+                                </figcaption>
+                            </figure>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -307,8 +330,8 @@ Veja thiago.projetos() ou digite 'sobre'.
                             <li>Hardening contra supply-chain com hashes SRI e tokens CSRF</li>
                             <li>PostgreSQL 16 em container Docker espelhando produção</li>
                             <li>
-                                Suíte com 364 testes automatizados (pytest), rodando contra PostgreSQL com
-                                paralelização via xdist em ~32s, com CI/CD (GitHub Actions) como gate de
+                                Suíte de testes automatizados (pytest), rodando contra PostgreSQL com
+                                paralelização via xdist, com CI/CD (GitHub Actions) como gate de
                                 qualidade na branch. Validei o locking pessimista (select_for_update)
                                 isoladamente, 10 execuções seguidas sem falha, contra concorrência real
                                 simulada com threads.
@@ -316,27 +339,51 @@ Veja thiago.projetos() ou digite 'sobre'.
                         </ul>
 
                         <!-- Mostrador: valor final já no HTML, no número e no dashoffset. -->
-                        <figure class="gauge" data-valor="364" data-max="400">
-                            <div class="gauge__disco">
-                                <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
-                                    <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
-                                    <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 18.66"/>
-                                    <g class="gauge__ticks">
-                                        <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
-                                        <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
-                                        <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
-                                        <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
-                                        <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
-                                    </g>
-                                </svg>
-                                <p class="gauge__num">364</p>
-                            </div>
-                            <figcaption class="gauge__leg">
-                                <b>testes automatizados</b>
-                                pytest contra PostgreSQL, ~32s com xdist
-                                <span class="gauge__escala">escala 0 a 400</span>
-                            </figcaption>
-                        </figure>
+                        <div class="gauge-group">
+                            <figure class="gauge" data-valor="364" data-max="400">
+                                <div class="gauge__disco">
+                                    <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
+                                        <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
+                                        <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 18.66"/>
+                                        <g class="gauge__ticks">
+                                            <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
+                                            <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
+                                            <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
+                                            <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
+                                            <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
+                                        </g>
+                                    </svg>
+                                    <p class="gauge__num">364</p>
+                                </div>
+                                <figcaption class="gauge__leg">
+                                    <b>testes automatizados</b>
+                                    pytest contra PostgreSQL
+                                    <span class="gauge__escala">escala 0 a 400</span>
+                                </figcaption>
+                            </figure>
+
+                            <figure class="gauge" data-valor="32" data-max="40" data-sufixo="s">
+                                <div class="gauge__disco">
+                                    <svg class="gauge__svg" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true">
+                                        <path class="gauge__trilha" d="M28.89 91.11A44 44 0 1 1 91.11 91.11"/>
+                                        <path class="gauge__arco" d="M28.89 91.11A44 44 0 1 1 91.11 91.11" style="stroke-dashoffset: 41.47"/>
+                                        <g class="gauge__ticks">
+                                            <line class="gauge__tick" x1="33.13" y1="86.87" x2="35.96" y2="84.04"/>
+                                            <line class="gauge__tick" x1="24.89" y1="45.46" x2="28.59" y2="46.99"/>
+                                            <line class="gauge__tick" x1="60" y1="22" x2="60" y2="26"/>
+                                            <line class="gauge__tick" x1="95.11" y1="45.46" x2="91.41" y2="46.99"/>
+                                            <line class="gauge__tick" x1="86.87" y1="86.87" x2="84.04" y2="84.04"/>
+                                        </g>
+                                    </svg>
+                                    <p class="gauge__num">32s</p>
+                                </div>
+                                <figcaption class="gauge__leg">
+                                    <b>tempo de execução</b>
+                                    paralelização via xdist
+                                    <span class="gauge__escala">escala 0 a 40 segundos</span>
+                                </figcaption>
+                            </figure>
+                        </div>
 
                         <div class="out-row">
                             <a class="out" href="https://imoveldf-homolog.onrender.com" target="_blank" rel="noopener noreferrer">

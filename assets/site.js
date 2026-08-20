@@ -564,11 +564,12 @@
       var numero = gauge.querySelector('.gauge__num');
       var valor = Number(gauge.getAttribute('data-valor'));
       var maximo = Number(gauge.getAttribute('data-max')) || 400;
+      var sufixo = gauge.getAttribute('data-sufixo') || '';
       if (!arco || !numero || !valor) return;
 
       var alvo = ARCO * (1 - valor / maximo);
       arco.style.strokeDashoffset = ARCO;
-      numero.textContent = '0';
+      numero.textContent = '0' + sufixo;
 
       ScrollTrigger.create({
         trigger: gauge,
@@ -587,8 +588,8 @@
             n: valor,
             duration: 1.4,
             ease: 'power2.out',
-            onUpdate: function () { numero.textContent = Math.round(conta.n); },
-            onComplete: function () { numero.textContent = valor; }
+            onUpdate: function () { numero.textContent = Math.round(conta.n) + sufixo; },
+            onComplete: function () { numero.textContent = valor + sufixo; }
           });
         }
       });

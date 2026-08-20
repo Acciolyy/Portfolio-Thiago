@@ -909,13 +909,35 @@ img, video { max-width: 100%; display: block; }
    aparece certo. O site.js só anima de vazio até lá.
    -------------------------------------------------------------------------- */
 
+.gauge-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 600px) {
+  .gauge-group {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .gauge-group .gauge {
+    flex: 1;
+  }
+}
+
 .gauge {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  margin: 2rem 0 0;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
+}
+
+.gauge-group .gauge {
+  margin: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 .gauge__disco {
