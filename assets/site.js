@@ -160,18 +160,112 @@
   function progressoDeScroll() {
     var barra = document.querySelector('.progress');
     var trilha = document.getElementById('progress-fill');
-    var carro = document.getElementById('progress-car');
-    if (!barra || !trilha || !carro) return;
+    var cobra = document.getElementById('progress-cobra');
+    if (!barra || !trilha || !cobra) return;
+
+    var pescoco = cobra.querySelector('.cobra__pescoco');
+    var cabeca = cobra.querySelector('.cobra__cabeca');
+
+    // ALTURA é a altura em px do SVG, declarada no CSS. O viewBox usa o mesmo
+    // número, então 1 unidade do path é 1 pixel e o eixo da cobra cai em
+    // ALTURA / 2, que o CSS já ancorou no centro da barra.
+    var ALTURA = 22;
+    var EIXO = ALTURA / 2;
+    var PESCOCO = 16;
+    // Extremos do desenho da cabeça: 0 na nuca, 21.1 na ponta da língua.
+    var PONTA = 21.1;
+    var CENTRO = PONTA / 2;
+    var largura = 0;
+
+    function medir() {
+      largura = barra.clientWidth;
+      cobra.setAttribute('viewBox', '0 0 ' + largura + ' ' + ALTURA);
+    }
+
+    // dir = 1 descendo (cabeça olha para a direita), -1 subindo.
+    function desenhar(t, p, dir) {
+      if (!largura) medir();
+
+      var x = Math.min(Math.max(p * largura, 2), largura - 4);
+
+      // Subindo, o desenho inteiro espelha em torno do próprio centro: a ponta
+      // passa a ficar na fronteira, olhando para trás, e o pescoço vai parar
+      // do outro lado. Só troca de sinal, a forma é a mesma.
+      var giro = dir < 0
+        ? ' translate(' + CENTRO + ' 0) scale(-1 1) translate(' + (-CENTRO) + ' 0)'
+        : '';
+      cabeca.setAttribute('transform',
+        'translate(' + x.toFixed(2) + ' ' + EIXO + ')' + giro);
+
+      // Uma cúbica só. Os dois pontos de controle sobem e descem com o mesmo
+      // seno; nenhum ponto intermediário, para não tremer.
+      var fase = Math.sin(t * 3);
+      // Deslocamento em x do começo do pescoço, medido a partir da nuca.
+      function px(u) { return dir < 0 ? x + PONTA + u : x - u; }
+
+      pescoco.setAttribute('d',
+        'M' + px(PESCOCO).toFixed(2) + ' ' + (EIXO + fase * 2.4).toFixed(2) +
+        'C' + px(PESCOCO - 6).toFixed(2) + ' ' + (EIXO + fase * 2.6).toFixed(2) +
+        ' ' + px(7).toFixed(2) + ' ' + (EIXO - fase * 1.8).toFixed(2) +
+        ' ' + px(0).toFixed(2) + ' ' + EIXO);
+    }
+
+    var progressoAtual = 0;
+    var direcaoAtual = 1;
+
+    function posicionar(p) {
+      progressoAtual = p;
+      trilha.style.width = (p * 100).toFixed(2) + '%';
+    }
+
+    window.addEventListener('resize', function () {
+      medir();
+      desenhar(0, progressoAtual, direcaoAtual);
+    });
+
+    if (semMovimento || !temGsap) {
+      // Sem GSAP a barra ainda mede o scroll: ela some por completo se ficar
+      // dependurada no ScrollTrigger. O que não acontece aqui é a ondulação,
+      // com a fase travada em zero.
+      var agendado = false;
+      var ultimoY = window.scrollY;
+
+      var aoRolar = function () {
+        if (agendado) return;
+        agendado = true;
+        requestAnimationFrame(function () {
+          agendado = false;
+          if (window.scrollY !== ultimoY) {
+            direcaoAtual = window.scrollY > ultimoY ? 1 : -1;
+            ultimoY = window.scrollY;
+          }
+          var total = document.documentElement.scrollHeight - window.innerHeight;
+          posicionar(total > 0 ? Math.min(1, Math.max(0, window.scrollY / total)) : 0);
+          desenhar(0, progressoAtual, direcaoAtual);
+        });
+      };
+
+      window.addEventListener('scroll', aoRolar, { passive: true });
+      medir();
+      aoRolar();
+      return;
+    }
 
     ScrollTrigger.create({
       start: 0,
       end: 'max',
       onUpdate: function (self) {
-        var p = self.progress;
-        trilha.style.width = (p * 100).toFixed(2) + '%';
-        // o carro anda dentro da barra, sem sair pelas pontas
-        carro.style.transform = 'translateX(' + (p * (barra.clientWidth - 34)).toFixed(1) + 'px)';
+        if (self.direction) direcaoAtual = self.direction;
+        posicionar(self.progress);
       }
+    });
+
+    medir();
+    desenhar(0, 0, 1);
+
+    // Pega carona no ticker que o GSAP e o Lenis já rodam: nenhum laço novo.
+    gsap.ticker.add(function (tempo) {
+      if (!document.hidden) desenhar(tempo, progressoAtual, direcaoAtual);
     });
   }
 
@@ -619,6 +713,9 @@
   montarCarrossel();
   // Fica antes do return: o terminal não depende do GSAP, só de movimento.
   montarTerminal();
+  // Também fica antes do return: a barra mede o scroll nos dois modos, e ela
+  // mesma decide se o pescoço ondula ou fica parado.
+  progressoDeScroll();
 
   if (semMovimento || !temGsap) {
     // Sem movimento: valores finais direto, nenhuma das três animações roda.
@@ -651,7 +748,6 @@
     });
   }
 
-  progressoDeScroll();
   marcaDePneu();
   contadores();
   brilhoNaBorda();

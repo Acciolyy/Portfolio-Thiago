@@ -149,28 +149,54 @@ img, video { max-width: 100%; display: block; }
 
 .progress {
   position: fixed;
-  inset: 0 0 auto 0;
+  /* Descolada 5px do topo: a cabeça da cobra sobe acima da linha, e encostada
+     na borda da janela ela sairia cortada. O cabeçalho é opaco e começa no
+     mesmo zero, então nenhuma faixa nova aparece atrás. */
+  inset: 5px 0 auto 0;
   height: 3px;
-  background: var(--line);
+  /* Nasce cheia de laranja. O que muda com o scroll é o preto por cima. */
+  background: var(--accent);
   z-index: 60;
 }
 
+/* O trecho já percorrido, comido a partir do início. */
 .progress__fill {
   height: 100%;
   width: 0;
-  background: var(--accent);
+  background: var(--ink);
   will-change: width;
 }
 
-.progress__car {
+/* O eixo Y não é calculado: top 50% com translateY(-50%) faz o centro do SVG
+   ser o centro da barra por construção, e o viewBox usa a mesma altura em px
+   declarada aqui, então 1 unidade do desenho é 1 pixel. */
+.progress__cobra {
   position: absolute;
-  top: -5px;
   left: 0;
-  width: 34px;
-  height: 12px;
-  color: var(--text);
-  will-change: transform;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 22px;
+  overflow: visible;
   pointer-events: none;
+}
+
+.cobra__silhueta { fill: var(--text); stroke: none; }
+
+.cobra__lingua {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+}
+
+.cobra__olho { fill: var(--ink); stroke: none; }
+
+.cobra__pescoco {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 3;
+  stroke-linecap: round;
 }
 
 /* --------------------------------------------------------------------------
@@ -1211,7 +1237,8 @@ img, video { max-width: 100%; display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .progress__car { display: none; }
+  /* A cobra continua visível: ela marca posição, e posição é informação.
+     O que sai é só a ondulação do pescoço, decidida no site.js. */
   .tire { display: none; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
