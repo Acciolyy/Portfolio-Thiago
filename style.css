@@ -343,9 +343,7 @@ img, video { max-width: 100%; display: block; }
    Fundo 3D
 
    Canvas do tamanho da tela, fixo, atrás de tudo. Nunca cresce com o
-   documento. A máscara deixa passar só as duas faixas de borda, com
-   degradê, então a coluna de conteúdo nunca tem nada por trás dela.
-   A opacidade fica nos materiais do Three (0.10 e 0.12).
+   documento. A opacidade fica nos materiais do Three.
    -------------------------------------------------------------------------- */
 
 .fundo3d {
@@ -356,14 +354,35 @@ img, video { max-width: 100%; display: block; }
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* Sem filter: blur. Medido, ele sozinho respondia por metade do tempo de
+  /* Duas camadas de máscara somadas.
+
+     A de baixo é a original: deixa passar só as duas faixas de borda, então a
+     treliça de fundo nunca entra na coluna de conteúdo. Tirá-la foi medido e
+     não dá: o desvio por coluna vai a 166 e suja 1283 de 1441 colunas, 419
+     delas em cima do .spec. Conter as cobras só pela geometria não resolve,
+     porque a da esquerda chega a 60% da largura da tela.
+
+     A de cima é uma janela redonda que devolve o pedaço do vazio da Hero onde
+     o novelo vive. O fundo3d.js move e dimensiona essa janela pelas variáveis
+     abaixo, e zera o raio quando o novelo não está na tela.
+
+     Sem filter: blur. Medido, ele sozinho respondia por metade do tempo de
      quadro (61 -> 26 fps com ele, 58 sem), porque desfocar uma camada fixa do
-     tamanho da tela custa em área, não em resolução. A suavidade vem de graça
-     do buffer em 0.55x sendo esticado pelo CSS até o tamanho da tela. */
-  -webkit-mask-image: linear-gradient(90deg,
-              #000 0, transparent 13% 87%, #000 100%);
-  mask-image: linear-gradient(90deg,
-              #000 0, transparent 13% 87%, #000 100%);
+     tamanho da tela custa em área, não em resolução. */
+  --janela-x: 50%;
+  --janela-y: 50%;
+  --janela-r: 0px;
+
+  -webkit-mask-image:
+      radial-gradient(circle var(--janela-r) at var(--janela-x) var(--janela-y),
+              #000 0 80%, transparent 100%),
+      linear-gradient(90deg, #000 0, transparent 13% 87%, #000 100%);
+  mask-image:
+      radial-gradient(circle var(--janela-r) at var(--janela-x) var(--janela-y),
+              #000 0 80%, transparent 100%),
+      linear-gradient(90deg, #000 0, transparent 13% 87%, #000 100%);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
 }
 
 @media (max-width: 639px) {
