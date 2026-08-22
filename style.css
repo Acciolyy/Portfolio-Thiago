@@ -372,17 +372,64 @@ img, video { max-width: 100%; display: block; }
   --janela-x: 50%;
   --janela-y: 50%;
   --janela-r: 0px;
+  --nuvem-x: 50%;
+  --nuvem-y: 50%;
+  --nuvem-rx: 0px;
+  --nuvem-ry: 0px;
 
   -webkit-mask-image:
+      radial-gradient(ellipse var(--nuvem-rx) var(--nuvem-ry) at var(--nuvem-x) var(--nuvem-y),
+              #000 0 88%, transparent 100%),
       radial-gradient(circle var(--janela-r) at var(--janela-x) var(--janela-y),
               #000 0 80%, transparent 100%),
       linear-gradient(90deg, #000 0, transparent 13% 87%, #000 100%);
   mask-image:
+      radial-gradient(ellipse var(--nuvem-rx) var(--nuvem-ry) at var(--nuvem-x) var(--nuvem-y),
+              #000 0 88%, transparent 100%),
       radial-gradient(circle var(--janela-r) at var(--janela-x) var(--janela-y),
               #000 0 80%, transparent 100%),
       linear-gradient(90deg, #000 0, transparent 13% 87%, #000 100%);
   -webkit-mask-composite: source-over;
   mask-composite: add;
+}
+
+/* Rótulo da nuvem de tecnologias. O elemento é criado pelo fundo3d.js, para a
+   marcação da seção de Contato não mudar. A borda usa o mesmo recorte do
+   contorno aceso dos cards: gradiente na caixa inteira, máscara descartando
+   tudo menos o anel de 1px. Sem box-shadow, que o site não tem em lugar
+   nenhum. */
+.nuvem-rotulo {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--ink);
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.14s linear;
+}
+
+.nuvem-rotulo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: rgb(var(--accent-rgb) / 0.55);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.nuvem-rotulo[data-visivel="1"] { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nuvem-rotulo { transition: none; }
 }
 
 @media (max-width: 639px) {
