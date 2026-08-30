@@ -25,7 +25,7 @@
          mais a lista fixa em assets/tailwind.src.css. Regerar com `npm run css`. -->
     <!-- ?v= força o navegador a buscar a versão nova. Suba o número ao mexer no CSS ou no JS. -->
     <link rel="stylesheet" href="assets/tailwind.css?v=6">
-    <link rel="stylesheet" href="style.css?v=15">
+    <link rel="stylesheet" href="style.css?v=16">
 
     <!-- Lenis: scroll suave. O site.js só liga se prefers-reduced-motion estiver
          desligado; com ele ligado o navegador rola nativamente, sem interceptação. -->
@@ -84,6 +84,7 @@
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#outros-interesses">Outros Interesses</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
 
@@ -99,6 +100,7 @@
                 <li><a href="#inicio" @click="aberto = false">Início</a></li>
                 <li><a href="#sobre" @click="aberto = false">Sobre</a></li>
                 <li><a href="#projetos" @click="aberto = false">Projetos</a></li>
+                <li><a href="#outros-interesses" @click="aberto = false">Outros Interesses</a></li>
                 <li><a href="#contato" @click="aberto = false">Contato</a></li>
             </ul>
         </nav>
@@ -420,6 +422,40 @@ Veja thiago.projetos() ou digite 'sobre'.
                     </div>
                 </article>
 
+                <!-- Demais projetos -->
+                <div class="grid-projects grid-projects--single mt-4">
+
+                    <article class="card">
+                        <div class="card__body">
+                            <h3 class="card__title">Catálogo com Bugs Propositais</h3>
+                            <p class="origin">origem: prática</p>
+                            <p class="card__text">
+                                Aplicação Django que construí para praticar automação de testes, com bugs
+                                documentados e reproduzidos: validação de preço negativo, TextField sem
+                                limite, off-by-one na paginação, ausência de controle de acesso por papel, e
+                                página protegida ainda acessível pelo botão voltar após logout, por falta de
+                                Cache-Control.
+                            </p>
+                            <p class="stack mt-6">
+                                Django <span class="sep">·</span> pytest <span class="sep">·</span> Playwright
+                            </p>
+                            <div class="out-row">
+                                <a class="out" href="https://github.com/Acciolyy/catalog-under-test" target="_blank" rel="noopener noreferrer">
+                                    github.com/Acciolyy/catalog-under-test <span class="arrow" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= 05 / OUTROS INTERESSES ======================= -->
+        <section id="outros-interesses" class="section section--projetos">
+            <div class="wrap">
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>05 / OUTROS INTERESSES</p>
+
                 <!-- Texto à esquerda, mídia à direita. -->
                 <article class="feature feature--inverso mt-4">
                     <div class="feature__media">
@@ -606,36 +642,14 @@ Veja thiago.projetos() ou digite 'sobre'.
                         </div>
                     </article>
 
-                    <article class="card">
-                        <div class="card__body">
-                            <h3 class="card__title">Catálogo com Bugs Propositais</h3>
-                            <p class="origin">origem: prática</p>
-                            <p class="card__text">
-                                Aplicação Django que construí para praticar automação de testes, com bugs
-                                documentados e reproduzidos: validação de preço negativo, TextField sem
-                                limite, off-by-one na paginação, ausência de controle de acesso por papel, e
-                                página protegida ainda acessível pelo botão voltar após logout, por falta de
-                                Cache-Control.
-                            </p>
-                            <p class="stack mt-6">
-                                Django <span class="sep">·</span> pytest <span class="sep">·</span> Playwright
-                            </p>
-                            <div class="out-row">
-                                <a class="out" href="https://github.com/Acciolyy/catalog-under-test" target="_blank" rel="noopener noreferrer">
-                                    github.com/Acciolyy/catalog-under-test <span class="arrow" aria-hidden="true">↗</span>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
                 </div>
             </div>
         </section>
 
-        <!-- ============================== 05 / CONTATO ============================= -->
+        <!-- ============================== 06 / CONTATO ============================= -->
         <section id="contato" class="section section--contato">
             <div class="wrap">
-                <p class="sec-label"><span class="tire" aria-hidden="true"></span>05 / CONTATO</p>
+                <p class="sec-label"><span class="tire" aria-hidden="true"></span>06 / CONTATO</p>
 
                 <div class="contact indent">
                     <h2>Vamos conversar</h2>

@@ -1154,6 +1154,12 @@ img, video { max-width: 100%; display: block; }
   .grid-projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+/* Grade com um card só: sem as colunas vazias ao lado. */
+.grid-projects.grid-projects--single {
+  grid-template-columns: minmax(0, 1fr) !important;
+  max-width: 640px;
+}
+
 .grid-projects .card {
   border: 0;
   background: var(--ink);
