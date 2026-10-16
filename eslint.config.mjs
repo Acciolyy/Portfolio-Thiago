@@ -18,8 +18,6 @@ const eslintConfig = defineConfig([
     ".agents/**",
     ".claude/**",
     ".impeccable/**",
-    // Site estático antigo, mantido só como referência até a Fase 7.
-    "assets/**",
   ]),
 ]);
 

@@ -20,8 +20,8 @@
 | 3. Markup estático | **Feita.** DOM gerado confere com o `index.html` (diferenças só as esperadas, ver 5.1) |
 | 4. Interatividade | **Feita.** Todos os componentes portados, testados em produção e em `next dev` (StrictMode) |
 | 5. Paridade | **Feita no local.** Falta repetir no Preview da Vercel |
-| 6. Deploy na Vercel | **Pendente** (precisa da sua conta e do domínio) |
-| 7. Limpeza | **Pendente** (`index.html`, `style.css`, `assets/` ficam como referência até a Fase 6) |
+| 6. Deploy na Vercel | **Feita.** Produção em https://portfolio-thiago-beta.vercel.app (o `-beta` é da Vercel: `portfolio-thiago` já era de outra conta). Paridade conferida lá também |
+| 7. Limpeza | **Feita.** Site antigo removido do `main` (continua na tag `v1-estatico`). O GitHub Pages agora publica a branch `gh-pages`, que só redireciona para a Vercel |
 
 ### 0.1 Decisões tomadas na execução
 
