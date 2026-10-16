@@ -1,0 +1,132 @@
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+
+.hero__name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  /* 0.22em dispersava um nome próprio de 22 caracteres. */
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0 0 0.75rem;
+}
+
+.hero__title {
+  font-size: clamp(3rem, 11vw, 3.75rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.75rem;
+}
+
+.hero__title .py { color: var(--accent); display: block; }
+
+.hero__pitch {
+  max-width: min(52ch, var(--prose));
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* Título à esquerda, ficha técnica à direita. No mobile a ficha desce. */
+.hero__top {
+  display: grid;
+  gap: 2.75rem;
+  margin-bottom: 3.5rem;
+}
+
+@media (min-width: 900px) {
+  .hero__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 372px);
+    gap: 3.5rem;
+    align-items: end;
+  }
+}
+
+/* Ficha técnica: só as linhas entre os pares, sem moldura. */
+.spec {
+  margin: 0;
+  padding: 0;
+}
+
+.spec__row {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.spec__row:first-child { padding-top: 0; }
+.spec__row:last-child  { border-bottom: 0; padding-bottom: 0; }
+
+.spec dt {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.spec dd {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.spec .sep { color: var(--text-mute); }
+
+@media (max-width: 420px) {
+  .spec__row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Faixa de telemetria: o gap de 1px sobre o fundo vira a borda. */
+.telemetry {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 720px) {
+  .telemetry { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.telemetry__cell {
+  background: var(--ink);
+  padding: 0.9rem 1.1rem 1rem;
+}
+
+.telemetry__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+}
+
+/* O Barlow Condensed não expõe tnum: "0" mede 14px e "1" mede 9px, e o
+   contador do site.js mudava de largura a cada quadro da animação. Em mono
+   os dígitos já nascem da mesma largura. */
+.telemetry__value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Sem dado nenhum, nem em cache: a faixa some em vez de mostrar buraco. */
+.telemetry[hidden] { display: none; }
+
+/* Herda a família do valor; só cai um degrau porque é texto, não número. */
+.telemetry__value--txt {
+  font-size: 1.125rem;
+  color: var(--text);
+}

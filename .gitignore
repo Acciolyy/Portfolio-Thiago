@@ -1,2 +1,25 @@
-node_modules/
-package-lock.json
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# playwright
+.playwright-mcp/
+docs/paridade/

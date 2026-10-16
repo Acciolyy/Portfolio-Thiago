@@ -1,0 +1,106 @@
+/* --------------------------------------------------------------------------
+   Mostrador radial
+
+   Arco de 270 graus, escala 0 a 400. O valor final já vem no HTML, tanto no
+   número quanto no stroke-dashoffset do arco, então sem JS o mostrador
+   aparece certo. O site.js só anima de vazio até lá.
+   -------------------------------------------------------------------------- */
+
+.gauge-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 600px) {
+  .gauge-group {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .gauge-group .gauge {
+    flex: 1;
+  }
+}
+
+.gauge {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.gauge-group .gauge {
+  margin: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.gauge__disco {
+  position: relative;
+  flex: 0 0 auto;
+  width: 120px;
+}
+
+.gauge__svg { display: block; }
+
+.gauge__trilha {
+  fill: none;
+  stroke: var(--line-2);
+  stroke-width: 1.5;
+}
+
+.gauge__arco {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: butt;
+  stroke-dasharray: 207.345;
+}
+
+.gauge__tick {
+  stroke: var(--line-2);
+  stroke-width: 1;
+}
+
+.gauge__num {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 52px;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.gauge__leg {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.gauge__leg b {
+  display: block;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.gauge__escala {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+@media (max-width: 520px) {
+  .gauge { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+}

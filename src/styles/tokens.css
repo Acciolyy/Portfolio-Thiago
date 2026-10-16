@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Tokens de design: FONTE ÚNICA de cores, fontes, medidas e espaçamento.
+   Para mudar uma cor, uma fonte ou um respiro do site, mude aqui.
+   O 3D (lib/fundo3d) e o Tailwind (@theme abaixo) leem estas mesmas variáveis.
+
+   Exceções que não dá para ler daqui:
+     - viewport.themeColor no layout.tsx (gerado no servidor): espelha --ink.
+     - Breakpoints: CSS não aceita variável dentro de @media. Valores em uso,
+       literais nos parciais de components/: 420, 520, 600, 639, 680, 700, 720,
+       780, 860, 900, 1100 e 1280 px.
+   ========================================================================== */
+
+:root {
+  /* Cores */
+  --ink:       #131619;
+  --ink-2:     #1A1E22;
+  --line:      #22262B;
+  --line-2:    #2A2F35;
+  --text:      #ECECEA;
+  --text-dim:  #9BA3AB;
+  --text-mute: #6E7681;
+  --accent:    #FF6B1A;
+  /* Mesmo laranja em componentes, para o brilho da borda variar a opacidade. */
+  --accent-rgb: 255 107 26;
+
+  /* Fontes. As --font-*-face vêm do next/font (layout.tsx). 'Reserva
+     condensada' e 'Reserva de corpo' são os @font-face de fonts.css: métrica
+     ajustada para o swap acontecer sem refluir o documento. */
+  --font-title: var(--font-barlow-face), 'Roboto Condensed', 'Liberation Sans Narrow', 'Reserva condensada', sans-serif;
+  --font-mono:  var(--font-plex-face), ui-monospace, SFMono-Regular, monospace;
+  --font-body:  var(--font-inter-face), 'Reserva de corpo', system-ui, -apple-system, sans-serif;
+
+  /* Rótulo mono em caixa alta: um tamanho, um tracking, em todo o site. */
+  --label-size: 0.6875rem;
+  --label-track: 0.16em;
+
+  /* Medidas de layout */
+  --header-h: 54px;
+  --wrap: 1440px;
+  /* O container cresceu; a prosa não. Nenhum parágrafo passa daqui. */
+  --prose: 42rem;
+
+  /* Espaçamento: números que estavam soltos no CSS, só ganharam nome.
+     Consolidar numa escala é trabalho do redesign. */
+  --gutter-sm: 1.5rem;        /* .wrap, mobile */
+  --gutter-md: 2.5rem;        /* .wrap, >= 900px */
+  --gutter-lg: 3.5rem;        /* .wrap, >= 1280px */
+  --pad-card-sm: 1.5rem;      /* .card__body e .feature__body */
+  --pad-card-lg: 2rem;        /* idem, >= 860/900px */
+
+  --sec-hero-top:       calc(var(--header-h) + 5rem);
+  --sec-hero-top-sm:    calc(var(--header-h) + 3rem);   /* <= 700px */
+  --sec-hero-bottom:    3rem;
+  --sec-sobre-top:      7.5rem;
+  --sec-sobre-top-sm:   5rem;                           /* <= 700px */
+  --sec-sobre-bottom:   2.25rem;
+  --sec-nota-top:       2.25rem;
+  --sec-nota-bottom:    6rem;
+  --sec-proj-top:       4rem;
+  --sec-proj-top-sm:    3rem;                           /* <= 700px */
+  --sec-proj-bottom:    4.5rem;
+  --sec-contato-top:    6.5rem;
+  --sec-contato-bottom: 4rem;
+
+  color-scheme: dark;
+}
+
+/* Tailwind enxerga os mesmos tokens: bg-ink, text-accent, border-line... */
+@theme inline {
+  --color-ink:       var(--ink);
+  --color-ink-2:     var(--ink-2);
+  --color-line:      var(--line);
+  --color-line-2:    var(--line-2);
+  --color-text:      var(--text);
+  --color-text-dim:  var(--text-dim);
+  --color-text-mute: var(--text-mute);
+  --color-accent:    var(--accent);
+
+  --font-title: var(--font-title);
+  --font-mono:  var(--font-mono);
+  --font-body:  var(--font-body);
+}

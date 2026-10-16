@@ -1,0 +1,69 @@
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+body {
+  margin: 0;
+  /* Transparente de propósito: a mesma cor está no html acima e pinta o fundo
+     da viewport inteira. Se o body pintasse aqui, cobriria o canvas de fundo,
+     que fica em z-index negativo. Cor renderizada é idêntica. */
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  /* Texto claro em fundo escuro fecha um pouco. Um fio de tracking devolve. */
+  letter-spacing: 0.008em;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+}
+
+/* nenhum box-shadow no site inteiro */
+* { box-shadow: none !important; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+a { color: inherit; }
+
+img, video { max-width: 100%; display: block; }
+
+::selection { background: var(--accent); color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: var(--gutter-sm);
+}
+
+@media (min-width: 900px) {
+  .wrap { padding-inline: var(--gutter-md); }
+}
+
+/* Container mais largo pede mais respiro na lateral. */
+@media (min-width: 1280px) {
+  .wrap { padding-inline: var(--gutter-lg); }
+}
+
+/* Toque de Python: indentação com significado. */
+.indent {
+  border-left: 1px solid var(--line-2);
+  padding-left: 1.25rem;
+}

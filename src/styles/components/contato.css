@@ -1,0 +1,67 @@
+/* --------------------------------------------------------------------------
+   Contato e rodapé
+   -------------------------------------------------------------------------- */
+
+.contact h2 {
+  font-size: clamp(2.25rem, 7vw, 3rem);
+  text-wrap: balance;
+  margin-bottom: 1.25rem;
+}
+
+.contact p {
+  color: var(--text-dim);
+  max-width: min(52ch, var(--prose));
+  margin: 0 0 2.5rem;
+}
+
+.contact__links {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  max-width: 820px;
+}
+
+@media (min-width: 680px) {
+  .contact__links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.contact__links a {
+  background: var(--ink);
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  display: block;
+  transition: background 0.15s linear;
+}
+
+.contact__links a:hover { background: var(--ink-2); }
+
+.contact__links .k {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.3rem;
+}
+
+.contact__links .v {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0 2.5rem;
+}
+
+.site-footer p {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin: 0;
+}

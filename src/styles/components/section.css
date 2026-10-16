@@ -1,0 +1,50 @@
+/* --------------------------------------------------------------------------
+   Seções e rótulos
+   -------------------------------------------------------------------------- */
+
+.section {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+/* Ritmo de espaçamento variável: o que se relaciona fica mais perto. */
+.section--hero    { padding-top: var(--sec-hero-top); padding-bottom: var(--sec-hero-bottom); }
+.section--sobre   { padding-top: var(--sec-sobre-top); padding-bottom: var(--sec-sobre-bottom); }
+.section--nota    { padding-top: var(--sec-nota-top); padding-bottom: var(--sec-nota-bottom); }
+.section--projetos{ padding-top: var(--sec-proj-top); padding-bottom: var(--sec-proj-bottom); }
+.section--contato { padding-top: var(--sec-contato-top); padding-bottom: var(--sec-contato-bottom); }
+
+@media (max-width: 700px) {
+  .section--hero    { padding-top: var(--sec-hero-top-sm); }
+  .section--sobre   { padding-top: var(--sec-sobre-top-sm); }
+  .section--projetos{ padding-top: var(--sec-proj-top-sm); }
+}
+
+.sec-label {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.75rem;
+}
+
+/* Marca de pneu: vestígio, não desenho. Animada pelo GSAP. */
+.tire {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: -6px;
+  height: 9px;
+  width: 0;
+  transform: translateY(-50%);
+  opacity: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--line-2) 0 4px,
+    transparent 4px 7px
+  );
+}

@@ -1,0 +1,28 @@
+/* --------------------------------------------------------------------------
+   Acessibilidade e movimento
+   -------------------------------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+
+.skip-link:focus { left: 0; }
+
+/* Alpine: evita o menu piscar antes de o JS carregar. */
+[x-cloak] { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  /* A cobra continua visível: ela marca posição, e posição é informação.
+     O que sai é só a ondulação do pescoço, decidida no site.js. */
+  .tire { display: none; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

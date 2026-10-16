@@ -1,0 +1,97 @@
+/* --------------------------------------------------------------------------
+   Fundo 3D
+
+   Canvas do tamanho da tela, fixo, atrás de tudo. Nunca cresce com o
+   documento. A opacidade fica nos materiais do Three.
+   -------------------------------------------------------------------------- */
+
+.fundo3d {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Duas camadas de máscara somadas.
+
+     A de baixo é a original: deixa passar só as duas faixas de borda, então a
+     treliça de fundo nunca entra na coluna de conteúdo. Tirá-la foi medido e
+     não dá: o desvio por coluna vai a 166 e suja 1283 de 1441 colunas, 419
+     delas em cima do .spec. Conter as cobras só pela geometria não resolve,
+     porque a da esquerda chega a 60% da largura da tela.
+
+     A de cima é uma janela redonda que devolve o pedaço do vazio da Hero onde
+     o novelo vive. O fundo3d.js move e dimensiona essa janela pelas variáveis
+     abaixo, e zera o raio quando o novelo não está na tela.
+
+     Sem filter: blur. Medido, ele sozinho respondia por metade do tempo de
+     quadro (61 -> 26 fps com ele, 58 sem), porque desfocar uma camada fixa do
+     tamanho da tela custa em área, não em resolução. */
+  --janela-x: 50%;
+  --janela-y: 50%;
+  --janela-r: 0px;
+  --nuvem-x: 50%;
+  --nuvem-y: 50%;
+  --nuvem-rx: 0px;
+  --nuvem-ry: 0px;
+
+  -webkit-mask-image:
+      radial-gradient(ellipse var(--nuvem-rx) var(--nuvem-ry) at var(--nuvem-x) var(--nuvem-y),
+              #000 0 88%, transparent 100%),
+      radial-gradient(circle var(--janela-r) at var(--janela-x) var(--janela-y),
+              #000 0 80%, transparent 100%),
+      linear-gradient(90deg, #000 0, transparent 13% 87%, #000 100%);
+  mask-image:
+      radial-gradient(ellipse var(--nuvem-rx) var(--nuvem-ry) at var(--nuvem-x) var(--nuvem-y),
+              #000 0 88%, transparent 100%),
+      radial-gradient(circle var(--janela-r) at var(--janela-x) var(--janela-y),
+              #000 0 80%, transparent 100%),
+      linear-gradient(90deg, #000 0, transparent 13% 87%, #000 100%);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+}
+
+/* Rótulo da nuvem de tecnologias. O elemento é criado pelo fundo3d.js, para a
+   marcação da seção de Contato não mudar. A borda usa o mesmo recorte do
+   contorno aceso dos cards: gradiente na caixa inteira, máscara descartando
+   tudo menos o anel de 1px. Sem box-shadow, que o site não tem em lugar
+   nenhum. */
+.nuvem-rotulo {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--ink);
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.14s linear;
+}
+
+.nuvem-rotulo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: rgb(var(--accent-rgb) / 0.55);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.nuvem-rotulo[data-visivel="1"] { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nuvem-rotulo { transition: none; }
+}
+
+@media (max-width: 639px) {
+  /* Na tela estreita o texto ocupa quase tudo. Recua mais um passo. */
+  .fundo3d { opacity: 0.6; }
+}

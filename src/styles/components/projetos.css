@@ -1,0 +1,200 @@
+/* --------------------------------------------------------------------------
+   Projetos
+   -------------------------------------------------------------------------- */
+
+/* Não é rótulo em caixa alta: sai do token e fica com tracking de leitura. */
+.origin {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+
+.stack {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.8;
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
+  word-spacing: 0.1em;
+}
+
+.stack .sep { color: var(--line-2); }
+
+.card {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  transition: border-color 0.18s linear;
+}
+
+.card:hover { border-color: var(--line-2); }
+
+/* Foco de luz no contorno, seguindo o cursor.
+
+   O gradiente pinta a caixa inteira e a máscara descarta tudo menos o anel
+   de 1px da borda: subtrai a área de conteúdo (content-box) da área total.
+   O card não inclina nem gira, só a borda acende. As coordenadas vêm de
+   --mx/--my, que o site.js atualiza no mousemove. */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s linear;
+  background: radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%),
+              rgb(var(--accent-rgb) / 0.5),
+              rgb(var(--accent-rgb) / 0.14) 45%,
+              transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.card:hover::before,
+.card:focus-within::before { opacity: 1; }
+
+/* Sem movimento: nada de rastrear o cursor. A borda inteira acende, parada. */
+@media (prefers-reduced-motion: reduce) {
+  /* A regra global de transição usa *, que não pega pseudo-elemento. */
+  .card::before {
+    background: rgb(var(--accent-rgb) / 0.28);
+    transition: none;
+  }
+}
+
+.card__body { padding: var(--pad-card-sm); }
+
+@media (min-width: 860px) {
+  .card__body { padding: var(--pad-card-lg); }
+}
+
+.card__title {
+  font-size: 1.75rem;
+  /* Sem isto, três títulos deixavam uma palavra sozinha na última linha a 390px. */
+  text-wrap: balance;
+  margin-bottom: 0.35rem;
+}
+
+.card__text {
+  color: var(--text-dim);
+  margin: 1rem 0 0;
+  max-width: min(62ch, var(--prose));
+}
+
+.rank {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0 0 0.75rem;
+}
+
+.points {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.points li {
+  font-family: var(--font-mono);
+  /* É o bloco de prosa mais longo do site; sobe um degrau e some o 13px. */
+  font-size: 0.875rem;
+  line-height: 1.65;
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
+  padding: 0.7rem 0 0.7rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.points li::before {
+  content: "·";
+  position: absolute;
+  left: 0.25rem;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Destaques: mídia e texto lado a lado dentro do card
+   -------------------------------------------------------------------------- */
+
+.feature {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--ink);
+}
+
+/* 55% mídia / 45% texto. O lado alterna a cada destaque para dar ritmo. */
+@media (min-width: 900px) {
+  .feature { grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); }
+
+  /* Texto à esquerda, mídia à direita: inverte as colunas e o lado da linha. */
+  .feature--inverso { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); }
+
+  .feature--inverso .feature__media {
+    order: 2;
+    border-right: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* Zero padding na coluna de mídia: ela encosta na borda interna do card. */
+.feature__media {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 900px) {
+  .feature__media {
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  /* A coluna de texto é mais alta que o vídeo. Em vez de esticar a imagem
+     ou deixar um vazio, o vídeo acompanha a leitura. */
+  .feature__media > * {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+}
+
+.feature__media video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--ink-2);
+}
+
+.feature__body {
+  min-width: 0;
+  padding: var(--pad-card-sm);
+}
+
+@media (min-width: 900px) {
+  .feature__body { padding: var(--pad-card-lg); }
+}
+
+/* Projeto principal: único lugar da tela onde o laranja estrutura o bloco. */
+.feature--main {
+  border-left: 2px solid var(--accent);
+  background: var(--ink-2);
+}
+
+/* Corpo em --ink-2, então a mídia inverte o tom para as colunas se separarem. */
+.feature--main .feature__media,
+.feature--main .feature__media video { background: var(--ink); }
+
+.feature--main .card__title { font-size: clamp(2rem, 3.4vw, 2.75rem); }
+
+.feature--main .card__text { max-width: min(68ch, var(--prose)); }

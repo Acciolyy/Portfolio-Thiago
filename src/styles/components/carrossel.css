@@ -1,0 +1,84 @@
+/* --------------------------------------------------------------------------
+   Carrossel do portfólio de IA
+   -------------------------------------------------------------------------- */
+
+/* Os gráficos têm fundo branco. A moldura escura evita que o branco
+   encoste na borda do card. */
+.carro { position: relative; }
+
+.carro__janela {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  padding: 1.5rem;
+}
+
+.carro__slide {
+  position: absolute;
+  inset: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s linear;
+}
+
+.carro__slide[data-ativo] { opacity: 1; }
+
+.carro__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carro__nav {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  background: var(--ink);
+  border: 1px solid var(--line-2);
+  color: var(--text-dim);
+  transition: color 0.15s linear, border-color 0.15s linear;
+}
+
+.carro__nav:hover { color: var(--text); border-color: var(--accent); }
+
+.carro__nav--ant  { left: 0.5rem; }
+.carro__nav--prox { right: 0.5rem; }
+
+.carro__pontos {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.carro__ponto {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--line-2);
+  transition: background 0.15s linear;
+}
+
+.carro__ponto[aria-current="true"] { background: var(--accent); }
+
+/* Legenda vive na coluna de texto e troca junto com o slide. */
+.carro__legenda {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
+  margin: 1.75rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+  min-height: 3.2em;
+}

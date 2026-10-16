@@ -1,0 +1,37 @@
+/* Bloco editorial: "Nem tudo é o que parece" */
+.note p {
+  font-size: 1.125rem;
+  /* Peso 450 no eixo variável do Inter, que já vem baixado e não era usado. */
+  font-weight: 450;
+  line-height: 1.6;
+  max-width: min(56ch, var(--prose));
+  color: var(--text);
+  margin: 0 0 1.25rem;
+}
+
+.note p:last-child { color: var(--text-dim); margin-bottom: 0; }
+
+/* Em tela larga a anotação vai para a margem, ao lado da prosa. */
+.note__grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+@media (min-width: 1100px) {
+  .note__grid {
+    grid-template-columns: minmax(0, var(--prose)) minmax(0, 30rem);
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* Comentário de código solto: sem fundo, sem borda, sem caixa. */
+.anota {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.75;
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
+}
+
+.anota span { display: block; }

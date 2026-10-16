@@ -1,0 +1,88 @@
+/* --------------------------------------------------------------------------
+   Grid dos demais projetos
+   -------------------------------------------------------------------------- */
+
+.grid-projects {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 780px) {
+  .grid-projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1100px) {
+  .grid-projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Grade com um card só: sem as colunas vazias ao lado. */
+.grid-projects.grid-projects--single {
+  grid-template-columns: minmax(0, 1fr) !important;
+  max-width: 640px;
+}
+
+@media (min-width: 780px) {
+  .grid-projects.grid-projects--pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+.grid-projects .card {
+  border: 0;
+  background: var(--ink);
+}
+
+/* Vídeo no topo do card: mesmo tratamento do destaque, largura cheia. */
+.card__media {
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.card__media video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--ink-2);
+}
+
+.grid-projects .card__title { font-size: 1.25rem; }
+
+/* 15px era um degrau só para este card. Volta para o corpo padrão. */
+.grid-projects .card__text { font-size: 1rem; }
+
+/* Links de saída */
+.out {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 2px;
+  transition: color 0.15s linear, border-color 0.15s linear;
+}
+
+.out:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+.out .arrow { color: var(--text-mute); }
+
+.out-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.private-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  max-width: min(64ch, var(--prose));
+  color: var(--text-dim);
+  margin-top: 1.5rem;
+}

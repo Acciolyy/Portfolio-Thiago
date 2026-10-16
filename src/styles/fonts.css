@@ -1,0 +1,38 @@
+/* --------------------------------------------------------------------------
+   Reservas com métrica ajustada
+
+   Enquanto as webfonts não chegam, o navegador desenha com a fonte do sistema.
+   Sem ajuste, "DESENVOLVEDOR" a 600/60px mede 354px em Barlow Condensed e
+   586px na sans genérica: 65% mais larga. 'Arial Narrow' não salva, o
+   fontconfig do Linux e do Android aliasa para a sans de largura cheia.
+   Resultado medido antes do ajuste: o documento refluía 146px no swap.
+   Os size-adjust abaixo saíram de medição, não de chute:
+     condensada  354 / 535 ≈ 66%
+     corpo       561 / 592 ≈ 95%
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Reserva condensada';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica'),
+       local('Liberation Sans'), local('DejaVu Sans'), local('Roboto');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 66%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Reserva de corpo';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans'),
+       local('DejaVu Sans'), local('Roboto');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}

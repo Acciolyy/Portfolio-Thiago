@@ -1,13 +1,31 @@
 {
   "name": "portfolio-thiago",
+  "version": "0.1.0",
   "private": true,
-  "description": "Portfolio de Thiago Viriato Accioly. O site e estatico; o npm existe so para compilar o Tailwind.",
+  "description": "Portfolio de Thiago Viriato Accioly.",
   "scripts": {
-    "css": "tailwindcss -i assets/tailwind.src.css -o assets/tailwind.css --minify",
-    "css:watch": "tailwindcss -i assets/tailwind.src.css -o assets/tailwind.css --watch"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "gsap": "3.12.5",
+    "lenis": "1.3.26",
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "three": "0.160.0"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "0.160.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
