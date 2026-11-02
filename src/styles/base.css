@@ -19,6 +19,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Sem ligaduras de código do JetBrains Mono: >=, == e -> aparecem como
+     foram escritos (versões, código e telemetria são texto literal). */
+  font-variant-ligatures: no-contextual;
 }
 
 /* O fundo 3D fica atrás; o conteúdo acima dele. */
