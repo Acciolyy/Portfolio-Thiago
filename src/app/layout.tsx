@@ -35,13 +35,14 @@ const dominio = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(dominio),
-  title: site.titulo,
+  title: { default: site.titulo, template: `%s · ${site.nome}` },
   description: site.descricao,
   openGraph: {
     type: "website",
+    locale: "pt_BR",
+    siteName: site.nome,
     title: site.titulo,
-    description: site.descricaoOg,
-    images: [site.imagemOg],
+    description: site.descricao,
     url: "/",
   },
   twitter: { card: "summary_large_image" },

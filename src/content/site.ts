@@ -1,11 +1,9 @@
 export const site = {
   nome: "Thiago Accioly",
-  titulo: "Thiago Viriato Accioly, Desenvolvedor Python",
+  // Título e descrição: o posicionamento e a frase do topo da Home.
+  titulo: "Thiago Accioly · Desenvolvedor Python Backend · IA aplicada",
   descricao:
-    "Desenvolvedor Python. Construo aplicações com Django, HTMX e PostgreSQL, e escrevo os testes que provam que elas continuam funcionando depois.",
-  descricaoOg:
-    "Django, HTMX, PostgreSQL e pytest. Projetos com o problema que apareceu no caminho e o que eu fiz para resolver.",
-  imagemOg: "/images/eu-imagem.jpg",
+    "Desenvolvedor Python Backend · IA aplicada: LLMs, agentes e Machine Learning. Construo o backend e a camada de IA que roda sobre ele.",
   email: "thiagoacciolyest@gmail.com",
   local: "Brasília, DF",
   ano: 2026,
