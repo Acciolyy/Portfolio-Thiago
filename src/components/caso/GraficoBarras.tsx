@@ -6,7 +6,9 @@ export default function GraficoBarras({ legenda, barras }: { legenda: string; ba
   return (
     <figure className="card grafico">
       <figcaption className="rot">{legenda}</figcaption>
-      <table className="sr-only">
+      {/* o .sr-only fica num div: uma <table> ignora width: 1px e vazaria a página */}
+      <div className="sr-only">
+      <table>
         <thead>
           <tr>
             <th scope="col">Métrica</th>
@@ -24,6 +26,7 @@ export default function GraficoBarras({ legenda, barras }: { legenda: string; ba
           ))}
         </tbody>
       </table>
+      </div>
       <div aria-hidden="true" className="grafico__linhas">
         {barras.map((b) => (
           <div key={b.rotulo} className="grafico__linha">
