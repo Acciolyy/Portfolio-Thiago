@@ -170,7 +170,7 @@ export const outros = {
 
 // Experiência como "git log --graph": cada ramo é uma trilha; cada commit, um
 // nó com data. Textos dos detalhes exatamente como fornecidos; o miniclient
-// não tem data informada.
+// aparece "(sem data)".
 export type Commit = {
   id: string;
   ramo: string;
@@ -197,6 +197,7 @@ export const experiencia: { rotulo: string; titulo: string; commits: Commit[] } 
       ramo: "miniclient",
       titulo: "miniclient",
       papel: "open source",
+      periodo: "(sem data)",
       detalhe:
         "Participo do projeto open source miniclient (github.com/marciomazza/miniclient), em adoção no Senado no lugar do Playwright para testes end-to-end.",
     },
