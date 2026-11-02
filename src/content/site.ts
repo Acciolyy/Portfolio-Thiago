@@ -31,5 +31,5 @@ export const perfis: LinkPerfil[] = [
 
 export const contato = {
   rotulo: "contato",
-  titulo: ["Vagas de AI Engineer", "e backend Python"],
+  titulo: "Abrir canal",
 } as const;

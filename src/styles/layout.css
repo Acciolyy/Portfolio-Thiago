@@ -85,9 +85,10 @@
   background: var(--surface);
 }
 
-.rodape__corpo {
-  padding-top: 48px;
-  padding-bottom: 40px;
+.rodape__corpo { padding-top: 48px; padding-bottom: 40px; }
+
+.rodape__painel {
+  padding: 28px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -103,6 +104,9 @@
   min-height: var(--toque);
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
+  padding: 0 16px;
+  margin-left: -16px;
   font-family: var(--display);
   font-stretch: 104%;
   font-weight: 600;
