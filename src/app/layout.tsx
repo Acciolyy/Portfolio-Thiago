@@ -3,7 +3,7 @@ import { Archivo, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import MotionProvider from "@/providers/MotionProvider";
 import ScriptTema from "@/components/tema/ScriptTema";
-import Fundo3D from "@/components/background/Fundo3D";
+import FundoCobras from "@/components/background/FundoCobras";
 import SkipLink from "@/components/layout/SkipLink";
 import "./globals.css";
 
@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <MotionProvider>
-          <Fundo3D />
+          <FundoCobras />
           <SkipLink />
           {children}
         </MotionProvider>
