@@ -228,24 +228,24 @@ export const experiencia: { rotulo: string; titulo: string; commits: Commit[] } 
   ],
 };
 
+// Radar da stack. As tecnologias vêm de content/stack.json, gerado dos
+// arquivos de dependências dos repositórios públicos (mais o que foi
+// informado do Senado, que é privado).
 export const competencias = {
   rotulo: "competências",
-  titulo: "Três camadas",
-  grupos: [
-    {
-      titulo: "IA e ML",
-      nivel: 1,
-      itens: ["LLMs (Gemini)", "Function calling", "Agentes", "Avaliação de modelos", "PyTorch", "ONNX", "scikit-learn", "OpenCV", "Edge Impulse", "Hugging Face"],
-    },
-    {
-      titulo: "Backend e dados",
-      nivel: 2,
-      itens: ["Python", "Django", "HTMX", "Alpine.js", "PostgreSQL", "Pydantic", "Pandas", "Streamlit", "React"],
-    },
-    {
-      titulo: "Engenharia",
-      nivel: 3,
-      itens: ["pytest", "CI (GitHub Actions, GitLab CI)", "Docker", "Git", "Avaliação com várias sementes", "Open source"],
-    },
-  ],
+  titulo: "Radar da stack",
+  // Python fica no centro; as outras são as fatias do radar.
+  camadas: ["Python", "Interface", "Backend e APIs", "Modelos e LLMs", "Dados", "Qualidade e entrega"],
+  legenda: "Quanto mais repositórios usam uma tecnologia, mais perto do centro e maior o ponto.",
+  dica: "Clique num ponto para ver onde eu uso",
+  // Repositório → onde ele aparece no site.
+  projetos: {
+    "agente-triagem-vagas": { nome: "Agente de Triagem de Vagas com LLM", href: "#projeto-agente" },
+    "portfolio-ia": { nome: "IA do zero: algoritmos da UnB", href: "#projeto-ia-do-zero" },
+    "Dashboard-Salarios": { nome: "Dashboard de análise salarial", href: "#projeto-dashboard" },
+    "Cell-Detector": { nome: "Detector de uso de celular", href: "#projeto-detector" },
+    "Portfolio-Thiago": { nome: "Este site", href: "https://github.com/Acciolyy/Portfolio-Thiago" },
+    "Senado Federal (privado)": { nome: "Senado Federal", href: "#experiencia" },
+    "ImóvelDF (privado)": { nome: "ImóvelDF", href: "#projeto-imoveldf" },
+  } as Record<string, { nome: string; href: string }>,
 };
