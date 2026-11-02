@@ -1,0 +1,23 @@
+/* --------------------------------------------------------------------------
+   Sobre
+   -------------------------------------------------------------------------- */
+
+.secao--sobre { padding-top: 40px; padding-bottom: 72px; }
+
+.sobre {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.sobre__foto { margin: 0; padding: 10px; }
+.sobre__foto img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+
+.sobre__texto { display: flex; flex-direction: column; gap: 12px; max-width: 40rem; }
+.sobre__paragrafo { margin: 0; font-size: 18px; line-height: 1.65; color: var(--text-2); }
+
+@media (max-width: 900px) {
+  .sobre { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .sobre__foto { max-width: 280px; }
+}

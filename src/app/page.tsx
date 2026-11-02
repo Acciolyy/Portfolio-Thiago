@@ -4,6 +4,7 @@ import Topo from "@/components/home/Topo";
 import Projetos from "@/components/home/Projetos";
 import Experiencia from "@/components/home/Experiencia";
 import Competencias from "@/components/home/Competencias";
+import Sobre from "@/components/home/Sobre";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Projetos />
         <Experiencia />
         <Competencias />
+        <Sobre />
       </main>
       <Rodape />
     </div>
