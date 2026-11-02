@@ -91,9 +91,11 @@
 
 .outros-bloco { display: flex; flex-direction: column; gap: 14px; padding-top: 24px; }
 
-.outros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.outros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row dense; gap: 16px; }
 
-.outro { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.outro { display: flex; flex-direction: column; }
+
+.outro__corpo { padding: 18px 18px 0; display: flex; flex-direction: column; gap: 10px; }
 
 .outro__titulo {
   margin: 0;
@@ -106,31 +108,42 @@
 
 .outro__texto { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--text-2); }
 
-.outro__pe {
-  margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0 8px;
+.outro__numero {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
 }
 
-.outro__numero { font-family: var(--mono); font-size: 13px; color: var(--accent-text); }
+.outro .expansivel__pe {
+  padding: 12px 18px 18px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
 
-.outro__links { display: flex; flex-wrap: wrap; gap: 0 12px; }
+.outro .expansivel__botao { justify-content: center; }
+
+/* Aberto, o card de "outros" ocupa a linha inteira e põe o texto ao lado do vídeo. */
+.outro[data-ativo] .outro__corpo { max-width: 46rem; }
+.outro[data-ativo] .expansivel__pe { flex-direction: row; align-items: center; }
+.outro .por-dentro { margin: 0 18px 18px; }
+
+.outro__links { display: flex; flex-wrap: wrap; gap: 0 4px; margin-right: auto; }
 
 .outro__links a {
   min-height: var(--toque);
   display: inline-flex;
   align-items: center;
+  padding: 0 12px;
   font-family: var(--mono);
   font-size: 13px;
   text-decoration: none;
 }
 
-.outro__links a:hover, .mais:hover { text-decoration: underline; text-underline-offset: 3px; }
+.por-dentro__midia--larga { max-width: 900px; }
 
 /* ---- experiência ---- */
 

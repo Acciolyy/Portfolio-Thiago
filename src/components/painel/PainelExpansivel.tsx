@@ -5,16 +5,22 @@ import { useEffect, useRef, type ReactNode } from "react";
 import * as m from "motion/react-m";
 import { useReducedMotion } from "motion/react";
 import { useGrupo } from "./GrupoExpansivel";
+import type { MidiaPorDentro } from "@/components/por-dentro/PorDentroMidia";
 
 // O que aparece "por dentro" de cada painel. Cada um é um chunk à parte,
 // baixado só quando o painel abre (replay, galeria, vídeos, GIFs).
 const carregando = () => <p className="rot por-dentro__carregando">carregando…</p>;
-const CONTEUDOS = {
-  agente: dynamic(() => import("@/components/por-dentro/PorDentroAgente"), { ssr: false, loading: carregando }),
-  ia: dynamic(() => import("@/components/por-dentro/PorDentroIa"), { ssr: false, loading: carregando }),
-};
+const Agente = dynamic(() => import("@/components/por-dentro/PorDentroAgente"), { ssr: false, loading: carregando });
+const Ia = dynamic(() => import("@/components/por-dentro/PorDentroIa"), { ssr: false, loading: carregando });
+const Midia = dynamic(() => import("@/components/por-dentro/PorDentroMidia"), { ssr: false, loading: carregando });
 
-export type ConteudoPorDentro = keyof typeof CONTEUDOS;
+export type ConteudoPorDentro = { tipo: "agente" } | { tipo: "ia" } | ({ tipo: "video" } & MidiaPorDentro);
+
+function Conteudo({ c }: { c: ConteudoPorDentro }) {
+  if (c.tipo === "agente") return <Agente />;
+  if (c.tipo === "ia") return <Ia />;
+  return <Midia {...c} />;
+}
 
 type Props = {
   id: string;
@@ -37,7 +43,6 @@ export default function PainelExpansivel({ id, tituloId, titulo, conteudo, class
   const regiao = useRef<HTMLDivElement>(null);
   const abriuPorClique = useRef(false);
   const reduz = useReducedMotion();
-  const Conteudo = CONTEUDOS[conteudo];
   const regiaoId = `${id}-por-dentro`;
 
   useEffect(() => {
@@ -103,7 +108,7 @@ export default function PainelExpansivel({ id, tituloId, titulo, conteudo, class
             transition={{ duration: 0.45, ease: "easeOut" }}
           >
             {!reduz && <span className="por-dentro__varredura" aria-hidden="true" />}
-            <Conteudo />
+            <Conteudo c={conteudo} />
           </m.div>
         )}
       </div>

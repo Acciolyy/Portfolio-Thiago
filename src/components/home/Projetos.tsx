@@ -19,7 +19,7 @@ export default function Projetos() {
         <p className="secao__intro">{destaques.texto}</p>
       </div>
 
-      <GrupoExpansivel ids={destaques.itens.map((p) => p.ancora)}>
+      <GrupoExpansivel ids={[...destaques.itens.map((p) => p.ancora), ...outros.itens.map((o) => o.ancora)]}>
         <div className="dest">
           {destaques.itens.map((p) => (
             <PainelExpansivel
@@ -70,31 +70,53 @@ export default function Projetos() {
             </PainelExpansivel>
           ))}
         </div>
-      </GrupoExpansivel>
 
-      <div className="outros-bloco">
-        <Rotulo n="02">{outros.rotulo}</Rotulo>
-        <div className="outros">
-          {outros.itens.map((o) => (
-            <article key={o.titulo} className="card outro">
-              <p className="rot">{o.tipo}</p>
-              <h3 className="outro__titulo">{o.titulo}</h3>
-              <p className="outro__texto">{o.texto}</p>
-              <div className="outro__pe">
-                <span className="outro__numero">{o.numero}</span>
+        <div className="outros-bloco">
+          <Rotulo n="02">{outros.rotulo}</Rotulo>
+          <div className="outros">
+            {outros.itens.map((o) => {
+              const corpo = (
+                <div className="outro__corpo">
+                  <p className="rot">{o.tipo}</p>
+                  <h3 id={`t-${o.ancora}`} className="outro__titulo">
+                    {o.titulo}
+                  </h3>
+                  <p className="outro__texto">{o.texto}</p>
+                  <span className="outro__numero">{o.numero}</span>
+                </div>
+              );
+              const links = (
                 <span className="outro__links">
                   {o.links.map((l) => (
-                    <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
+                    <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="colchetes">
                       {l.rotulo} <span aria-hidden="true">↗</span>
                       <span className="sr-only"> de {o.titulo} (abre em nova aba)</span>
                     </a>
                   ))}
                 </span>
-              </div>
-            </article>
-          ))}
+              );
+              return o.video ? (
+                <PainelExpansivel
+                  key={o.ancora}
+                  id={o.ancora}
+                  tituloId={`t-${o.ancora}`}
+                  titulo={o.titulo}
+                  conteudo={{ tipo: "video", ...o.video }}
+                  className="outro"
+                  pe={links}
+                >
+                  {corpo}
+                </PainelExpansivel>
+              ) : (
+                <article key={o.ancora} id={o.ancora} className="card outro" aria-labelledby={`t-${o.ancora}`}>
+                  {corpo}
+                  <div className="expansivel__pe">{links}</div>
+                </article>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </GrupoExpansivel>
     </section>
   );
 }

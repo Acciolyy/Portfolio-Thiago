@@ -31,7 +31,7 @@ export type Destaque = {
   id: string;
   // Hash da URL quando o painel está aberto (#projeto-agente).
   ancora: string;
-  conteudo: "agente" | "ia";
+  conteudo: { tipo: "agente" } | { tipo: "ia" };
   // Linha de status em mono, só com dados reais.
   status: string[];
   rotulo: [string, string];
@@ -55,7 +55,7 @@ export const destaques: {
     {
       id: "agente",
       ancora: "projeto-agente",
-      conteudo: "agente",
+      conteudo: { tipo: "agente" },
       status: ["status: avaliado", "80 vagas reais", "39 testes", "CI"],
       rotulo: ["LLM · agente", "Gemini · function calling"],
       titulo: "Agente de Triagem de Vagas com LLM",
@@ -71,7 +71,7 @@ export const destaques: {
     {
       id: "ia",
       ancora: "projeto-ia-do-zero",
-      conteudo: "ia",
+      conteudo: { tipo: "ia" },
       status: ["status: publicado no Hugging Face", "28 testes", "CI"],
       rotulo: ["ML do zero", "UnB · Hugging Face"],
       titulo: "IA do zero: algoritmos da UnB",
@@ -90,6 +90,9 @@ export const destaques: {
 export type LinkCard = { rotulo: string; href: string };
 
 export type OutroProjeto = {
+  ancora: string;
+  // Vídeo mostrado ao abrir o painel (só baixa quando abre).
+  video?: { src: string; poster: string; descricao: string; legenda: string };
   tipo: string;
   titulo: string;
   texto: string;
@@ -101,6 +104,13 @@ export const outros = {
   rotulo: "outros projetos",
   itens: [
     {
+      ancora: "projeto-detector",
+      video: {
+        src: "/videos/destaque.webm",
+        poster: "/videos/destaque-poster.jpg",
+        descricao: "Detecção de uso de celular rodando em tempo real sobre vídeo de webcam",
+        legenda: "detecção em tempo real sobre vídeo de webcam",
+      },
       tipo: "visão computacional · tempo real",
       titulo: "Detector de uso de celular",
       texto:
@@ -109,6 +119,14 @@ export const outros = {
       links: [{ rotulo: "GitHub", href: "https://github.com/Acciolyy/Cell-Detector" }],
     },
     {
+      ancora: "projeto-dashboard",
+      video: {
+        src: "/videos/dashboard.webm",
+        poster: "/videos/dashboard-poster.jpg",
+        descricao:
+          "Dashboard de salários em uso: filtros por ano e senioridade à esquerda, métricas gerais e gráficos à direita",
+        legenda: "filtros à esquerda, métricas e gráficos à direita",
+      },
       tipo: "dados · dashboard",
       titulo: "Dashboard de análise salarial",
       texto:
@@ -117,6 +135,14 @@ export const outros = {
       links: [{ rotulo: "demo", href: "https://tech-salary-insights.streamlit.app/" }],
     },
     {
+      ancora: "projeto-imoveldf",
+      video: {
+        src: "/videos/imoveldf.webm",
+        poster: "/videos/imoveldf-poster.jpg",
+        descricao:
+          "Plataforma ImóvelDF em uso: busca de imóveis com filtros, parceria entre corretores e painel de analytics",
+        legenda: "vitrine, detalhe do imóvel e painel de analytics",
+      },
       tipo: "backend · web",
       titulo: "ImóvelDF",
       texto:
@@ -128,6 +154,7 @@ export const outros = {
       ],
     },
     {
+      ancora: "projeto-open-source",
       tipo: "open source",
       titulo: "miniclient e Excalidraw",
       texto:
