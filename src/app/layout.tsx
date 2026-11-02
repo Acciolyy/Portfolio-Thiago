@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, IBM_Plex_Mono, Inter } from "next/font/google";
+import { Archivo, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import MotionProvider from "@/providers/MotionProvider";
+import ScriptTema from "@/components/tema/ScriptTema";
 import Fundo3D from "@/components/background/Fundo3D";
 import SkipLink from "@/components/layout/SkipLink";
 import ScrollProgress from "@/components/layout/ScrollProgress";
@@ -9,30 +10,25 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
-// Mesmos pesos que o <link> do Google Fonts pedia. adjustFontFallback desligado:
-// as reservas com métrica medida à mão estão em styles/fonts.css.
-const barlow = Barlow_Condensed({
+// Archivo é variável: o eixo wdth (104–118% no site) vem junto com o peso.
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: "600",
+  axes: ["wdth"],
   display: "swap",
-  adjustFontFallback: false,
-  variable: "--font-barlow-face",
+  variable: "--font-archivo",
 });
 
-const plex = IBM_Plex_Mono({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   display: "swap",
-  adjustFontFallback: false,
-  variable: "--font-plex-face",
+  variable: "--font-plex-sans",
 });
 
-const inter = Inter({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
-  adjustFontFallback: false,
-  variable: "--font-inter-face",
+  variable: "--font-jetbrains",
 });
 
 // Domínio absoluto para og:image/og:url. A Vercel injeta o de produção.
@@ -56,15 +52,24 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   // Espelha --ink de styles/tokens.css: aqui é gerado no servidor e não lê CSS.
-  themeColor: "#131619",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0E1113" },
+    { media: "(prefers-color-scheme: light)", color: "#F4F2ED" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    // suppressHydrationWarning: o script do <head> põe data-theme no <html>
+    // antes de o React hidratar; o DOM vence.
     <html
       lang="pt-BR"
-      className={`${barlow.variable} ${plex.variable} ${inter.variable}`}
+      className={`${archivo.variable} ${plexSans.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <ScriptTema />
+      </head>
       <body>
         <MotionProvider>
           <Fundo3D />

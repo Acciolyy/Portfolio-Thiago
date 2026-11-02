@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { nav } from "@/content/site";
+import BotaoTema from "@/components/tema/BotaoTema";
 
 // Cabeçalho fixo. O menu mobile era Alpine (x-data/x-show/@click.outside); agora
 // é estado do React. O drawer fica sempre no DOM, com `hidden`, porque o
@@ -40,6 +41,8 @@ export default function Header() {
             </li>
           ))}
         </ul>
+
+        <BotaoTema />
 
         <button
           ref={botao}

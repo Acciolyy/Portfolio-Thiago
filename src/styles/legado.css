@@ -1,0 +1,34 @@
+/* TEMPORÁRIO: nomes de token do site anterior, apontando para os novos, para as
+   seções antigas continuarem de pé até serem substituídas. Sai no commit de
+   limpeza, junto com elas. */
+:root {
+  --ink-2: var(--surface-2);
+  --text-dim: var(--text-2);
+  --text-mute: var(--muted);
+  --accent-rgb: 255 107 26;
+  --font-title: var(--display);
+  --font-mono: var(--mono);
+  --font-body: var(--sans);
+  --label-size: 0.6875rem;
+  --label-track: 0.16em;
+  --wrap: 1440px;
+  --prose: 42rem;
+  --gutter-sm: 1.5rem;
+  --gutter-md: 2.5rem;
+  --gutter-lg: 3.5rem;
+  --pad-card-sm: 1.5rem;
+  --pad-card-lg: 2rem;
+  --sec-hero-top: calc(var(--header-h) + 5rem);
+  --sec-hero-top-sm: calc(var(--header-h) + 3rem);
+  --sec-hero-bottom: 3rem;
+  --sec-sobre-top: 7.5rem;
+  --sec-sobre-top-sm: 5rem;
+  --sec-sobre-bottom: 2.25rem;
+  --sec-nota-top: 2.25rem;
+  --sec-nota-bottom: 6rem;
+  --sec-proj-top: 4rem;
+  --sec-proj-top-sm: 3rem;
+  --sec-proj-bottom: 4.5rem;
+  --sec-contato-top: 6.5rem;
+  --sec-contato-bottom: 4rem;
+}
