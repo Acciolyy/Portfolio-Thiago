@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content/site";
-import MotionProvider from "@/providers/MotionProvider";
 import ScriptTema from "@/components/tema/ScriptTema";
 import FundoCobras from "@/components/background/FundoCobras";
 import SkipLink from "@/components/layout/SkipLink";
@@ -66,12 +65,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScriptTema />
       </head>
       <body>
-        <MotionProvider>
-          <FundoCobras />
-          <SkipLink />
-          <Aparelho />
-          {children}
-        </MotionProvider>
+        <FundoCobras />
+        <SkipLink />
+        <Aparelho />
+        {children}
       </body>
     </html>
   );
