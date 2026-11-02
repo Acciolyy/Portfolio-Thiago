@@ -10,20 +10,27 @@ import Rotulo from "@/components/ui/Rotulo";
 // ao lado no desktop, logo abaixo do commit no celular.
 
 const LINHA = 88; // altura de cada commit no grafo
-const X = [14, 38, 62]; // trilhas
+const X = [14, 38, 62, 86]; // trilhas
+const LARGURA = 104;
 const c = (i: number) => LINHA / 2 + i * LINHA;
 
-// Ordem dos commits (de cima para baixo) e trilha de cada um.
-const TRILHA: Record<string, number> = { miniclient: 2, senado: 1, orcestra: 2, monitoria: 1, unb: 0 };
+// Ordem dos commits (de cima para baixo, o mais recente primeiro) e trilha
+// de cada um: monitoria, miniclient, Senado, Orc'estra e a UnB como tronco.
+const TRILHA: Record<string, number> = { monitoria: 1, miniclient: 3, senado: 2, orcestra: 1, unb: 0 };
 
 // Cada caminho começa no ponto mais antigo (embaixo), para se desenhar de
-// baixo para cima, como a história.
+// baixo para cima, como a história. Nenhum ramo cruza outro.
+const sobe = (de: number, para: number, y: number) =>
+  `M${X[de]} ${y + 40} C${X[de]} ${y + 28} ${X[para]} ${y + 32} ${X[para]} ${y + 20} L${X[para]} 0`;
+const bolha = (de: number, para: number, y: number) =>
+  `M${X[de]} ${y + 34} C${X[de]} ${y + 22} ${X[para]} ${y + 26} ${X[para]} ${y + 14} L${X[para]} ${y - 14} C${X[para]} ${y - 26} ${X[de]} ${y - 22} ${X[de]} ${y - 34}`;
+
 const RAMOS = [
   { id: "unb", d: `M${X[0]} ${c(4)} L${X[0]} 0` },
-  { id: "monitoria", d: `M${X[0]} ${c(3) + 34} C${X[0]} ${c(3) + 22} ${X[1]} ${c(3) + 26} ${X[1]} ${c(3) + 14} L${X[1]} ${c(3) - 14} C${X[1]} ${c(3) - 26} ${X[0]} ${c(3) - 22} ${X[0]} ${c(3) - 34}` },
-  { id: "orcestra", d: `M${X[0]} ${c(2) + 40} C${X[0]} ${c(2) + 26} ${X[2]} ${c(2) + 30} ${X[2]} ${c(2) + 16} L${X[2]} ${c(2) - 16} C${X[2]} ${c(2) - 30} ${X[0]} ${c(2) - 26} ${X[0]} ${c(2) - 40}` },
-  { id: "senado", d: `M${X[0]} ${c(1) + 40} C${X[0]} ${c(1) + 28} ${X[1]} ${c(1) + 32} ${X[1]} ${c(1) + 20} L${X[1]} 0` },
-  { id: "miniclient", d: `M${X[1]} ${c(0) + 40} C${X[1]} ${c(0) + 28} ${X[2]} ${c(0) + 32} ${X[2]} ${c(0) + 20} L${X[2]} 0` },
+  { id: "orcestra", d: bolha(0, 1, c(3)) },
+  { id: "senado", d: sobe(0, 2, c(2)) },
+  { id: "miniclient", d: sobe(2, 3, c(1)) },
+  { id: "monitoria", d: sobe(0, 1, c(0)) },
 ];
 
 export default function Experiencia() {
@@ -76,9 +83,9 @@ export default function Experiencia() {
           <svg
             ref={grafo}
             className="gitlog__svg"
-            width={80}
+            width={LARGURA}
             height={commits.length * LINHA}
-            viewBox={`0 0 80 ${commits.length * LINHA}`}
+            viewBox={`0 0 ${LARGURA} ${commits.length * LINHA}`}
             aria-hidden="true"
           >
             {RAMOS.map((r) => (

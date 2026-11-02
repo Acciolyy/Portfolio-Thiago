@@ -169,7 +169,7 @@ export const outros = {
 };
 
 // Experiência como "git log --graph": cada ramo é uma trilha; cada commit, um
-// nó com data. Textos dos detalhes exatamente como fornecidos. A monitoria
+// nó com data. Textos dos detalhes exatamente como fornecidos; o miniclient
 // não tem data informada.
 export type Commit = {
   id: string;
@@ -184,6 +184,14 @@ export const experiencia: { rotulo: string; titulo: string; commits: Commit[] } 
   rotulo: "experiência",
   titulo: "Onde isso roda em produção",
   commits: [
+    {
+      id: "monitoria",
+      ramo: "monitoria",
+      titulo: "Monitoria de SBD1",
+      papel: "UnB",
+      periodo: "2026.2 – atual",
+      detalhe: "Monitor de Sistemas de Banco de Dados 1 na UnB.",
+    },
     {
       id: "miniclient",
       ramo: "miniclient",
@@ -208,13 +216,6 @@ export const experiencia: { rotulo: string; titulo: string; commits: Commit[] } 
       papel: "Empresa Júnior",
       periodo: "jan – jul/2025",
       detalhe: "Automações em Python com IA e um portal interno em React.",
-    },
-    {
-      id: "monitoria",
-      ramo: "monitoria",
-      titulo: "Monitoria de SBD1",
-      papel: "UnB",
-      detalhe: "Monitor de Sistemas de Banco de Dados 1 na UnB.",
     },
     {
       id: "unb",
