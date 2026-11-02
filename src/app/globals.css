@@ -1,6 +1,5 @@
-/* Ordem = ordem do style.css original. O Tailwind (preflight + utilidades)
-   vem primeiro e em @layer; o CSS do site vem depois, sem layer, então ganha
-   a cascata, exatamente como no site estático. */
+/* O Tailwind (preflight) vem primeiro e em @layer; o CSS do site vem depois,
+   sem layer, então ganha a cascata. */
 @import "tailwindcss";
 
 @import "../styles/tokens.css";
@@ -9,14 +8,7 @@
 @import "../styles/ui.css";
 @import "../styles/layout.css";
 @import "../styles/topo.css";
+@import "../styles/home.css";
 
-@import "../styles/components/section.css";
 @import "../styles/components/fundo3d.css";
-@import "../styles/components/sobre.css";
-@import "../styles/components/nota.css";
-@import "../styles/components/projetos.css";
-@import "../styles/components/carrossel.css";
-@import "../styles/components/gauge.css";
-@import "../styles/components/grid.css";
-@import "../styles/components/a11y.css";
 @import "../styles/components/tema.css";

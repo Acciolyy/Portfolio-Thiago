@@ -1,10 +1,9 @@
-import Sobre from "@/components/sections/Sobre";
-import NemTudo from "@/components/sections/NemTudo";
-import Projetos from "@/components/sections/Projetos";
-import OutrosInteresses from "@/components/sections/OutrosInteresses";
-import Topo from "@/components/home/Topo";
 import Cabecalho from "@/components/layout/Cabecalho";
 import Rodape from "@/components/layout/Rodape";
+import Topo from "@/components/home/Topo";
+import Projetos from "@/components/home/Projetos";
+import Experiencia from "@/components/home/Experiencia";
+import Competencias from "@/components/home/Competencias";
 
 export default function Home() {
   return (
@@ -12,10 +11,9 @@ export default function Home() {
       <Cabecalho />
       <main id="conteudo">
         <Topo />
-        <Sobre />
-        <NemTudo />
         <Projetos />
-        <OutrosInteresses />
+        <Experiencia />
+        <Competencias />
       </main>
       <Rodape />
     </div>
