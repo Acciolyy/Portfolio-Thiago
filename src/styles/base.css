@@ -78,6 +78,10 @@ img, video { max-width: 100%; display: block; }
 
 .skip-link:focus { left: 0; }
 
+/* Branco sobre o laranja de preenchimento não chega a AA no modo dia. */
+:root[data-theme="light"] .skip-link,
+:root[data-theme="light"] ::selection { background: var(--accent-text); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

@@ -138,6 +138,10 @@
   font-weight: 600;
 }
 
+/* No modo dia, branco sobre #E85A0C fica em 3,6:1 (abaixo do AA para texto
+   de 13 px); o preenchimento usa o laranja escuro dos tokens. */
+:root[data-theme="light"] .btn--cheio { background: var(--accent-text); border-color: var(--accent-text); }
+
 .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
 .botoes { display: flex; flex-wrap: wrap; gap: 10px; }
