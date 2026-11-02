@@ -168,24 +168,61 @@ export const outros = {
   ] satisfies OutroProjeto[],
 };
 
-export const experiencia = {
+// Experiência como "git log --graph": cada ramo é uma trilha; cada commit, um
+// nó com data. Textos dos detalhes exatamente como fornecidos. A monitoria
+// não tem data informada.
+export type Commit = {
+  id: string;
+  ramo: string;
+  titulo: string;
+  papel: string;
+  periodo?: string;
+  detalhe: string;
+};
+
+export const experiencia: { rotulo: string; titulo: string; commits: Commit[] } = {
   rotulo: "experiência",
   titulo: "Onde isso roda em produção",
-  itens: [
+  commits: [
     {
-      periodo: "dez/2025 – atual",
-      atual: true,
-      lugar: "Senado Federal",
-      papel: "estágio em desenvolvimento backend",
-      texto:
-        "Sistemas internos em Python, Django, HTMX e Alpine.js. O principal gerencia eventos legislativos e administrativos.",
+      id: "miniclient",
+      ramo: "miniclient",
+      titulo: "miniclient",
+      papel: "open source",
+      detalhe:
+        "Participo do projeto open source miniclient (github.com/marciomazza/miniclient), em adoção no Senado no lugar do Playwright para testes end-to-end.",
     },
     {
-      periodo: "jan – jul/2025",
-      atual: false,
-      lugar: "Orc'estra Gamificação",
+      id: "senado",
+      ramo: "senado",
+      titulo: "Senado Federal",
+      papel: "estágio em desenvolvimento backend",
+      periodo: "dez/2025 – atual",
+      detalhe:
+        "Estágio em desenvolvimento backend na SECOM/COTI. Sistemas em Python, Django, HTMX e Alpine.js; o principal gerencia eventos legislativos e administrativos e é usado pela Secretaria de Relações Públicas e Comunicação Organizacional, pela Diretoria-Geral, pelo ILB e por fornecedores. Regras de negócio, correções em views e testes, motor de convites em Typst (PDF/SVG). Suíte de 297 testes em cerca de 15 s, com pre-commit e CI.",
+    },
+    {
+      id: "orcestra",
+      ramo: "orc'estra",
+      titulo: "Orc'estra Gamificação",
       papel: "Empresa Júnior",
-      texto: "Automações em Python com IA e um portal interno em React.",
+      periodo: "jan – jul/2025",
+      detalhe: "Automações em Python com IA e um portal interno em React.",
+    },
+    {
+      id: "monitoria",
+      ramo: "monitoria",
+      titulo: "Monitoria de SBD1",
+      papel: "UnB",
+      detalhe: "Monitor de Sistemas de Banco de Dados 1 na UnB.",
+    },
+    {
+      id: "unb",
+      ramo: "unb",
+      titulo: "UnB",
+      papel: "Engenharia de Software",
+      periodo: "2023 – dez/2027",
+      detalhe: "Engenharia de Software, 2023 a dez/2027.",
     },
   ],
 };

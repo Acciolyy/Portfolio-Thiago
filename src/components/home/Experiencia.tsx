@@ -1,7 +1,67 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { experiencia } from "@/content/home";
 import Rotulo from "@/components/ui/Rotulo";
 
+// Experiência como "git log --graph": o mais recente em cima, a UnB como
+// tronco. Os ramos se desenham conforme a seção passa pela tela (com
+// movimento reduzido, já desenhados). Clicar num commit mostra os detalhes:
+// ao lado no desktop, logo abaixo do commit no celular.
+
+const LINHA = 88; // altura de cada commit no grafo
+const X = [14, 38, 62]; // trilhas
+const c = (i: number) => LINHA / 2 + i * LINHA;
+
+// Ordem dos commits (de cima para baixo) e trilha de cada um.
+const TRILHA: Record<string, number> = { miniclient: 2, senado: 1, orcestra: 2, monitoria: 1, unb: 0 };
+
+// Cada caminho começa no ponto mais antigo (embaixo), para se desenhar de
+// baixo para cima, como a história.
+const RAMOS = [
+  { id: "unb", d: `M${X[0]} ${c(4)} L${X[0]} 0` },
+  { id: "monitoria", d: `M${X[0]} ${c(3) + 34} C${X[0]} ${c(3) + 22} ${X[1]} ${c(3) + 26} ${X[1]} ${c(3) + 14} L${X[1]} ${c(3) - 14} C${X[1]} ${c(3) - 26} ${X[0]} ${c(3) - 22} ${X[0]} ${c(3) - 34}` },
+  { id: "orcestra", d: `M${X[0]} ${c(2) + 40} C${X[0]} ${c(2) + 26} ${X[2]} ${c(2) + 30} ${X[2]} ${c(2) + 16} L${X[2]} ${c(2) - 16} C${X[2]} ${c(2) - 30} ${X[0]} ${c(2) - 26} ${X[0]} ${c(2) - 40}` },
+  { id: "senado", d: `M${X[0]} ${c(1) + 40} C${X[0]} ${c(1) + 28} ${X[1]} ${c(1) + 32} ${X[1]} ${c(1) + 20} L${X[1]} 0` },
+  { id: "miniclient", d: `M${X[1]} ${c(0) + 40} C${X[1]} ${c(0) + 28} ${X[2]} ${c(0) + 32} ${X[2]} ${c(0) + 20} L${X[2]} 0` },
+];
+
 export default function Experiencia() {
+  const { commits } = experiencia;
+  const [atual, setAtual] = useState("senado");
+  const grafo = useRef<SVGSVGElement>(null);
+
+  // Desenha os ramos com a rolagem.
+  useEffect(() => {
+    const svg = grafo.current;
+    if (!svg) return;
+    const caminhos = [...svg.querySelectorAll<SVGPathElement>("path[data-ramo]")];
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      caminhos.forEach((p) => (p.style.strokeDashoffset = "0"));
+      return;
+    }
+    let raf = 0;
+    const atualizar = () => {
+      raf = 0;
+      const r = svg.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (innerHeight * 0.9 - r.top) / (r.height + innerHeight * 0.3)));
+      caminhos.forEach((el) => (el.style.strokeDashoffset = String(1 - p)));
+    };
+    const pedir = () => {
+      if (!raf) raf = requestAnimationFrame(atualizar);
+    };
+    atualizar();
+    window.addEventListener("scroll", pedir, { passive: true });
+    window.addEventListener("resize", pedir);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", pedir);
+      window.removeEventListener("resize", pedir);
+    };
+  }, []);
+
+  const sel = commits.find((x) => x.id === atual)!;
+
   return (
     <section id="experiencia" className="wrap secao secao--exp" aria-labelledby="h-exp">
       <div className="secao__titulos">
@@ -10,19 +70,69 @@ export default function Experiencia() {
           {experiencia.titulo}
         </h2>
       </div>
-      <ol className="linha">
-        {experiencia.itens.map((e) => (
-          <li key={e.lugar} className="linha__item" data-atual={e.atual || undefined}>
-            <span className="linha__periodo">{e.periodo}</span>
-            <div className="linha__corpo">
-              <h3 className="linha__titulo">
-                {e.lugar} <span>· {e.papel}</span>
-              </h3>
-              <p className="linha__texto">{e.texto}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+
+      <div className="gitlog">
+        <div className="gitlog__grafo">
+          <svg
+            ref={grafo}
+            className="gitlog__svg"
+            width={80}
+            height={commits.length * LINHA}
+            viewBox={`0 0 80 ${commits.length * LINHA}`}
+            aria-hidden="true"
+          >
+            {RAMOS.map((r) => (
+              <path key={r.id} d={r.d} data-ramo={r.id} pathLength={1} className="gitlog__ramo" />
+            ))}
+            {commits.map((cm, i) => {
+              const x = X[TRILHA[cm.id]];
+              const y = c(i);
+              return (
+                <g key={cm.id} className="gitlog__no" data-atual={cm.id === atual || undefined}>
+                  <rect x={x - 5} y={y - 5} width={10} height={10} />
+                  <path d={`M${x - 9} ${y - 5} V${y - 9} H${x - 5} M${x + 5} ${y - 9} H${x + 9} V${y - 5} M${x + 9} ${y + 5} V${y + 9} H${x + 5} M${x - 5} ${y + 9} H${x - 9} V${y + 5}`} />
+                </g>
+              );
+            })}
+          </svg>
+
+          <ol className="gitlog__commits">
+            {commits.map((cm) => {
+              const aberto = cm.id === atual;
+              return (
+                <li key={cm.id} className="gitlog__item">
+                  <button
+                    type="button"
+                    className="gitlog__commit"
+                    aria-expanded={aberto}
+                    aria-controls={`det-${cm.id}`}
+                    onClick={() => setAtual(cm.id)}
+                  >
+                    <span className="gitlog__data">{cm.periodo ?? cm.ramo}</span>
+                    <span className="gitlog__titulo">
+                      {cm.titulo} <span>· {cm.papel}</span>
+                    </span>
+                  </button>
+                  {/* no celular, os detalhes abrem aqui mesmo */}
+                  <div id={`det-${cm.id}`} className="gitlog__inline" hidden={!aberto}>
+                    <p>{cm.detalhe}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
+        <div className="painel gitlog__detalhe" aria-live="polite" data-ativo>
+          <p className="rot">
+            {sel.ramo} {sel.periodo ? `· ${sel.periodo}` : ""}
+          </p>
+          <h3 className="gitlog__det-titulo">
+            {sel.titulo} <span>· {sel.papel}</span>
+          </h3>
+          <p className="gitlog__det-texto">{sel.detalhe}</p>
+        </div>
+      </div>
     </section>
   );
 }

@@ -145,61 +145,82 @@
 
 .por-dentro__midia--larga { max-width: 900px; }
 
-/* ---- experiência ---- */
+/* ---- experiência: git log --graph ---- */
 
-.linha {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-left: 2px solid var(--line-2);
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.linha__item {
-  position: relative;
-  padding-left: 28px;
+.gitlog {
   display: grid;
-  grid-template-columns: minmax(150px, 0.3fr) minmax(0, 1fr);
-  gap: 8px 32px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 32px;
+  align-items: start;
 }
 
-.linha__item::before {
-  content: "";
-  position: absolute;
-  left: -8px;
-  top: 6px;
-  width: 14px;
-  height: 14px;
-  box-sizing: border-box;
-  border-radius: 50%;
-  background: var(--ink);
-  border: 2px solid var(--line-2);
+.gitlog__grafo { position: relative; display: grid; grid-template-columns: 80px minmax(0, 1fr); }
+
+.gitlog__svg { display: block; overflow: visible; }
+
+.gitlog__ramo {
+  fill: none;
+  stroke: var(--hud);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 }
 
-.linha__item[data-atual]::before {
-  background: var(--accent);
-  border: 0;
-  outline: 4px solid var(--ink);
+.gitlog__ramo[data-ramo="senado"], .gitlog__ramo[data-ramo="miniclient"] { stroke: var(--accent); }
+
+.gitlog__no rect { fill: var(--ink); stroke: var(--hud); stroke-width: 1.5; }
+.gitlog__no path { fill: none; stroke: var(--hud); stroke-width: 1.2; }
+.gitlog__no[data-atual] rect { fill: var(--accent); stroke: var(--accent); }
+.gitlog__no[data-atual] path { stroke: var(--accent); }
+
+.gitlog__commits { margin: 0; padding: 0; list-style: none; }
+
+.gitlog__item { height: 88px; display: flex; flex-direction: column; justify-content: center; }
+
+.gitlog__commit {
+  width: 100%;
+  min-height: var(--toque);
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 4px 20px;
+  align-items: center;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
 }
 
-.linha__periodo { font-family: var(--mono); font-size: 13px; color: var(--muted); }
-.linha__item[data-atual] .linha__periodo { color: var(--accent-text); }
+.gitlog__commit:hover { border-color: var(--hud-line); }
+.gitlog__commit[aria-expanded="true"] { border-color: var(--accent); }
 
-.linha__corpo { display: flex; flex-direction: column; gap: 6px; }
+.gitlog__data {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hud-text);
+}
 
-.linha__titulo {
-  margin: 0;
+.gitlog__commit[aria-expanded="true"] .gitlog__data { color: var(--accent-text); }
+
+.gitlog__titulo, .gitlog__det-titulo {
   font-family: var(--display);
   font-stretch: 108%;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 19px;
+  line-height: 1.2;
 }
 
-.linha__titulo span { font-weight: 500; color: var(--muted); }
+.gitlog__titulo span, .gitlog__det-titulo span { font-weight: 500; color: var(--muted); }
 
-.linha__texto { margin: 0; max-width: 44rem; font-size: 15.5px; line-height: 1.6; color: var(--text-2); }
+.gitlog__inline { display: none; }
+
+.gitlog__detalhe { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: calc(var(--header-h) + 24px); }
+.gitlog__det-titulo { margin: 0; font-size: 22px; }
+.gitlog__det-texto { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--text-2); }
 
 /* ---- competências ---- */
 
@@ -223,7 +244,15 @@
 
 @media (max-width: 900px) {
   .dest, .comp { grid-template-columns: minmax(0, 1fr); }
-  .linha__item { grid-template-columns: minmax(0, 1fr); }
+  /* No celular, lista vertical com os mesmos detalhes, abertos no lugar. */
+  .gitlog { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__grafo { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__svg, .gitlog__detalhe { display: none; }
+  .gitlog__commits { border-left: 2px solid var(--hud-line); }
+  .gitlog__item { height: auto; padding: 6px 0 6px 12px; }
+  .gitlog__commit { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__inline:not([hidden]) { display: block; padding: 4px 12px 8px; font-size: 15px; line-height: 1.6; color: var(--text-2); }
+  .gitlog__inline p { margin: 0; }
 }
 
 @media (max-width: 560px) {
