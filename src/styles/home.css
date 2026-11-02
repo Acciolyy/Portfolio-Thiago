@@ -1,0 +1,394 @@
+/* --------------------------------------------------------------------------
+   Seções da Home: projetos, outros projetos, experiência e competências
+   -------------------------------------------------------------------------- */
+
+.secao { display: flex; flex-direction: column; gap: 24px; }
+
+.secao--projetos { padding-top: 56px; padding-bottom: 32px; border-top: 1px solid var(--line); }
+.secao--exp { padding-top: 72px; padding-bottom: 40px; gap: 28px; }
+.secao--comp { padding-top: 56px; padding-bottom: 72px; }
+
+.secao__titulos { display: flex; flex-direction: column; gap: 10px; }
+
+.secao__cabeca--lado {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px 40px;
+}
+
+.secao__intro { margin: 0; max-width: 30rem; color: var(--muted); font-size: 15px; line-height: 1.55; }
+
+/* ---- destaques ---- */
+
+.dest { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+
+.dest__card { display: flex; flex-direction: column; }
+
+/* Aberto, o painel ocupa a linha inteira da grade. */
+.expansivel[data-ativo] { grid-column: 1 / -1; }
+
+.dest__corpo { padding: 24px 24px 18px; display: flex; flex-direction: column; gap: 12px; }
+
+.dest__titulo {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 110%;
+  font-weight: 750;
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.05;
+}
+
+.dest__texto { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-2); }
+
+.metr {
+  margin: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.metr > div {
+  background: var(--surface);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.metr dd { margin: 0; }
+
+.metr__valor { font-size: clamp(30px, 3vw, 38px); }
+.metr__valor[data-destaque] { color: var(--accent-text); }
+.metr__valor span { font-size: 0.53em; color: var(--muted); }
+
+.dest__status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 0;
+  margin: 0;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--hud-line);
+}
+
+.dest__status span + span::before { content: "·"; margin: 0 10px; color: var(--hud); }
+
+.mais {
+  min-height: var(--toque);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+/* ---- outros projetos ---- */
+
+.outros-bloco { display: flex; flex-direction: column; gap: 14px; padding-top: 24px; }
+
+.outros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row dense; gap: 16px; }
+
+.outro { display: flex; flex-direction: column; }
+
+.outro__corpo { padding: 18px 18px 0; display: flex; flex-direction: column; gap: 10px; }
+
+.outro__titulo {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 108%;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.outro__texto { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--text-2); }
+
+.outro__numero {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.outro .expansivel__pe {
+  padding: 12px 18px 18px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.outro .expansivel__botao { justify-content: center; }
+
+/* Aberto, o card de "outros" ocupa a linha inteira e põe o texto ao lado do vídeo. */
+.outro[data-ativo] .outro__corpo { max-width: 46rem; }
+.outro[data-ativo] .expansivel__pe { flex-direction: row; align-items: center; }
+.outro .por-dentro { margin: 0 18px 18px; }
+
+.outro__links { display: flex; flex-wrap: wrap; gap: 0 4px; margin-right: auto; }
+
+.outro__links a {
+  min-height: var(--toque);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.por-dentro__midia--larga { max-width: 900px; }
+
+/* ---- experiência: git log --graph ---- */
+
+.gitlog {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.gitlog__grafo { position: relative; display: grid; grid-template-columns: 104px minmax(0, 1fr); }
+
+.gitlog__svg { display: block; overflow: visible; }
+
+.gitlog__ramo {
+  fill: none;
+  stroke: var(--hud);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.gitlog__ramo[data-ramo="senado"], .gitlog__ramo[data-ramo="miniclient"] { stroke: var(--accent); }
+
+.gitlog__no rect { fill: var(--ink); stroke: var(--hud); stroke-width: 1.5; }
+.gitlog__no path { fill: none; stroke: var(--hud); stroke-width: 1.2; }
+.gitlog__no[data-atual] rect { fill: var(--accent); stroke: var(--accent); }
+.gitlog__no[data-atual] path { stroke: var(--accent); }
+
+.gitlog__commits { margin: 0; padding: 0; list-style: none; }
+
+.gitlog__item { height: 88px; display: flex; flex-direction: column; justify-content: center; }
+
+.gitlog__commit {
+  width: 100%;
+  min-height: var(--toque);
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 4px 20px;
+  align-items: center;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.gitlog__commit:hover { border-color: var(--hud-line); }
+.gitlog__commit[aria-expanded="true"] { border-color: var(--accent); }
+
+.gitlog__data {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hud-text);
+}
+
+.gitlog__commit[aria-expanded="true"] .gitlog__data { color: var(--accent-text); }
+
+.gitlog__titulo, .gitlog__det-titulo {
+  font-family: var(--display);
+  font-stretch: 108%;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.gitlog__titulo span, .gitlog__det-titulo span { font-weight: 500; color: var(--muted); }
+
+.gitlog__inline { display: none; }
+
+.gitlog__detalhe { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: calc(var(--header-h) + 24px); }
+.gitlog__det-titulo { margin: 0; font-size: 22px; }
+.gitlog__det-texto { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--text-2); }
+
+/* ---- competências: radar da stack + manifesto ---- */
+
+.radar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.radar__painel, .manifesto { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+.radar__cabeca { padding-bottom: 10px; border-bottom: 1px solid var(--hud-line); }
+
+.radar__tela { position: relative; width: 100%; max-width: 600px; margin: 0 auto; aspect-ratio: 600 / 440; }
+
+.radar__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.radar__borda { fill: none; stroke: var(--hud); stroke-width: 1; }
+.radar__guia { fill: none; stroke: var(--hud-grid); stroke-width: 1; }
+.radar__divisoria { stroke: var(--hud); stroke-width: 1; opacity: 0.7; }
+.radar__centro { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+
+.radar__feixe path { fill: var(--hud); }
+.radar__linha-feixe { stroke: var(--hud-text); stroke-width: 1.5; }
+
+.radar__nome-camada {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--hud-text);
+}
+
+/* Ponto: marca do tamanho do dado, alvo de pelo menos 24 px. */
+.radar__ponto {
+  --tam: 6px;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.radar__ponto::before,
+.radar__ponto::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--tam);
+  height: var(--tam);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.radar__ponto::before { background: var(--hud-text); }
+.radar__ponto::after { border: 1px solid var(--accent); opacity: 0; }
+
+.radar__ponto[data-centro]::before { width: 12px; height: 12px; background: var(--accent); }
+
+/* Aceso pelo feixe: brilho laranja que decai em ~1 s e um anel que se expande. */
+.radar__ponto[data-aceso]::before { animation: ponto-acende 1s ease-out; }
+.radar__ponto[data-aceso]::after { animation: ponto-anel 0.8s ease-out; }
+
+@keyframes ponto-acende {
+  0% { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  100% { background: var(--hud-text); box-shadow: 0 0 0 0 transparent; }
+}
+
+@keyframes ponto-anel {
+  0% { opacity: 0.9; width: var(--tam); height: var(--tam); }
+  100% { opacity: 0; width: calc(var(--tam) + 22px); height: calc(var(--tam) + 22px); }
+}
+
+.radar__ponto[aria-pressed="true"]::before { background: var(--accent); outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.radar__rotulo {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 2px);
+  transform: translateX(-50%);
+  padding: 1px 6px;
+  background: var(--ink);
+  border: 1px solid var(--hud-line);
+  font-family: var(--mono);
+  font-size: 11px;
+  white-space: nowrap;
+  color: var(--text);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radar__ponto:hover .radar__rotulo,
+.radar__ponto:focus-visible .radar__rotulo,
+.radar__ponto[aria-pressed="true"] .radar__rotulo { opacity: 1; z-index: 3; }
+
+.radar__legenda { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+
+/* ---- manifesto ---- */
+
+.manifesto__barra { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--hud-line); }
+.manifesto__limpar { min-height: 36px; }
+
+.manifesto__projetos ul { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 8px; }
+.manifesto__projetos a { min-height: var(--toque); display: inline-flex; align-items: center; padding: 0 12px; font-family: var(--mono); font-size: 13px; text-decoration: none; }
+
+.manifesto__terminal {
+  background: var(--quadro);
+  border: 1px solid var(--hud-line);
+  padding: 12px 14px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #D7DEE2;
+  max-height: 460px;
+  overflow: auto;
+}
+
+.manifesto__grupo + .manifesto__grupo { margin-top: 8px; }
+.manifesto__camada { margin: 0; color: #93B7C3; }
+.manifesto__terminal ul { margin: 0; padding: 0; list-style: none; }
+.manifesto__linha { overflow-wrap: anywhere; }
+.radar[data-ligado] .manifesto__linha { animation: instalar 0.12s ease-out both; }
+@keyframes instalar { from { opacity: 0; } }
+.manifesto__versao { color: #93B7C3; }
+.manifesto__ok { color: #5FC9A8; }
+.manifesto__repos { color: #9AA3AB; }
+
+.manifesto__fonte { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+
+@media (max-width: 1100px) {
+  .outros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .dest { grid-template-columns: minmax(0, 1fr); }
+  .radar { grid-template-columns: minmax(0, 1fr); }
+  .radar__tela { max-width: 560px; }
+  /* No celular, lista vertical com os mesmos detalhes, abertos no lugar. */
+  .gitlog { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__grafo { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__svg, .gitlog__detalhe { display: none; }
+  .gitlog__commits { border-left: 2px solid var(--hud-line); }
+  .gitlog__item { height: auto; padding: 6px 0 6px 12px; }
+  .gitlog__commit { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__inline:not([hidden]) { display: block; padding: 4px 12px 8px; font-size: 15px; line-height: 1.6; color: var(--text-2); }
+  .gitlog__inline p { margin: 0; }
+}
+
+@media (max-width: 560px) {
+  /* o SVG encolhe; o texto dele cresce em unidades do viewBox para seguir legível */
+  .radar__nome-camada { font-size: 21px; letter-spacing: 0.04em; }
+  .outros { grid-template-columns: minmax(0, 1fr); }
+  .dest__corpo { padding: 20px 18px 16px; }
+  .metr { margin: 0 18px; }
+  .expansivel__pe { padding: 16px 18px 20px; }
+  .dest__status { padding: 10px 18px; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .radar__feixe { display: none; }
+  .radar__ponto[data-aceso]::before, .radar__ponto[data-aceso]::after { animation: none; }
+  .radar[data-ligado] .manifesto__linha { animation: none; }
+}
+

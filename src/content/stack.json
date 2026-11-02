@@ -1,0 +1,875 @@
+[
+  {
+    "nome": "Python",
+    "camada": "Python",
+    "repos": [
+      "Cell-Detector",
+      "Dashboard-Salarios",
+      "ImóvelDF (privado)",
+      "Senado Federal (privado)",
+      "agente-triagem-vagas",
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": null,
+        "arquivo": "pyproject.toml"
+      },
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "pyproject.toml"
+      },
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": null,
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "Cell-Detector",
+        "versao": null,
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      },
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "streamlit",
+    "camada": "Interface",
+    "repos": [
+      "Dashboard-Salarios",
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=1.35.0",
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": "==1.44.1",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "next",
+    "camada": "Interface",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "16.4.2",
+        "arquivo": "package.json (dependencies)"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "Alpine.js",
+    "camada": "Interface",
+    "repos": [
+      "Senado Federal (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "django-htmx",
+    "camada": "Interface",
+    "repos": [
+      "ImóvelDF (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "HTMX",
+    "camada": "Interface",
+    "repos": [
+      "Senado Federal (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "motion",
+    "camada": "Interface",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "14.3.0",
+        "arquivo": "package.json (dependencies)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "react",
+    "camada": "Interface",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "19.3.0",
+        "arquivo": "package.json (dependencies)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "react-dom",
+    "camada": "Interface",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "19.3.0",
+        "arquivo": "package.json (dependencies)"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  },
+  {
+    "nome": "Django",
+    "camada": "Backend e APIs",
+    "repos": [
+      "ImóvelDF (privado)",
+      "Senado Federal (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      },
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": "5.2.13",
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "requests",
+    "camada": "Backend e APIs",
+    "repos": [
+      "Dashboard-Salarios",
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=2.31.0",
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": "==2.32.3",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "feedparser",
+    "camada": "Backend e APIs",
+    "repos": [
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=6.0.10",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "gunicorn",
+    "camada": "Backend e APIs",
+    "repos": [
+      "ImóvelDF (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "httpx",
+    "camada": "Backend e APIs",
+    "repos": [
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=0.27",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "PostgreSQL · psycopg2",
+    "camada": "Backend e APIs",
+    "repos": [
+      "ImóvelDF (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pydantic",
+    "camada": "Backend e APIs",
+    "repos": [
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=2.0",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "Typst",
+    "camada": "Backend e APIs",
+    "repos": [
+      "Senado Federal (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "whitenoise",
+    "camada": "Backend e APIs",
+    "repos": [
+      "ImóvelDF (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "python-dotenv",
+    "camada": "Backend e APIs",
+    "repos": [
+      "Dashboard-Salarios",
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=1.0.0",
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": "==1.0.1",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  },
+  {
+    "nome": "google-genai",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": ">=0.5.0",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "onnxruntime-web",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "1.22.0",
+        "arquivo": "package.json (dependencies)"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "opencv-python",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "Cell-Detector"
+    ],
+    "usos": [
+      {
+        "repo": "Cell-Detector",
+        "versao": ">=4.8.0",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "torch",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=2.2.2",
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "hf-space/requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "huggingface_hub",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "hf-space/requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pgmpy",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=1.0.0",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "safetensors",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=0.4.0",
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "hf-space/requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "scikit-learn",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=1.3.2",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "torchvision",
+    "camada": "Modelos e LLMs",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=0.17.2",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "numpy",
+    "camada": "Dados",
+    "repos": [
+      "Cell-Detector",
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=1.26.4",
+        "arquivo": "requirements.txt"
+      },
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "hf-space/requirements.txt"
+      },
+      {
+        "repo": "Cell-Detector",
+        "versao": ">=1.24.0",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pandas",
+    "camada": "Dados",
+    "repos": [
+      "Dashboard-Salarios"
+    ],
+    "usos": [
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": "==2.3.3",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "matplotlib",
+    "camada": "Dados",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=3.8.4",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "networkx",
+    "camada": "Dados",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=3.2.1",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pillow",
+    "camada": "Dados",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "hf-space/requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "plotly",
+    "camada": "Dados",
+    "repos": [
+      "Dashboard-Salarios"
+    ],
+    "usos": [
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": "==5.24.1",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "scipy",
+    "camada": "Dados",
+    "repos": [
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "portfolio-ia",
+        "versao": null,
+        "arquivo": "hf-space/requirements.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pyarrow",
+    "camada": "Dados",
+    "repos": [
+      "Dashboard-Salarios"
+    ],
+    "usos": [
+      {
+        "repo": "Dashboard-Salarios",
+        "versao": "==22.0.0",
+        "arquivo": "requirements.txt"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  },
+  {
+    "nome": "pytest",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Cell-Detector",
+      "Senado Federal (privado)",
+      "agente-triagem-vagas",
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": null,
+        "arquivo": "requirements-dev.txt"
+      },
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=9.2",
+        "arquivo": "requirements-dev.txt"
+      },
+      {
+        "repo": "Cell-Detector",
+        "versao": ">=7.4.0",
+        "arquivo": "requirements-dev.txt"
+      },
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": true
+  },
+  {
+    "nome": "pre-commit",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "ImóvelDF (privado)",
+      "Senado Federal (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "Senado Federal (privado)",
+        "versao": null,
+        "arquivo": "Senado Federal (privado)"
+      },
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "ruff",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "agente-triagem-vagas",
+      "portfolio-ia"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": null,
+        "arquivo": "requirements-dev.txt"
+      },
+      {
+        "repo": "portfolio-ia",
+        "versao": ">=0.17",
+        "arquivo": "requirements-dev.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "eslint",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "^9",
+        "arquivo": "package.json (devDependencies)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pytest-django",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "ImóvelDF (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pytest-mock",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "agente-triagem-vagas"
+    ],
+    "usos": [
+      {
+        "repo": "agente-triagem-vagas",
+        "versao": null,
+        "arquivo": "requirements-dev.txt"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "pytest-xdist",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "ImóvelDF (privado)"
+    ],
+    "usos": [
+      {
+        "repo": "ImóvelDF (privado)",
+        "versao": null,
+        "arquivo": "ImóvelDF (privado)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "typescript",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "^5",
+        "arquivo": "package.json (devDependencies)"
+      }
+    ],
+    "destaque": true,
+    "principal": false
+  },
+  {
+    "nome": "@types/node",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "^20",
+        "arquivo": "package.json (devDependencies)"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  },
+  {
+    "nome": "@types/react",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "^19",
+        "arquivo": "package.json (devDependencies)"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  },
+  {
+    "nome": "@types/react-dom",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "^19",
+        "arquivo": "package.json (devDependencies)"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  },
+  {
+    "nome": "eslint-config-next",
+    "camada": "Qualidade e entrega",
+    "repos": [
+      "Portfolio-Thiago"
+    ],
+    "usos": [
+      {
+        "repo": "Portfolio-Thiago",
+        "versao": "16.4.2",
+        "arquivo": "package.json (devDependencies)"
+      }
+    ],
+    "destaque": false,
+    "principal": false
+  }
+]

@@ -5,42 +5,33 @@
 html {
   scroll-behavior: smooth;
   background: var(--ink);
+  /* Âncoras não ficam escondidas atrás do cabeçalho fixo. */
+  scroll-padding-top: calc(var(--header-h) + 16px);
 }
 
 body {
   margin: 0;
-  /* Transparente de propósito: a mesma cor está no html acima e pinta o fundo
-     da viewport inteira. Se o body pintasse aqui, cobriria o canvas de fundo,
-     que fica em z-index negativo. Cor renderizada é idêntica. */
-  background: transparent;
+  min-height: 100vh;
+  background: var(--ink);
   color: var(--text);
-  font-family: var(--font-body);
-  font-weight: 400;
+  font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.65;
-  /* Texto claro em fundo escuro fecha um pouco. Um fio de tracking devolve. */
-  letter-spacing: 0.008em;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  text-align: left;
+  overflow-x: hidden;
+  /* Sem ligaduras de código do JetBrains Mono: >=, == e -> aparecem como
+     foram escritos (versões, código e telemetria são texto literal). */
+  font-variant-ligatures: no-contextual;
 }
 
-/* nenhum box-shadow no site inteiro */
-* { box-shadow: none !important; }
+/* O fundo 3D fica atrás; o conteúdo acima dele. */
+.camada { position: relative; z-index: 1; }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-title);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: 0.005em;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-a { color: inherit; }
+a { color: var(--accent-text); }
 
 img, video { max-width: 100%; display: block; }
 
-::selection { background: var(--accent); color: var(--ink); }
+::selection { background: var(--accent); color: var(--on-accent); }
 
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -48,22 +39,53 @@ img, video { max-width: 100%; display: block; }
 }
 
 .wrap {
-  max-width: var(--wrap);
+  max-width: var(--container);
   margin: 0 auto;
-  padding-inline: var(--gutter-sm);
+  padding-inline: var(--gutter);
+  box-sizing: border-box;
 }
 
-@media (min-width: 900px) {
-  .wrap { padding-inline: var(--gutter-md); }
+@media (max-width: 900px) {
+  :root { --gutter: 20px; }
 }
 
-/* Container mais largo pede mais respiro na lateral. */
-@media (min-width: 1280px) {
-  .wrap { padding-inline: var(--gutter-lg); }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Toque de Python: indentação com significado. */
-.indent {
-  border-left: 1px solid var(--line-2);
-  padding-left: 1.25rem;
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  min-height: var(--toque);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.skip-link:focus { left: 0; }
+
+/* Branco sobre o laranja de preenchimento não chega a AA no modo dia. */
+:root[data-theme="light"] .skip-link,
+:root[data-theme="light"] ::selection { background: var(--accent-text); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

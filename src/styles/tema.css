@@ -1,0 +1,15 @@
+.botao-tema {
+  flex: none;
+  width: var(--toque);
+  height: var(--toque);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line-2);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.botao-tema:hover { border-color: var(--accent); }

@@ -1,0 +1,183 @@
+/* --------------------------------------------------------------------------
+   Peças reutilizáveis: rótulo, título de seção, botão, tag, card, número
+   -------------------------------------------------------------------------- */
+
+/* Leitura de telemetria: mono, caixa alta, espaçamento largo. */
+.rot {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--hud-text);
+}
+
+.rot b { color: var(--accent-text); font-weight: 600; }
+
+/* Rótulo de HUD: Archivo no eixo condensado. */
+.hud-rotulo {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: var(--hud-stretch);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hud-text);
+}
+
+/* ---- painel com cantoneiras ----
+   Bordas finas, quatro cantos em L e uma textura de scanline quase invisível.
+   A cor das cantoneiras vira laranja quando o painel está ativo (aberto). */
+.card,
+.painel {
+  --canto: var(--hud);
+  --canto-t: 14px;
+  --ci: 0px; /* recuo das cantoneiras (aproximam no hover) */
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.card::before, .card::after,
+.painel::before,
+.painel::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.card::before,
+.painel::before {
+  inset: -1px;
+  background:
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) top var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) top var(--ci) / 2px var(--canto-t),
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) top var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) top var(--ci) / 2px var(--canto-t),
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) bottom var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) bottom var(--ci) / 2px var(--canto-t),
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) bottom var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) bottom var(--ci) / 2px var(--canto-t);
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.card::after,
+.painel::after {
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, var(--scan) 0 1px, transparent 1px 3px);
+}
+
+.card[data-ativo],
+.painel[data-ativo] { --canto: var(--accent); }
+
+/* O conteúdo fica acima da textura. */
+.card > *, .painel > * { position: relative; z-index: 2; }
+
+/* ---- colchetes de HUD em links do menu e botões ----
+   Hover e foco: [ TEXTO ] em laranja, entrando de fora para dentro. */
+.colchetes { position: relative; }
+
+.colchetes::before,
+.colchetes::after {
+  position: absolute;
+  top: 50%;
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--accent-text);
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+}
+
+.colchetes::before { content: "[" / ""; left: 2px; transform: translate(-4px, -50%); }
+.colchetes::after { content: "]" / ""; right: 2px; transform: translate(4px, -50%); }
+
+.colchetes:hover::before,
+.colchetes:hover::after,
+.colchetes:focus-visible::before,
+.colchetes:focus-visible::after { opacity: 1; transform: translate(0, -50%); }
+
+.h-sec {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 112%;
+  font-weight: 750;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.btn {
+  box-sizing: border-box;
+  min-height: var(--toque);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.btn:hover { border-color: var(--accent); }
+
+.btn--cheio {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+/* No modo dia, branco sobre #E85A0C fica em 3,6:1 (abaixo do AA para texto
+   de 13 px); o preenchimento usa o laranja escuro dos tokens. */
+:root[data-theme="light"] .btn--cheio { background: var(--accent-text); border-color: var(--accent-text); }
+
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.botoes { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 8px;
+  border: 1px solid var(--hud-line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--line-2); }
+
+.num {
+  font-family: var(--display);
+  font-stretch: 108%;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.btn--cheio.colchetes::before,
+.btn--cheio.colchetes::after { color: var(--on-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .colchetes::before, .colchetes::after { transition: none; }
+}

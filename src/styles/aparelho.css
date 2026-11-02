@@ -1,0 +1,73 @@
+/* --------------------------------------------------------------------------
+   Camada de movimento "aparelho tático" (lib/aparelho.ts). Nada aqui age com
+   prefers-reduced-motion: o JS nem marca os elementos.
+   -------------------------------------------------------------------------- */
+
+@property --canto-t {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 14px;
+}
+
+@property --ci {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* 1. Painel desligado até entrar na tela; ligando: linha horizontal, abre na
+   vertical, cantoneiras se encaixam, conteúdo cintila 2 ou 3 quadros. */
+/* opacidade, não clip-path: um clip de área zero esconderia o painel do
+   IntersectionObserver e ele nunca ligaria. */
+[data-desligado] { opacity: 0; }
+
+[data-ligando] { animation: ligar-painel 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+[data-ligando] > * { animation: cintilar 0.7s steps(1, end) both; }
+
+@keyframes ligar-painel {
+  0%   { clip-path: inset(calc(50% - 1px) 50% calc(50% - 1px) 50%); --canto-t: 34px; }
+  30%  { clip-path: inset(calc(50% - 1px) 0 calc(50% - 1px) 0); --canto-t: 34px; }
+  75%  { clip-path: inset(0 0 0 0); --canto-t: 22px; }
+  100% { clip-path: inset(0 0 0 0); --canto-t: 14px; }
+}
+
+@keyframes cintilar {
+  0%, 70% { opacity: 0; }
+  76% { opacity: 1; }
+  82% { opacity: 0.35; }
+  88%, 100% { opacity: 1; }
+}
+
+/* 2 e 3. Texto que decodifica ou conta: a camada aria-hidden por cima, o
+   texto real transparente por baixo (continua no HTML e no nome acessível). */
+.aparelho-alvo.aparelho-alvo { position: relative; color: transparent; }
+.aparelho-alvo *:not(.aparelho-camada) { color: transparent; }
+
+.aparelho-camada {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  white-space: inherit;
+  overflow: hidden;
+}
+
+/* 4. Inclinação no hover: o JS só aplica com ponteiro fino. */
+.card { transition: transform 0.15s ease-out, border-color 0.2s; }
+.card[data-inclinado] { --ci: 4px; transition: transform 0.05s linear, --ci 0.2s; }
+
+.card[data-inclinado]::after {
+  background:
+    radial-gradient(circle at var(--luz-x, 50%) var(--luz-y, 50%), rgba(255, 255, 255, 0.07), transparent 45%),
+    repeating-linear-gradient(to bottom, var(--scan) 0 1px, transparent 1px 3px);
+}
+
+:root[data-theme="light"] .card[data-inclinado]::after {
+  background:
+    radial-gradient(circle at var(--luz-x, 50%) var(--luz-y, 50%), rgba(255, 255, 255, 0.6), transparent 45%),
+    repeating-linear-gradient(to bottom, var(--scan) 0 1px, transparent 1px 3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-desligado] { opacity: 1; }
+  [data-ligando], [data-ligando] > * { animation: none; }
+}

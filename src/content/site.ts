@@ -1,44 +1,33 @@
 export const site = {
-  nome: "Thiago Viriato Accioly",
-  titulo: "Thiago Viriato Accioly, Desenvolvedor Python",
+  nome: "Thiago Accioly",
+  // Título e descrição: o posicionamento e a frase do topo da Home.
+  titulo: "Thiago Accioly · Desenvolvedor Python Backend · IA aplicada",
   descricao:
-    "Desenvolvedor Python. Construo aplicações com Django, HTMX e PostgreSQL, e escrevo os testes que provam que elas continuam funcionando depois.",
-  descricaoOg:
-    "Django, HTMX, PostgreSQL e pytest. Projetos com o problema que apareceu no caminho e o que eu fiz para resolver.",
-  imagemOg: "/images/eu-imagem.jpg",
-  rodape: "© 2026 Thiago Viriato Accioly.",
+    "Desenvolvedor Python Backend · IA aplicada: LLMs, agentes e Machine Learning. Construo o backend e a camada de IA que roda sobre ele.",
+  email: "thiagoacciolyest@gmail.com",
+  local: "Brasília, DF",
+  ano: 2026,
 } as const;
 
+// Seções da Home, na ordem do cabeçalho.
 export const nav = [
-  { href: "#inicio", rotulo: "Início" },
-  { href: "#sobre", rotulo: "Sobre" },
-  { href: "#projetos", rotulo: "Projetos" },
-  { href: "#outros-interesses", rotulo: "Outros Interesses" },
-  { href: "#contato", rotulo: "Contato" },
+  { href: "#projetos", rotulo: "projetos" },
+  { href: "#experiencia", rotulo: "experiência" },
+  { href: "#competencias", rotulo: "competências" },
+  { href: "#contato", rotulo: "contato" },
 ] as const;
 
+export type LinkPerfil = { rotulo: string; href: string; externo: boolean };
+
+// Os mesmos quatro botões no topo e no contato.
+export const perfis: LinkPerfil[] = [
+  { rotulo: "GitHub", href: "https://github.com/Acciolyy", externo: true },
+  { rotulo: "LinkedIn", href: "https://www.linkedin.com/in/thiago-viriato-accioly", externo: true },
+  { rotulo: "Hugging Face", href: "https://huggingface.co/Acciolyyy", externo: true },
+  { rotulo: "Currículo (PDF)", href: "/curriculo-thiago-accioly.pdf", externo: false },
+];
+
 export const contato = {
-  titulo: "Vamos conversar",
-  texto:
-    "Procuro vagas de Desenvolvedor Python, Back-End ou Full-Stack. Moro em Brasília e atendo presencial ou híbrido aqui, e remoto para fora.",
-  links: [
-    {
-      k: "GitHub",
-      v: "Acciolyy",
-      href: "https://github.com/Acciolyy",
-      externo: true,
-    },
-    {
-      k: "LinkedIn",
-      v: "thiago-viriato-accioly",
-      href: "https://www.linkedin.com/in/thiago-viriato-accioly",
-      externo: true,
-    },
-    {
-      k: "E-mail",
-      v: "thiagoacciolyest@gmail.com",
-      href: "mailto:thiagoacciolyest@gmail.com",
-      externo: false,
-    },
-  ],
+  rotulo: "contato",
+  titulo: "Abrir canal",
 } as const;
