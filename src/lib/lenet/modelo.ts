@@ -10,7 +10,9 @@ export const URL_MODELO =
 // Os .wasm vêm do jsDelivr, na mesma versão do pacote (como no Space).
 const URL_WASM = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
 
-export type Previsao = { digito: number; confianca: number; probs: number[] };
+// visao: a entrada já pré-processada (28 × 28, valores de 0 a 1) que vai
+// para a rede; ms: o tempo da inferência (só o session.run), medido aqui.
+export type Previsao = { digito: number; confianca: number; probs: number[]; visao: Float32Array; ms: number };
 
 export type Modelo = {
   bytes: number;
@@ -39,14 +41,16 @@ export async function carregarModelo(): Promise<Modelo> {
     }
     const out = preprocess(gray, h, w);
     if (!out) return null;
+    const t0 = performance.now();
     const res = await sessao.run({ input: new ort.Tensor("float32", out.tensor, [1, 1, 28, 28]) });
+    const ms = performance.now() - t0;
     const logits = Array.from(res.logits.data as Float32Array);
     const m = Math.max(...logits);
     const exps = logits.map((v) => Math.exp(v - m));
     const soma = exps.reduce((a, b) => a + b, 0);
     const probs = exps.map((v) => v / soma);
     const confianca = Math.max(...probs);
-    return { digito: probs.indexOf(confianca), confianca, probs };
+    return { digito: probs.indexOf(confianca), confianca, probs, visao: out.canvas, ms };
   }
 
   return { bytes: buf.byteLength, classificar };

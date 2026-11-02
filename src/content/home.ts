@@ -19,6 +19,8 @@ export const demo = {
   baixaConfianca:
     "Baixa confiança: a entrada pode não ser um dígito único ou estar fora do padrão do MNIST.",
   acuracia: "CNN: 98,74% ± 0,07 no MNIST",
+  notaX:
+    "O modelo sempre escolhe um dos 10 dígitos: desenhe um X e ele pode responder 4 com mais de 90% de confiança.",
   space: "https://huggingface.co/spaces/Acciolyyy/lenet5-mnist-demo",
   limiar: 0.7,
 } as const;

@@ -42,6 +42,17 @@
 
 .demo { margin: 0; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 
+/* Linha de telemetria do "dispositivo": dados reais do modelo carregado. */
+.demo__telemetria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hud-line);
+}
+
+.demo__telemetria span + span::before { content: "·"; margin: 0 10px; color: var(--hud); }
+
 .demo__topo {
   display: flex;
   justify-content: space-between;
@@ -89,6 +100,34 @@
   background: var(--quadro);
   touch-action: none;
   cursor: crosshair;
+}
+
+/* Varredura curta (300 ms) sobre o quadro a cada classificação. */
+.demo__varredura {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.demo__varredura::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18%;
+  top: -18%;
+  background: linear-gradient(to bottom, transparent, rgba(159, 212, 226, 0.22) 70%, rgba(159, 212, 226, 0.65));
+  border-bottom: 1px solid rgba(159, 212, 226, 0.9);
+  animation: varrer 0.3s ease-out forwards;
+}
+
+@keyframes varrer {
+  to { top: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo__varredura { display: none; }
 }
 
 .demo__botoes { display: flex; gap: 8px; }
@@ -152,6 +191,41 @@
 }
 
 .demo__eixo [data-maior] { color: var(--accent-text); }
+
+/* Visão do sensor: a entrada que a rede recebe, pixel a pixel. */
+.demo__sensor {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--hud-line);
+}
+
+.demo__sensor-grade { position: relative; width: 112px; border: 1px solid var(--hud-line); }
+
+.demo__sensor-grade canvas {
+  display: block;
+  width: 112px;
+  height: 112px;
+  image-rendering: pixelated;
+  background: var(--quadro);
+}
+
+.demo__sensor-grade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(111, 152, 166, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(111, 152, 166, 0.18) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.demo__sensor-texto { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+
+.demo__nota-x { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-2); }
 
 .demo__legenda {
   display: flex;
