@@ -35,6 +35,7 @@
 .painel {
   --canto: var(--hud);
   --canto-t: 14px;
+  --ci: 0px; /* recuo das cantoneiras (aproximam no hover) */
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -52,14 +53,14 @@
 .painel::before {
   inset: -1px;
   background:
-    linear-gradient(var(--canto), var(--canto)) left top / var(--canto-t) 2px,
-    linear-gradient(var(--canto), var(--canto)) left top / 2px var(--canto-t),
-    linear-gradient(var(--canto), var(--canto)) right top / var(--canto-t) 2px,
-    linear-gradient(var(--canto), var(--canto)) right top / 2px var(--canto-t),
-    linear-gradient(var(--canto), var(--canto)) left bottom / var(--canto-t) 2px,
-    linear-gradient(var(--canto), var(--canto)) left bottom / 2px var(--canto-t),
-    linear-gradient(var(--canto), var(--canto)) right bottom / var(--canto-t) 2px,
-    linear-gradient(var(--canto), var(--canto)) right bottom / 2px var(--canto-t);
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) top var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) top var(--ci) / 2px var(--canto-t),
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) top var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) top var(--ci) / 2px var(--canto-t),
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) bottom var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) left var(--ci) bottom var(--ci) / 2px var(--canto-t),
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) bottom var(--ci) / var(--canto-t) 2px,
+    linear-gradient(var(--canto), var(--canto)) right var(--ci) bottom var(--ci) / 2px var(--canto-t);
   background-repeat: no-repeat;
   z-index: 1;
 }

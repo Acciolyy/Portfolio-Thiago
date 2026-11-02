@@ -5,6 +5,7 @@ import MotionProvider from "@/providers/MotionProvider";
 import ScriptTema from "@/components/tema/ScriptTema";
 import FundoCobras from "@/components/background/FundoCobras";
 import SkipLink from "@/components/layout/SkipLink";
+import Aparelho from "@/components/Aparelho";
 import "./globals.css";
 
 // Archivo é variável: o eixo wdth (104–118% no site) vem junto com o peso.
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionProvider>
           <FundoCobras />
           <SkipLink />
+          <Aparelho />
           {children}
         </MotionProvider>
       </body>
