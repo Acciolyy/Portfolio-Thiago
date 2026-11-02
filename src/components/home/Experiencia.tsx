@@ -115,7 +115,8 @@ export default function Experiencia() {
                     aria-controls={`det-${cm.id}`}
                     onClick={() => setAtual(cm.id)}
                   >
-                    <span className="gitlog__data">{cm.periodo ?? cm.ramo}</span>
+                    {/* sem data, a coluna fica vazia: o título continua alinhado com os outros */}
+                    <span className="gitlog__data">{cm.periodo}</span>
                     <span className="gitlog__titulo">
                       {cm.titulo} <span>· {cm.papel}</span>
                     </span>

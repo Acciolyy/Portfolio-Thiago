@@ -27,7 +27,7 @@ export const iaDoZero: EstudoDeCaso = {
   ],
   porQue: [
     "Os portfólios nasceram na disciplina Inteligência Artificial (FGA0221) da UnB, com os algoritmos implementados do zero.",
-    "Em outubro de 2026 revisei o repositório inteiro no estilo de uma revisão de código sênior: refiz as conclusões com várias sementes e corrigi o que não se sustentava. A LeNet-5 também está no Hugging Face, com uma demo que roda a rede inteira no navegador.",
+    "Em outubro de 2026 revisei o repositório inteiro com olhar crítico: refiz as conclusões com várias sementes e corrigi o que não se sustentava. A LeNet-5 também está no Hugging Face, com uma demo que roda a rede inteira no navegador.",
   ],
   fluxo: {
     rotulo: "Da LeNet-5 treinada à demo no navegador",

@@ -371,6 +371,7 @@
   .gitlog__commits { border-left: 2px solid var(--hud-line); }
   .gitlog__item { height: auto; padding: 6px 0 6px 12px; }
   .gitlog__commit { grid-template-columns: minmax(0, 1fr); }
+  .gitlog__data:empty { display: none; }
   .gitlog__inline:not([hidden]) { display: block; padding: 4px 12px 8px; font-size: 15px; line-height: 1.6; color: var(--text-2); }
   .gitlog__inline p { margin: 0; }
 }
