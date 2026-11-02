@@ -1,0 +1,45 @@
+/* --------------------------------------------------------------------------
+   Fundo 3D: as cobras só nas margens
+
+   Canvas fixo do tamanho da tela, atrás do conteúdo (.camada fica acima). A
+   máscara deixa passar só as bordas: até 24% de cada lado no desktop, 30% no
+   celular. O fundo estático (movimento reduzido ou sem WebGL) é uma imagem
+   parada da mesma cena, já com a máscara aplicada.
+   -------------------------------------------------------------------------- */
+
+.fundo3d,
+.fundo3d-estatico {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fundo3d {
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s;
+  -webkit-mask-image: linear-gradient(90deg, #000 0, rgba(0, 0, 0, 0.5) 12%, transparent 24%, transparent 76%, rgba(0, 0, 0, 0.5) 88%, #000 100%);
+  mask-image: linear-gradient(90deg, #000 0, rgba(0, 0, 0, 0.5) 12%, transparent 24%, transparent 76%, rgba(0, 0, 0, 0.5) 88%, #000 100%);
+}
+
+.fundo3d[data-ativo] { opacity: 1; }
+
+.fundo3d-estatico {
+  background: url("/fundo/cobras-escuro.webp") center / cover no-repeat;
+}
+
+:root[data-theme="light"] .fundo3d-estatico {
+  background-image: url("/fundo/cobras-claro.webp");
+}
+
+@media (max-width: 900px) {
+  .fundo3d {
+    -webkit-mask-image: linear-gradient(90deg, #000 0, transparent 30%, transparent 70%, #000 100%);
+    mask-image: linear-gradient(90deg, #000 0, transparent 30%, transparent 70%, #000 100%);
+  }
+  .fundo3d-estatico { background-image: url("/fundo/cobras-escuro-celular.webp"); }
+  :root[data-theme="light"] .fundo3d-estatico { background-image: url("/fundo/cobras-claro-celular.webp"); }
+}
