@@ -33,10 +33,7 @@ export default function BotaoTema() {
     // Em desenvolvimento o StrictMode remonta e o React limpa os atributos do
     // <html>; reaplica a partir da mesma fonte do script do <head>.
     if (!document.documentElement.hasAttribute("data-theme")) {
-      const t =
-        salvo() ??
-        (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      document.documentElement.setAttribute("data-theme", t);
+      document.documentElement.setAttribute("data-theme", salvo() ?? "dark");
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect -- sincroniza com o DOM que o script do <head> preparou
     setTema(temaAtual());
@@ -54,7 +51,7 @@ export default function BotaoTema() {
   };
 
   const rotulo =
-    tema === "light" ? "Alternar para tema escuro" : "Alternar para tema claro";
+    tema === "light" ? "Alternar para o modo noite" : "Alternar para o modo dia";
 
   return (
     <button type="button" className="botao-tema" onClick={alternar} aria-label={rotulo} title={rotulo}>

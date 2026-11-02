@@ -1,10 +1,11 @@
 /* ==========================================================================
    Tokens de design: FONTE ÚNICA de cores, fontes e medidas.
-   Direção "Bancada de inferência" (ver as pranchas do Claude Design).
+   Base "Bancada de inferência" (pranchas do Claude Design) com a linguagem de
+   interface tática: ciano frio de HUD para linhas e leituras, laranja de destaque.
 
    O tema vem do atributo data-theme no <html>, que o script do <head>
    (components/tema/ScriptTema.tsx) aplica antes da primeira pintura.
-   Sem JS, vale a preferência do sistema (prefers-color-scheme).
+   O padrão é o escuro; o claro é o "modo dia".
 
    Exceções que não dá para ler daqui:
      - viewport.themeColor no layout.tsx (gerado no servidor): espelha --ink.
@@ -33,10 +34,18 @@
   --quadro:      #0A0C0E;
   --quadro-traco:#F4F2ED;
 
-  /* Fundo 3D */
-  --fio:         #8EA2B6;
-  --fio-forca:   0.24;
-  --lingua:      #FF6B1A;
+  /* HUD: ciano-acinzentado frio para linhas, grades e leituras. O laranja
+     continua sendo o destaque e o estado ativo. */
+  --hud:         #6F98A6;               /* linhas e cantoneiras */
+  --hud-text:    #93B7C3;               /* texto de telemetria (AA sobre --ink e --surface) */
+  --hud-line:    rgba(111, 152, 166, 0.28);
+  --hud-grid:    rgba(111, 152, 166, 0.10);
+  --scan:        rgba(147, 183, 195, 0.035);
+
+  /* Fundo: as cobras de neurônios */
+  --fio:         #6F98A6;
+  --no:          #FF6B1A;
+  --fio-forca:   0.42;
 
   color-scheme: dark;
 }
@@ -56,39 +65,24 @@
   --accent-soft: rgba(232, 90, 12, 0.10);
   --ok:          #1F7A5C;
 
-  --fio:         #7D7468;
-  --fio-forca:   0.26;
-  --lingua:      #D9560F;
+  --hud:         #4F7C8A;
+  --hud-text:    #2E5A67;
+  --hud-line:    rgba(63, 108, 122, 0.30);
+  --hud-grid:    rgba(63, 108, 122, 0.10);
+  --scan:        rgba(46, 90, 103, 0.03);
+
+  --fio:         #4F7C8A;
+  --no:          #D9560F;
+  --fio-forca:   0.38;
 
   color-scheme: light;
-}
-
-/* Sem JS (o script do <head> não rodou): segue o sistema. */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    --ink:         #F4F2ED;
-    --surface:     #FFFFFF;
-    --surface-2:   #ECE9E2;
-    --line:        #D8D3C9;
-    --line-2:      #C6BFB3;
-    --text:        #15181B;
-    --text-2:      #343A40;
-    --muted:       #5B636B;
-    --accent:      #E85A0C;
-    --accent-text: #B4460A;
-    --on-accent:   #FFFFFF;
-    --accent-soft: rgba(232, 90, 12, 0.10);
-    --ok:          #1F7A5C;
-    --fio:         #7D7468;
-    --fio-forca:   0.26;
-    --lingua:      #D9560F;
-    color-scheme: light;
-  }
 }
 
 :root {
   /* Fontes. As --font-*-face vêm do next/font (layout.tsx). */
   --display: var(--font-archivo), 'Arial Narrow', sans-serif;
+  /* Rótulo de HUD: a mesma Archivo, no eixo de largura condensado. */
+  --hud-stretch: 72%;
   --sans:    var(--font-plex-sans), system-ui, sans-serif;
   --mono:    var(--font-jetbrains), ui-monospace, monospace;
 

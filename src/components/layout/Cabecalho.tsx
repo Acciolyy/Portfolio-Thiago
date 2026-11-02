@@ -18,7 +18,7 @@ export default function Cabecalho({ variante = "home" }: { variante?: "home" | "
             </a>
             <nav className="cabecalho__nav" aria-label="Seções">
               {nav.map((item) => (
-                <a key={item.href} href={item.href}>
+                <a key={item.href} href={item.href} className="colchetes">
                   {item.rotulo}
                 </a>
               ))}

@@ -49,10 +49,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   // Espelha --ink de styles/tokens.css: aqui é gerado no servidor e não lê CSS.
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0E1113" },
-    { media: "(prefers-color-scheme: light)", color: "#F4F2ED" },
-  ],
+  themeColor: "#0E1113",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

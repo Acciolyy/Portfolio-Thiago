@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function Botao({ href, children, cheio, externo, className }: Props) {
-  const classes = ["btn", cheio && "btn--cheio", className].filter(Boolean).join(" ");
+  const classes = ["btn", "colchetes", cheio && "btn--cheio", className].filter(Boolean).join(" ");
   return (
     <a
       className={classes}
