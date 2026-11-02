@@ -5,9 +5,6 @@ import MotionProvider from "@/providers/MotionProvider";
 import ScriptTema from "@/components/tema/ScriptTema";
 import Fundo3D from "@/components/background/Fundo3D";
 import SkipLink from "@/components/layout/SkipLink";
-import ScrollProgress from "@/components/layout/ScrollProgress";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 // Archivo é variável: o eixo wdth (104–118% no site) vem junto com o peso.
@@ -74,10 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionProvider>
           <Fundo3D />
           <SkipLink />
-          <ScrollProgress />
-          <Header />
           {children}
-          <Footer />
         </MotionProvider>
       </body>
     </html>
