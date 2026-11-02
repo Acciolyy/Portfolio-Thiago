@@ -1,7 +1,7 @@
 import type { EstudoDeCaso } from "./tipos";
 import { agenteTriagemVagas } from "./agente-triagem-vagas";
-import { portfolioIa } from "./portfolio-ia";
+import { iaDoZero } from "./ia-do-zero";
 
-export const casos: EstudoDeCaso[] = [agenteTriagemVagas, portfolioIa];
+export const casos: EstudoDeCaso[] = [agenteTriagemVagas, iaDoZero];
 
 export const casoPorSlug = (slug: string) => casos.find((c) => c.slug === slug);

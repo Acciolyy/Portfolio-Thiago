@@ -4,9 +4,9 @@ import type { EstudoDeCaso } from "./tipos";
 // e o README do Space no Hugging Face).
 const REPO = "https://github.com/Acciolyy/portfolio-ia";
 
-export const portfolioIa: EstudoDeCaso = {
-  slug: "portfolio-ia",
-  titulo: "Portfólio de IA e LeNet-5 no Hugging Face",
+export const iaDoZero: EstudoDeCaso = {
+  slug: "ia-do-zero",
+  titulo: "IA do zero: algoritmos da UnB",
   rotulo: ["estudo de caso", "ML do zero · UnB"],
   resumo:
     "Algoritmos clássicos de IA implementados do zero na disciplina de Inteligência Artificial da UnB e revisados em 2026 com várias sementes. A LeNet-5 está no Hugging Face e roda no seu navegador, aqui ao lado.",

@@ -63,7 +63,7 @@ export const destaques: {
     {
       id: "ia",
       rotulo: ["ML do zero", "UnB · Hugging Face"],
-      titulo: "Portfólio de IA e LeNet-5 no Hugging Face",
+      titulo: "IA do zero: algoritmos da UnB",
       texto:
         "A*, HMM, filtro de Kalman e Q-Learning do zero, revisados com várias sementes. A revisão corrigiu um vazamento de validação e um erro no Kalman.",
       metricas: [
@@ -71,7 +71,7 @@ export const destaques: {
         { valor: "59,8%", extra: "± 3,4", rotulo: "redução de erro do Kalman (antes: 27%, instável)" },
       ],
       tags: ["PyTorch", "ONNX", "NumPy", "várias sementes"],
-      href: "/projetos/portfolio-ia",
+      href: "/projetos/ia-do-zero",
     },
   ],
 };
