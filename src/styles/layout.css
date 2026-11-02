@@ -120,3 +120,99 @@
   font-size: 12px;
   color: var(--muted);
 }
+
+/* Relógio de Brasília no cabeçalho */
+.relogio {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--hud-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cabecalho__volta + .relogio { margin-left: auto; }
+.cabecalho .relogio + .botao-tema { margin-left: 0; }
+
+@media (max-width: 900px) {
+  .cabecalho__barra > .relogio:first-of-type { margin-left: auto; }
+  .cabecalho__nav + .relogio { margin-left: auto; }
+}
+
+@media (max-width: 560px) {
+  .relogio { display: none; }
+  .cabecalho .relogio + .botao-tema { margin-left: auto; }
+}
+
+/* Altímetro: medidor de rolagem na borda direita, só em telas largas. A faixa
+   de 64 px fica fora do container e fora do caminho das cobras. */
+.altimetro {
+  position: fixed;
+  z-index: 5;
+  right: 10px;
+  top: calc(var(--header-h) + 40px);
+  bottom: 40px;
+  width: 44px;
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .altimetro { display: block; }
+}
+
+.altimetro__pct {
+  position: absolute;
+  top: -26px;
+  right: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.altimetro__escala {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 44px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-right: 1px solid var(--hud-line);
+  background-image: linear-gradient(to bottom, var(--hud-line) 1px, transparent 1px);
+  background-size: 8px 24px;
+  background-position: right top;
+  background-repeat: repeat-y;
+}
+
+.altimetro__escala li { position: absolute; right: 0; transform: translateY(-50%); }
+
+.altimetro__escala a {
+  min-width: 36px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--hud-text);
+  text-decoration: none;
+  border-right: 2px solid transparent;
+}
+
+.altimetro__escala a:hover, .altimetro__escala a:focus-visible { color: var(--text); }
+.altimetro__escala a[data-atual] { color: var(--accent-text); border-right-color: var(--accent); }
+
+.altimetro__cursor {
+  position: absolute;
+  right: -1px;
+  width: 8px;
+  height: 2px;
+  background: var(--accent);
+  transform: translateY(-50%);
+  transition: top 0.1s linear;
+}

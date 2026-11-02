@@ -5,6 +5,7 @@ import Projetos from "@/components/home/Projetos";
 import Experiencia from "@/components/home/Experiencia";
 import Competencias from "@/components/home/Competencias";
 import Sobre from "@/components/home/Sobre";
+import Altimetro from "@/components/layout/Altimetro";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Sobre />
       </main>
       <Rodape />
+      <Altimetro />
     </div>
   );
 }

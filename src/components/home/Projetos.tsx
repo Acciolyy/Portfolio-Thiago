@@ -71,7 +71,7 @@ export default function Projetos() {
           ))}
         </div>
 
-        <div className="outros-bloco">
+        <div id="outros" className="outros-bloco">
           <Rotulo n="02">{outros.rotulo}</Rotulo>
           <div className="outros">
             {outros.itens.map((o) => {
