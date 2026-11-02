@@ -108,6 +108,8 @@ export default function PainelExpansivel({ id, tituloId, titulo, conteudo, class
             transition={{ duration: 0.45, ease: "easeOut" }}
           >
             {!reduz && <span className="por-dentro__varredura" aria-hidden="true" />}
+            {/* aquisição de sinal: ruído estático breve antes de a mídia aparecer */}
+            {!reduz && <span className="por-dentro__ruido" aria-hidden="true" />}
             <Conteudo c={conteudo} />
           </m.div>
         )}
