@@ -8,10 +8,10 @@
 @import "../styles/base.css";
 @import "../styles/ui.css";
 @import "../styles/layout.css";
+@import "../styles/topo.css";
 
 @import "../styles/components/section.css";
 @import "../styles/components/fundo3d.css";
-@import "../styles/components/hero.css";
 @import "../styles/components/sobre.css";
 @import "../styles/components/nota.css";
 @import "../styles/components/projetos.css";

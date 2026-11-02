@@ -1,0 +1,179 @@
+/* --------------------------------------------------------------------------
+   Topo da Home e demo da LeNet-5
+   -------------------------------------------------------------------------- */
+
+.topo {
+  padding-top: 64px;
+  padding-bottom: 72px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.topo__texto { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+
+.topo__nome {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 118%;
+  font-weight: 800;
+  font-size: clamp(54px, 7.2vw, 104px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+
+.topo__frase {
+  margin: 0;
+  max-width: 34rem;
+  font-family: var(--display);
+  font-stretch: 104%;
+  font-weight: 500;
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.2;
+  color: var(--text-2);
+}
+
+.topo__frase span { color: var(--accent-text); }
+
+.topo__resumo { margin: 0; max-width: 34rem; font-size: 16px; line-height: 1.6; color: var(--muted); }
+
+/* ---- demo ---- */
+
+.demo { margin: 0; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+
+.demo__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.demo__titulo {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 112%;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.demo__corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.demo__esq, .demo__dir { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+/* A grade de 28 × 28 fica numa camada por cima do canvas, fora dos pixels
+   que o modelo lê. */
+.demo__quadro { position: relative; border: 1px solid var(--line-2); }
+
+.demo__quadro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: calc(100% / 28) calc(100% / 28);
+}
+
+.demo__quadro canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--quadro);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.demo__botoes { display: flex; gap: 8px; }
+.demo__botoes .btn { flex: 1; justify-content: center; }
+
+.demo__saida { display: flex; flex-direction: column; gap: 8px; min-height: 108px; justify-content: flex-end; }
+
+.demo__previsao { display: flex; align-items: flex-end; gap: 12px; }
+
+.demo__digito { font-size: 108px; color: var(--accent-text); }
+
+.demo__conf {
+  padding-bottom: 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.demo__conf strong { font-size: 20px; color: var(--text); }
+
+.demo__msg { margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.demo__msg[data-erro] { color: var(--text); }
+
+.demo__alerta {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.demo__barras {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 4px;
+  align-items: end;
+  height: 92px;
+  padding-top: 4px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.demo__barra {
+  display: block;
+  min-height: 2px;
+  background: var(--line-2);
+  transition: height 0.3s;
+}
+
+.demo__barra[data-maior] { background: var(--accent); }
+
+.demo__eixo {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.demo__eixo [data-maior] { color: var(--accent-text); }
+
+.demo__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 16px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.demo__legenda a { display: inline-flex; align-items: center; min-height: var(--toque); }
+
+@media (max-width: 900px) {
+  .topo { grid-template-columns: minmax(0, 1fr); padding-top: 40px; padding-bottom: 56px; }
+}
+
+@media (max-width: 560px) {
+  .demo { padding: 16px; }
+  .demo__corpo { grid-template-columns: minmax(0, 1fr); }
+  .demo__digito { font-size: 88px; }
+}
