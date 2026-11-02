@@ -42,6 +42,29 @@
 
 .demo { margin: 0; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 
+/* Grade fina de fundo que anda devagar, só enquanto a demo está na tela. */
+.demo > .demo__grade {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--hud-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hud-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  animation: grade-andar 8s linear infinite paused;
+}
+
+.demo[data-visivel] > .demo__grade { animation-play-state: running; }
+
+@keyframes grade-andar {
+  to { background-position: 24px 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo > .demo__grade { animation: none; }
+}
+
 /* Linha de telemetria do "dispositivo": dados reais do modelo carregado. */
 .demo__telemetria {
   display: flex;

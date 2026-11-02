@@ -22,6 +22,7 @@ const pct = (p: number) => `${(p * 100).toFixed(1).replace(".", ",")}%`;
 export default function DemoLenet() {
   const quadro = useRef<HTMLCanvasElement>(null);
   const sensor = useRef<HTMLCanvasElement>(null);
+  const painel = useRef<HTMLElement>(null);
   const modelo = useRef<Modelo | null>(null);
   const ultimo = useRef<{ x: number; y: number } | null>(null);
   const temTraco = useRef(false);
@@ -105,6 +106,15 @@ export default function DemoLenet() {
       setEstado("erro");
     }
   }, [classificar]);
+
+  // Grade de fundo do painel: só se move enquanto o painel está na tela.
+  useEffect(() => {
+    const el = painel.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => el.toggleAttribute("data-visivel", e.isIntersecting));
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   // O quadro começa com o exemplo desenhado; o modelo só é baixado quando
   // o quadro entra na tela.
@@ -192,7 +202,8 @@ export default function DemoLenet() {
   const ms = previsao ? `${previsao.ms.toFixed(1).replace(".", ",")} MS` : "— MS";
 
   return (
-    <figure className="card demo" aria-labelledby="demo-t">
+    <figure ref={painel} className="card demo" aria-labelledby="demo-t">
+      <span className="demo__grade" aria-hidden="true" />
       <p className="rot demo__telemetria">
         <span>LeNet-5</span>
         <span>ONNX</span>
