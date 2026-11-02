@@ -5,9 +5,6 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // <img> comum de propósito: next/image gera outro markup (srcset) e fica
-  // para o redesign. Ver docs/plano-migracao-next.md.
-  { rules: { "@next/next/no-img-element": "off" } },
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
