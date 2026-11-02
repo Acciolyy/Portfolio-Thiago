@@ -92,8 +92,8 @@
   pointer-events: none;
 }
 
-.colchetes::before { content: "["; left: 2px; transform: translate(-4px, -50%); }
-.colchetes::after { content: "]"; right: 2px; transform: translate(4px, -50%); }
+.colchetes::before { content: "[" / ""; left: 2px; transform: translate(-4px, -50%); }
+.colchetes::after { content: "]" / ""; right: 2px; transform: translate(4px, -50%); }
 
 .colchetes:hover::before,
 .colchetes:hover::after,

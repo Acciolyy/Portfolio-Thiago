@@ -2,6 +2,8 @@ import Link from "next/link";
 import { destaques, outros } from "@/content/home";
 import Rotulo from "@/components/ui/Rotulo";
 import Tag from "@/components/ui/Tag";
+import GrupoExpansivel from "@/components/painel/GrupoExpansivel";
+import PainelExpansivel from "@/components/painel/PainelExpansivel";
 
 // 01 — projetos em destaque e 02 — outros projetos (a mesma seção, como na prancha).
 export default function Projetos() {
@@ -17,42 +19,58 @@ export default function Projetos() {
         <p className="secao__intro">{destaques.texto}</p>
       </div>
 
-      <div className="dest">
-        {destaques.itens.map((p) => (
-          <article key={p.id} className="card dest__card" aria-labelledby={`p-${p.id}`}>
-            <div className="dest__corpo">
-              <p className="rot">
-                <b>{p.rotulo[0]}</b> · {p.rotulo[1]}
-              </p>
-              <h3 id={`p-${p.id}`} className="dest__titulo">
-                {p.titulo}
-              </h3>
-              <p className="dest__texto">{p.texto}</p>
-            </div>
-            <dl className="metr">
-              {p.metricas.map((m) => (
-                <div key={m.rotulo}>
-                  <dt className="rot">{m.rotulo}</dt>
-                  <dd className="num metr__valor" data-destaque={m.destaque || undefined}>
-                    {m.valor}
-                    {m.extra && <span> {m.extra}</span>}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <div className="dest__pe">
-              <div className="tags">
-                {p.tags.map((t) => (
-                  <Tag key={t}>{t}</Tag>
+      <GrupoExpansivel ids={destaques.itens.map((p) => p.ancora)}>
+        <div className="dest">
+          {destaques.itens.map((p) => (
+            <PainelExpansivel
+              key={p.id}
+              id={p.ancora}
+              tituloId={`p-${p.id}`}
+              titulo={p.titulo}
+              conteudo={p.conteudo}
+              className="dest__card"
+              pe={
+                <>
+                  <div className="tags">
+                    {p.tags.map((t) => (
+                      <Tag key={t}>{t}</Tag>
+                    ))}
+                  </div>
+                  <Link className="mais colchetes" href={p.href} aria-label={`Estudo de caso: ${p.titulo}`}>
+                    Estudo de caso
+                  </Link>
+                </>
+              }
+            >
+              <p className="rot dest__status">
+                {p.status.map((s) => (
+                  <span key={s}>{s}</span>
                 ))}
+              </p>
+              <div className="dest__corpo">
+                <p className="rot">
+                  <b>{p.rotulo[0]}</b> · {p.rotulo[1]}
+                </p>
+                <h3 id={`p-${p.id}`} className="dest__titulo">
+                  {p.titulo}
+                </h3>
+                <p className="dest__texto">{p.texto}</p>
               </div>
-              <Link className="mais" href={p.href} aria-label={`Estudo de caso: ${p.titulo}`}>
-                Estudo de caso <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </article>
-        ))}
-      </div>
+              <dl className="metr">
+                {p.metricas.map((m) => (
+                  <div key={m.rotulo}>
+                    <dt className="rot">{m.rotulo}</dt>
+                    <dd className="num metr__valor" data-destaque={m.destaque || undefined}>
+                      {m.valor}
+                      {m.extra && <span> {m.extra}</span>}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </PainelExpansivel>
+          ))}
+        </div>
+      </GrupoExpansivel>
 
       <div className="outros-bloco">
         <Rotulo n="02">{outros.rotulo}</Rotulo>

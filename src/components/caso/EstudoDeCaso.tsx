@@ -4,7 +4,7 @@ import Rotulo from "@/components/ui/Rotulo";
 import Tag from "@/components/ui/Tag";
 import DemoLenet from "@/components/home/DemoLenet";
 import GraficoBarras from "./GraficoBarras";
-import VideoCaso from "./VideoCaso";
+import VideoMudo from "@/components/ui/VideoMudo";
 
 function Titulo({ n, id, children }: { n: string; id: string; children: React.ReactNode }) {
   return (
@@ -57,7 +57,7 @@ export default function EstudoDeCaso({ caso }: { caso: Caso }) {
         </div>
         {caso.midia.tipo === "video" ? (
           <figure className="card caso-midia">
-            <VideoCaso src={caso.midia.src} poster={caso.midia.poster} descricao={caso.midia.descricao} />
+            <VideoMudo className="caso-midia__video" src={caso.midia.src} poster={caso.midia.poster} descricao={caso.midia.descricao} />
             <figcaption className="caso-midia__legenda">{caso.midia.legenda}</figcaption>
           </figure>
         ) : (

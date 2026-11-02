@@ -29,6 +29,11 @@ export type Metrica = { valor: string; extra?: string; rotulo: string; destaque?
 
 export type Destaque = {
   id: string;
+  // Hash da URL quando o painel está aberto (#projeto-agente).
+  ancora: string;
+  conteudo: "agente" | "ia";
+  // Linha de status em mono, só com dados reais.
+  status: string[];
   rotulo: [string, string];
   titulo: string;
   texto: string;
@@ -49,6 +54,9 @@ export const destaques: {
   itens: [
     {
       id: "agente",
+      ancora: "projeto-agente",
+      conteudo: "agente",
+      status: ["status: avaliado", "80 vagas reais", "39 testes", "CI"],
       rotulo: ["LLM · agente", "Gemini · function calling"],
       titulo: "Agente de Triagem de Vagas com LLM",
       texto:
@@ -62,6 +70,9 @@ export const destaques: {
     },
     {
       id: "ia",
+      ancora: "projeto-ia-do-zero",
+      conteudo: "ia",
+      status: ["status: publicado no Hugging Face", "28 testes", "CI"],
       rotulo: ["ML do zero", "UnB · Hugging Face"],
       titulo: "IA do zero: algoritmos da UnB",
       texto:

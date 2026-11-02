@@ -2,10 +2,21 @@
 
 import { useEffect, useRef } from "react";
 
-// Vídeo mudo em loop. Toca sozinho só quando está na tela e sem
-// prefers-reduced-motion; com movimento reduzido fica parado no poster, e os
-// controles nativos deixam tocar ou pausar quando quiser.
-export default function VideoCaso({ src, poster, descricao }: { src: string; poster: string; descricao: string }) {
+// Vídeo mudo em loop. Só baixa quando é montado (preload="none" e src
+// definido por quem chama) e toca sozinho só na tela e sem
+// prefers-reduced-motion; com movimento reduzido fica no poster, e os
+// controles nativos deixam tocar ou pausar.
+export default function VideoMudo({
+  src,
+  poster,
+  descricao,
+  className,
+}: {
+  src: string;
+  poster: string;
+  descricao: string;
+  className?: string;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -19,12 +30,12 @@ export default function VideoCaso({ src, poster, descricao }: { src: string; pos
     });
     obs.observe(v);
     return () => obs.disconnect();
-  }, []);
+  }, [src]);
 
   return (
     <video
       ref={ref}
-      className="caso-midia__video"
+      className={["video-mudo", className].filter(Boolean).join(" ")}
       src={src}
       poster={poster}
       muted

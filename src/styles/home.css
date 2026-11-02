@@ -26,6 +26,9 @@
 
 .dest__card { display: flex; flex-direction: column; }
 
+/* Aberto, o painel ocupa a linha inteira da grade. */
+.expansivel[data-ativo] { grid-column: 1 / -1; }
+
 .dest__corpo { padding: 24px 24px 18px; display: flex; flex-direction: column; gap: 12px; }
 
 .dest__titulo {
@@ -63,28 +66,26 @@
 .metr__valor[data-destaque] { color: var(--accent-text); }
 .metr__valor span { font-size: 0.53em; color: var(--muted); }
 
-.dest__pe {
-  padding: 18px 24px 24px;
-  margin-top: auto;
+.dest__status {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 2px 0;
+  margin: 0;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--hud-line);
 }
+
+.dest__status span + span::before { content: "·"; margin: 0 10px; color: var(--hud); }
 
 .mais {
   min-height: var(--toque);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  padding: 0 14px;
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 13px;
   text-decoration: none;
 }
-
-.mais span { display: inline-block; transition: transform 0.15s; }
-.card:hover .mais span, .mais:focus-visible span { transform: translateX(3px); }
 
 /* ---- outros projetos ---- */
 
@@ -216,9 +217,7 @@
   .outros { grid-template-columns: minmax(0, 1fr); }
   .dest__corpo { padding: 20px 18px 16px; }
   .metr { margin: 0 18px; }
-  .dest__pe { padding: 16px 18px 20px; }
+  .expansivel__pe { padding: 16px 18px 20px; }
+  .dest__status { padding: 10px 18px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card:hover .mais span, .mais:focus-visible span { transform: none; }
-}
